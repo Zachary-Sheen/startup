@@ -26,7 +26,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-CryptoHaven is a website that will allow its users to track and converse about cryptocurrencies in real time.  It will allow people to talk about certain currencies and allow them to decide whether one is worth investing through help from others.  By combining live market data with community discussions, CryptoHaven allows users to make compelling decisions in a fast-paced world.  CrytoHaven provides the tools to navigate the cryptocurrency market regardless of any user's experience.
+CryptoHaven is a website that will allow its users to track and converse about cryptocurrencies in real time.  It will allow people to talk about certain currencies and allow them to decide whether one is worth investing through help from others.  By combining live market data with community discussions, CryptoHaven allows users to make compelling decisions in a fast-paced world, as well as providing the tools to navigate the cryptocurrency market regardless of the user's experience.
 
 ### Design
 
@@ -72,7 +72,7 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Create pages for login, dashboard, and chat rooms
+- **HTML** - Create pages for login, dashboard, and chat rooms.
 - **CSS** - Styling choices that make the site look appealing on different screen sizes with good color choice and object sizes.
 - **React** - Displays real-time updates for cryptocurrencies, ability to login, chat functionality, and displays new messages.
 - **Service** - Backend service with endpoints for:
