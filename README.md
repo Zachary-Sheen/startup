@@ -18,11 +18,11 @@ This project creates a website where people interested in cryptocurrency can com
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [X] Proper use of Markdown
+- [X] A concise and compelling elevator pitch
+- [X] Description of key features
+- [X] Description of how you will use each technology
+- [X] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
@@ -62,20 +62,26 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Secure login using HTTPS protocol.
+- Uses an API called CoinGecko to get crypto information.
+- Display of featured cryptocurrencies and their statistics.
+- Ability to favorite certain crytocurrencies to show them always.
+- Chat system for each cryptocurrency that allows users to communicate.
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Create pages for login, dashboard, and chat rooms
+- **CSS** - Styling choices that make the site look appealing on different screen sizes with good color choice and object sizes.
+- **React** - Displays real-time updates for cryptocurrencies, ability to login, chat functionality, and displays new messages.
+- **Service** - Backend service with endpoints for:
+                - Login
+                - Retrieving Currency Information
+                - Sending Messages
+                - Updating Chat for all Members
+- **DB/Login** - Stores users and chat information in the database.  Credentials securely stored using password hashing.
+- **WebSocket** - Enables real-time chat communication and shows new messages for each user.
 
 ## 🚀 AWS deliverable
 
