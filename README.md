@@ -36,20 +36,28 @@ Here is a sequence diagram that shows how users would interact with the backend 
 
 ```mermaid
 sequenceDiagram
-    actor User
+    actor Jim
+    actor Jimbo
     participant Program
     participant Cryptocurrency as Cryptocurrency Chat
-    participant Notification as Notification System
+    participant Server
     
-    User->>Program: Login or Register
-    Program-->>User: Authentication Confirmation
-    User->>Program: View Cryptocurrencies
-    Program-->>User: Show Cryptocurrency List
-    User->>Cryptocurrency: Join Chat for Crypto-Y
-    Cryptocurrency-->>User: Display Chat Messages
-    User->>Cryptocurrency: Send a Message
-    Cryptocurrency-->>Notification: Notify All Chat Members
-    Notification-->>User: New Message Alert
+    Jim->>Program: Login or Register
+    Program-->>Jim: Authentication
+    Jimbo->>Program: Login or Register
+    Program-->>Jimbo: Authentication
+    Jim->>Program: View Cryptocurrencies
+    Program-->>Jim: Show Cryptocurrency List
+    Jimbo->>Program: View Cryptocurrencies
+    Program-->>Jimbo: Show Cryptocurrency List
+    Jim->>Cryptocurrency: Join Chat
+    Jimbo->>Cryptocurrency: Join Chat
+    Cryptocurrency-->>Jim: Display Chat Messages
+    Cryptocurrency-->>Jimbo: Display Chat Messages
+    Jim->>Cryptocurrency: Send a Message
+    Cryptocurrency-->>Server: Update Chat to All Chat Members
+    Server-->>Jim: Display new message
+    Server-->>Jimbo: Display new message
 ```
 
 ### Key features
