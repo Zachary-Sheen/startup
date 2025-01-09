@@ -81,7 +81,7 @@ I am going to use the required technologies in the following ways.
                 - Sending Messages
                 - Updating Chat for all Members
 - **DB/Login** - Stores users and chat information in the database.  Credentials securely stored using password hashing.
-- **WebSocket** - Enables real-time chat communication and shows new messages for each user.
+- **WebSocket** - Enables real-time chat communication and shows new messages for each user, as well as communicates market data.
 
 ## 🚀 AWS deliverable
 
