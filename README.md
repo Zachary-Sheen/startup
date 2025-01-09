@@ -51,8 +51,8 @@ sequenceDiagram
     Jimbo->>Program: View Cryptocurrencies
     Program-->>Jimbo: Show Cryptocurrency List
     Jim->>Cryptocurrency: Join Chat
-    Jimbo->>Cryptocurrency: Join Chat
     Cryptocurrency-->>Jim: Display Chat Messages
+    Jimbo->>Cryptocurrency: Join Chat
     Cryptocurrency-->>Jimbo: Display Chat Messages
     Jim->>Cryptocurrency: Send a Message
     Cryptocurrency-->>Server: Update Chat to All Chat Members
