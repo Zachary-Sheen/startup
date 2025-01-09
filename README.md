@@ -36,9 +36,20 @@ Here is a sequence diagram that shows how users would interact with the backend 
 
 ```mermaid
 sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
+    actor User
+    participant Program
+    participant Cryptocurrency as Cryptocurrency Chat
+    participant Notification as Notification System
+    
+    User->>Program: Login or Register
+    Program-->>User: Authentication Confirmation
+    User->>Program: View Cryptocurrencies
+    Program-->>User: Show Cryptocurrency List
+    User->>Cryptocurrency: Join Chat for Crypto-Y
+    Cryptocurrency-->>User: Display Chat Messages
+    User->>Cryptocurrency: Send a Message
+    Cryptocurrency-->>Notification: Notify All Chat Members
+    Notification-->>User: New Message Alert
 ```
 
 ### Key features
