@@ -68,7 +68,7 @@ I am going to use the required technologies in the following ways.
 
 - **HTML** - Create pages for login, dashboard, and chat rooms.
 - **CSS** - Styling choices that make the site look appealing on different screen sizes with good color choice and object sizes.
-- **JavaScript** - Provides login, pulls information from the CoinGecko API, and implements the ability to click a currency sends the user to the chat and further information for that currency.
+- **JavaScript** - Provides login, pulls information from the CoinGecko API, and implements the ability to click a currency which sends the user to the chat and further information for that currency.
 - **React** - Displays real-time updates for cryptocurrencies, ability to login, chat functionality, and displays new messages.
 - **Service** - Backend service with endpoints for:
     - Login
