@@ -59,7 +59,7 @@ sequenceDiagram
 - Secure login using HTTPS protocol.
 - Uses an API called CoinGecko to get crypto information.
 - Display of featured cryptocurrencies and their statistics.
-- Ability to favorite certain crytocurrencies to show them always.
+- Ability to favorite certain crytocurrencies to always show them.
 - Chat system for each cryptocurrency that allows users to communicate.
 
 ### Technologies
