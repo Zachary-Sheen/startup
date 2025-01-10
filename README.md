@@ -77,10 +77,10 @@ I am going to use the required technologies in the following ways.
 - **JavaScript** - Pull information from the CoinGecko API and clicking a currency sends the user to the chat and further information for that currency.
 - **React** - Displays real-time updates for cryptocurrencies, ability to login, chat functionality, and displays new messages.
 - **Service** - Backend service with endpoints for:
--      Login
--      Retrieving Currency Information
--      Sending Messages
--      Updating Chat for all Members
+    - Login
+    - Retrieving Currency Information
+    - Sending Messages
+    - Updating Chat for all Members
 - **DB/Login** - Stores users and chat information in the database.  Credentials securely stored using password hashing.
 - **WebSocket** - Enables real-time chat communication and shows new messages for each user, as well as communicates market data.
 
