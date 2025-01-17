@@ -1,4 +1,4 @@
-CryptoHaven
+**CryptoHaven**
 
 [My Notes](notes.md)
 
@@ -8,13 +8,7 @@ This project creates a website where people interested in cryptocurrency can com
 > [!NOTE]
 >  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
 
-> [!NOTE]
->  If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
-
 ## 🚀 Specification Deliverable
-
-> [!NOTE]
->  Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
@@ -65,7 +59,7 @@ sequenceDiagram
 - Secure login using HTTPS protocol.
 - Uses an API called CoinGecko to get crypto information.
 - Display of featured cryptocurrencies and their statistics.
-- Ability to favorite certain crytocurrencies to show them always.
+- Ability to favorite certain crytocurrencies to always show them.
 - Chat system for each cryptocurrency that allows users to communicate.
 
 ### Technologies
@@ -74,12 +68,13 @@ I am going to use the required technologies in the following ways.
 
 - **HTML** - Create pages for login, dashboard, and chat rooms.
 - **CSS** - Styling choices that make the site look appealing on different screen sizes with good color choice and object sizes.
+- **JavaScript** - Provides login, pulls information from the CoinGecko API, and implements the ability to click a currency which sends the user to the chat and further information for that currency.
 - **React** - Displays real-time updates for cryptocurrencies, ability to login, chat functionality, and displays new messages.
 - **Service** - Backend service with endpoints for:
-                - Login
-                - Retrieving Currency Information
-                - Sending Messages
-                - Updating Chat for all Members
+    - Login
+    - Retrieving Currency Information
+    - Sending Messages
+    - Updating Chat for all Members
 - **DB/Login** - Stores users and chat information in the database.  Credentials securely stored using password hashing.
 - **WebSocket** - Enables real-time chat communication and shows new messages for each user, as well as communicates market data.
 
