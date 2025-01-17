@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CryptoHaven</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CryptoHaven</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- <li><a href="dashboard.html">Dashboard</a></li> dont know if I need this-->
+                <li><a href="chatroom.html">Chat</a></li>
+                <li><a href="signup.html">Sign-Up</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li>Account</li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+    <main>
+        <h2>Login</h2>
+        <form action="login.php" method="get"> <!-- login.php not made yet -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <button type="submit">Login</button>
+        </form>
+    </main>
+    <footer>
+        <hr />
+        <span class="text-reset">Zachary Sheen</span>
+        <br />
+        <a href="https://github.com/Zachary-Sheen/startup">GitHub</a>
+      </footer>
+</body>
+</html>
