@@ -82,7 +82,7 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [X] **Server deployed and accessible with custom domain name** - I signed up for AWS and started up the server that my code will display on.[My server link](http://vcoinchat.com/).
+- [X] **Server deployed and accessible with custom domain name** - I signed up for AWS and started up the server that my code will display on.  Also, I made sure to use port 443 (HTTPS) to ensure a secure website connection. [My server link](http://vcoinchat.com/).
 
 ## 🚀 HTML deliverable
 
