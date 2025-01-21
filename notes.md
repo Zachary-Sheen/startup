@@ -14,4 +14,4 @@ For this, AWS wasn't terrible setting up, it was just assigning an elastic IP th
 
 ## HTML Notes
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+For this, part of the assignment was creating a page using html in Codepen which you can find [here](https://codepen.io/Sheenster/pen/qEWMwjw).  I learned about a lot of the fundamental objects in HTML such as div, main, header, body, anchors, etc.  This was a really great way for me to start off the website.
