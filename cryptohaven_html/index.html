@@ -5,41 +5,33 @@
     <!-- Tell browsers not to scale the viewport automatically -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CryptoHaven</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="homepgstyle.css">
     <script src = "scripts.js"></script>
     <!-- <link rel="icon" href="favicon.ico" /> -->
   </head>
   <body>
     <!-- Use header, main, and footer elements to give semantic structure -->
-    <header>
-      <nav class = "top-navbar">
-        <h1>CryptoHaven<sup>&reg;</sup></h1>
-
-        <!-- Navigation elements -->
-        <nav class = "navbar-elements">
-          <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
-          <menu>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li> 
-            <li><a href="chatroom.html">Chat</a></li>
-            <li><a href="signup.html">Sign-Up</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li>Account</li>
-            <!-- <li><a href="about.html">About</a></li> -->
-             <!-- TRY TO MAKE A POPUP SIGN UP AND LOGIN WITH JAVASCRIPT INSTEAD OF HAVING SEPERATE PAGES FOR THEM-->
-          </menu>
-        </nav>
-      </nav>
-      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
-      <hr />
-    </header>
+    <div class = 'header'>
+      <div class = 'inner_header'>
+        <div class = 'logo'>
+          <h1>Crypto<span>Haven</span><sup>&reg;</sup></h1>
+        </div>
+        <ul class = 'navelements'>
+          <a href="index.html"><li>Home</li></a>
+          <a href="dashboard.html"><li>Dashboard</li></a>
+          <a href="chatroom.html"><li>Chatroom</li></a>
+          <a href="signup.html"><li>Sign Up</li></a>
+          <a href="login.html"><li>Login</li></a>
+          <a id = "accountName"><li>Account</li></a>
+        </ul>
+      </div>
+    </div>
 
     <main>
       <h1>Welcome to CryptoHaven</h1>
       <div class = "intro">
-        <img src = 'https://stat2.moneycontrol.com/assets/images/ms/wazirx/wazir_article_img_eight.jpg'></img> <!-- Add image here for background blurred -->
-        <h2>Interested in CryptoHaven?</h2>
-        <p>Sign up today to start tracking and conversing about cryptocurrencies</p>
+        <h2 id = "intromain">Interested in CryptoHaven?</h2>
+        <p id = 'introsub'>Sign up today to start tracking and conversing about cryptocurrencies</p>
       </div>
       <h2 class = 'maininfoleft'>Why CryptoHaven</h2>
       <p class = 'subinfoleft'>CryptoHaven is a website that will allow its users to track and converse about cryptocurrencies in real time.  
