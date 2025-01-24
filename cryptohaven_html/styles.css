@@ -1,0 +1,33 @@
+/* @import url('https://fonts.google.com/specimen/Space+Grotesk?categoryFilters=Feeling:%2FExpressive%2FBusiness;Appearance:%2FTheme%2FTechno'); */
+
+/* body {
+    font-family: 'Space Grotesk';
+} */
+/* #special{} /*This covers all elemnts with the id special
+/*.special{} /*This covers all elements with the class special*/
+/*special{} /*This covers all elements with the tag special*/
+/*body {
+    font-FAMILY: Arial, sans-serif;
+    font-size: xx-large;
+}
+p {
+    color: red;
+    padding: 3em;
+    margin: 0;
+    border: 1em solid black;
+    background-color: lightblue;
+    use border-radius to make boxes curved on the edges
+}
+p.course:hover  {
+    background-color: yellow;
+} */
+/* @keyframes demo {
+    from{
+        front-size:0vh
+    }
+    95%{
+        font-size: 21vh
+    }
+    to {
+        font-size: 20vh
+    } */

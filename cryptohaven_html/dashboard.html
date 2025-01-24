@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - CryptoHaven</title>
+    <title>Chatroom</title>
     <link rel="stylesheet" href="styles.css">
     <script src = "scripts.js"></script>
 </head>
 <body>
     <header>
         <nav class = "top-navbar">
-          <h1>CryptoHaven<sup>&reg;</sup></h1>
+          <h1>CryptoHaven Chatroom<sup>&reg;</sup></h1>
   
           <!-- Navigation elements -->
           <nav class = "navbar-elements">
@@ -31,22 +31,38 @@
       </header>
     
     <main>
-        <h2>Login</h2>
-        <form action="chatroom.html" method="get"> <!-- login.php not made yet, this is the placeholder for database access -->
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <br>
-            <button type="submit">Login</button>
-        </form>
+        <h2>Dashboard</h2>
+        <section class="favorite-cryptos"></section>
+            <h3>Favorite Cryptocurrencies ⭐</h3>
+            <ul> <!--This is where I am going to be doing database calls to get the favorites -->
+          <li>Bitcoin (BTC)</li>
+          <li>Ethereum (ETH)</li>
+          <li>Ripple (XRP)</li>
+          <li>Litecoin (LTC)</li>
+          <li>Cardano (ADA)</li>
+            </ul>
+        </section>
+        <div class="dashboard-container">
+          <div class="dashboard-item">
+            <h3>Profile</h3>
+            <p>View and edit your profile information.</p>
+          </div>
+          <div class="dashboard-item">
+            <h3>Messages</h3>
+            <p>Read the latest messages and notifications from the chat.</p>
+          </div>
+          <div class="dashboard-item">
+            <h3>Settings</h3>
+            <p>Adjust your preferences and settings.</p>
+          </div>
+        </div>
     </main>
+    
     <footer>
         <hr />
         <span class="text-reset">Zachary Sheen</span>
         <br />
         <a href="https://github.com/Zachary-Sheen/startup">GitHub</a>
-      </footer>
+    </footer>
 </body>
 </html>
