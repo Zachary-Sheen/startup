@@ -4,56 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatroom</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src = "scripts.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="styles.css">
+    <!-- <script src="scripts.js"></script> -->
 </head>
-<body>
-    <header>
-        <nav class = "top-navbar">
-          <h1>CryptoHaven Chatroom<sup>&reg;</sup></h1>
-  
-          <!-- Navigation elements -->
-          <nav class = "navbar-elements">
-            <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
-            <menu>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="dashboard.html">Dashboard</a></li> 
-              <li><a href="chatroom.html">Chat</a></li>
-              <li><a href="signup.html">Sign-Up</a></li>
-              <li><a href="login.html">Login</a></li>
-              <li>Account</li>
-              <!-- <li><a href="about.html">About</a></li> -->
-            </menu>
-          </nav>
+<body class="bg-black text-white">
+  <div> <!--class="container"-->
+    <div class="row">
+      <!-- Sidebar (col-4) -->
+      <header class="col-12 col-md-4">
+        <nav class="navbar navbar-light">
+            <h1>CryptoHaven Chatroom<sup>&reg;</sup></h1>
         </nav>
-        <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li> 
+          <li><a href="chatroom.html">Chat</a></li>
+          <li><a href="signup.html">Sign-Up</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li>Account</li>
+        </menu>
         <hr />
       </header>
-    
-    <main>
+
+      <!-- Main Content (col-8) -->
+      <main class="col-12 col-md-8">
         <h2>Welcome to the Chatroom</h2>
-        <h3 id = 'databox'>Cryptocurrencies</h3>
-        <div id = 'infocontainer'>
-            <!-- This is where the boxes for each cryptocurrency go, 3rd party API call to gather relative information for each currency here -->
-            <img src = 'https://img.freepik.com/free-psd/gold-bitcoin-symbol-cryptocurrency-design-transparent-background_84443-29193.jpg?semt=ais_hybrid' style = 'width:25%; height:25%'></img>
+        <h3 id="databox">Cryptocurrencies</h3>
+        <div id="infocontainer">
+            <!-- Placeholder for cryptocurrency boxes -->
+            <img src="https://img.freepik.com/free-psd/gold-bitcoin-symbol-cryptocurrency-design-transparent-background_84443-29193.jpg?semt=ais_hybrid" style="width:25%; height:25%;">
         </div>
-        <div id="cryptoinfo"> <!-- style="display: none;", this is where to populateinl the cryptocurrency information-->
-            <!-- Nothing yet, populate when needed-->
+        <div id="cryptoinfo">
+            <!-- Cryptocurrency information -->
         </div>
         <form action="chatroom.php" method="post">
-            <input type ="text" class = "messagecontainer" id="messagecontainer" readonly="readonly"> 
-            <!-- This is where the messages will be displayed, readonly means cant input info -->
+            <input type="text" class="messagecontainer" id="messagecontainer" readonly="readonly">
             <br>
-            <input type="text" class = "messagebox" id="messagebox" placeholder = "Enter your message here" name="message" required>
+            <input type="text" class="messagebox" id="messagebox" placeholder="Enter your message here" name="message" required>
             <br>
             <button type="submit">Send</button>
-    </main>
-    
-    <footer>
+        </form>
+      </main>
+    </div>
+
+    <footer class="mt-4">
         <hr />
         <span class="text-reset">Zachary Sheen</span>
         <br />
         <a href="https://github.com/Zachary-Sheen/startup">GitHub</a>
     </footer>
+  </div>
 </body>
 </html>

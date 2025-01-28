@@ -1,4 +1,4 @@
-/*#27cd6e - green*/
+/* #27cd6e - green */
 /*#192345 - background blue*/
 /*#c5524f - red*/
 @font-face {
@@ -21,39 +21,35 @@
     font-family: OpenSans;
     list-style:none;
     text-decoration: none;
-    /* animation: textBlur 2s ease-out forwards;  */
-    /* box-sizing: border-box;
-    size: relative; */
-    /* background-color: lightgray; */
 }
 .header {
     width: 100%;
     height: 80px;
-    display: flex; /* Use flexbox */
-    align-items: center; /* Center items vertically */
-    justify-content: space-between; /* Space out children elements */
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
     backdrop-filter: blur(10px);
-    padding: 0 20px; /* Add some padding if needed */
+    /* padding: 0 20px;  */
 }
 .inner_header{
     width:100%;
     height:80px;
-    display: flex; /* Use flexbox */
-    align-items: center; /* Center items vertically */
-    justify-content: space-between; /* Space out children elements */
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
     margin:0 auto;
 }
 .logo {
-    display: flex; /* Use flexbox */
-    align-items: center; /* Center items vertically */
+    display: flex; 
+    align-items: center;
     height: 100%;
     padding-left:20px
 }
-.logo h1{ /*Fix middle issue*/
+.logo h1{ 
     color: #46b89c;
     font-size: 32px;
     font-weight: bolder;
-    margin: 0; /* Remove default margin */
+    margin: 0; 
 }
 .logo h1 span {
     font-weight: 100;
@@ -65,8 +61,8 @@
     font-weight:20;
 }
 .navelements {
-    display: flex; /* Use flexbox */
-    align-items: center; /* Center items vertically */
+    display: flex; 
+    align-items: center;
     height: 100%;
 }
 .navelements :last-child{
@@ -92,7 +88,7 @@ body {
     flex-direction: column;
     background: url("background.jpg") no-repeat center center fixed;
     background-size: cover;
-    color: white; /* Adjust based on text contrast */
+    color: white; 
     font-family: Arial, sans-serif;
 
 }
@@ -118,7 +114,6 @@ main{
     color: white;
 }
 #intromain{
-    /* backdrop-filter: blur(10px); */
     margin:0 auto;
     padding:0;
     font-size:40px;
@@ -130,13 +125,12 @@ main{
     text-align: center;
 }
 #signup{
-    color:white;
+    font-size:bold;
 }
 .subcontent{
     display: flex;
     justify-content: space-between;
     padding: 100px 100px;
-    /* backdrop-filter: blur(50px); */
     background-color: black;
     position: relative
 }
@@ -172,14 +166,23 @@ main{
 }
 footer {
     display: flex;
-    align-self:baseline;
-    width:100vw;
-    /* justify-content: space-between; */
-    align-items: center;
-    padding: 10px 100px;
-    background-color: black;
-    font-size: 20px;
+    flex: 1 1 50px;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items:center;
+    background-color:black;
+    padding:20px;
 }
-#git{
-    text-align:right;
+
+#git {
+    font-size: 20px;
+    margin: 0 10px; /* Add space between items if needed */
+    padding-left:40px
+}
+
+#text-reset {
+    color: white;
+    font-size: 30px;
+    padding-right: 10px; /* Adjust padding */
+    text-align: center;
 }
