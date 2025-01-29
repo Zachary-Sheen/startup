@@ -3,3 +3,76 @@
     padding:0;
     border:0;
 }
+li{
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+.main{
+    min-height:  100%;
+    width:100%;
+    overflow:hidden;
+    background-color: #f9f9f9;
+}
+#sidebar{
+    max-width:  264px;
+    min-height: 100vh;
+    transition: all 0.35 ease-in-out;
+    background-color:rgb(24, 20, 20);
+    display:flex;
+    flex-direction: column;
+}
+#sidebar.collapsed {
+    margin-left:-264px;
+}
+
+.toggler-btn {
+    background-color: transparent;
+    cursor:pointer;
+    border:0;
+}
+.toggler-btn i{
+    font-size:1.5rem;
+    color:#000;
+    font-weight:bold
+ }
+ .navbar {
+    padding:1.15rem 1.5rem;
+ }
+ .sidebar-nav {
+    flex: 1 1 auto;
+ }
+ .sidebar-logo{
+    padding:1.15rem 1.5rem;
+    text-align:center;
+ }
+ .sidebar-logo a{
+    color: #FFF;
+    font-weight:800;
+    font-size:1.25rem;
+ }
+ .sidebar-header {
+    color: #FFF;
+    font-size: .75rem;
+    padding: 1.5rem 1.5rem .375rem;
+}
+ a.sidebar-link{
+    padding: .625rem 1.625rem;
+    color: #FFF;
+    position: relative;
+    transition: all 0.35s;
+    display:block;
+ }
+ a.sidebar-link:hover{
+    background-color: rgb(41, 40, 40);
+ }
+ #heading{
+    background-color: rgb(24, 20, 20);
+    color:white;
+    border-left: 2px solid black;
+ }
+ .messagesend{
+    max-width:75vw;
+    
+ }

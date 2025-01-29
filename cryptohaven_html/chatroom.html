@@ -4,56 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatroom</title>
+    <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="styles.css">
+    <link href="styles.css" rel = "stylesheet">
     <!-- <script src="scripts.js"></script> -->
 </head>
-<body class="bg-black text-white">
-  <div> <!--class="container"-->
-    <div class="row">
-      <!-- Sidebar (col-4) -->
-      <header class="col-12 col-md-4">
-        <nav class="navbar navbar-light">
-            <h1>CryptoHaven Chatroom<sup>&reg;</sup></h1>
-        </nav>
-        <menu>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="dashboard.html">Dashboard</a></li> 
-          <li><a href="chatroom.html">Chat</a></li>
-          <li><a href="signup.html">Sign-Up</a></li>
-          <li><a href="login.html">Login</a></li>
-          <li>Account</li>
-        </menu>
-        <hr />
-      </header>
-
-      <!-- Main Content (col-8) -->
-      <main class="col-12 col-md-8">
-        <h2>Welcome to the Chatroom</h2>
-        <h3 id="databox">Cryptocurrencies</h3>
-        <div id="infocontainer">
-            <!-- Placeholder for cryptocurrency boxes -->
-            <img src="https://img.freepik.com/free-psd/gold-bitcoin-symbol-cryptocurrency-design-transparent-background_84443-29193.jpg?semt=ais_hybrid" style="width:25%; height:25%;">
+<body>
+  
+      <div class = "d-flex">
+        <aside id = "sidebar" class = "sidebar-toggle">
+          <div class = "sidebar-logo">
+            <a href = '#'>Navigation</a>
+          </div>
+          <ul class = "sidebar-nav p-0">
+            <li class = "sidebar-header">
+              Tools
+            </li>
+            <li class = "sidebar-item">
+              <a href = "index.html" class = "sidebar-link">
+                <i class="lni lni-home-2"></i>
+                  Home Page
+              </a>
+            </li>
+            <li class = "sidebar-item">
+              <a href = "dashboard.html" class = "sidebar-link">
+                <i class="lni lni-dashboard-square-1"></i>
+                  Dashboard
+              </a>
+            </li>
+            <li class = "sidebar-item">
+              <a href = "chatroom.html" class = "sidebar-link">
+                <i class="lni lni-message-3-text"></i>
+                  Chatroom
+              </a>
+            </li>
+            <li class = "sidebar-header">
+              Login/Sign-up
+            </li>
+            <li class = "sidebar-item">
+              <a href = "login.html" class = "sidebar-link">
+                <i class="lni lni-user-4"></i>
+                  Login
+              </a>
+            </li>
+            <li class = "sidebar-item">
+              <a href = "signup.html" class = "sidebar-link">
+                <i class="lni lni-enter"></i>
+                  Sign-up
+              </a>
+            </li>
+          </ul>
+          <div class="sidebar-footer">
+            <a href="https://github.com/Zachary-Sheen/startup" class="sidebar-link">
+              <i class="lni lni-github"></i>
+                <span>Zachary Sheen - Github</span>
+            </a>
+          </div>
+        </aside>
+        <div class="main">
+          <nav class="navbar navbar-expand" id="heading">
+              <button class="toggler-btn" type="button">
+                  <i class="lni lni-text-align-left"></i>
+              </button>
+              <h2 class="mx-auto">Welcome to the Chatroom</h2>
+          </nav>
+          <main class="p-3">
+              <div class="container-fluid">
+                  <h3 id="databox">Cryptocurrencies</h3>
+                  <div id="infocontainer">
+                      <!-- Placeholder for cryptocurrency boxes -->
+                      <img src="https://img.freepik.com/free-psd/gold-bitcoin-symbol-cryptocurrency-design-transparent-background_84443-29193.jpg?semt=ais_hybrid"
+                          style="width:25%; height:25%;">
+                  </div>
+                  <div id="cryptoinfo" style="display:hidden">
+                      <!-- Cryptocurrency information -->
+                  </div>
+              </div>
+          </main>
+      
+          <!-- Footer Form (Attached to Bottom, Matches Parent Width) -->
+          <div class="messagesend fixed-bottom bg-light p-3 w-100">
+              <div class="container"> <!-- Restricts Width -->
+                  <form action="chatroom.php" method="post">
+                      <div class="chat-message clearfix">
+                          <div class="input-group mb-0">
+                              <div class="input-group-prepend">
+                                  <button type="submit">
+                                      <span class="input-group-text"><i class="lni lni-exit-up"></i></span>
+                                  </button>
+                              </div>
+                              <input type="text" class="form-control" placeholder="Enter text here...">
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
         </div>
-        <div id="cryptoinfo">
-            <!-- Cryptocurrency information -->
         </div>
-        <form action="chatroom.php" method="post">
-            <input type="text" class="messagecontainer" id="messagecontainer" readonly="readonly">
-            <br>
-            <input type="text" class="messagebox" id="messagebox" placeholder="Enter your message here" name="message" required>
-            <br>
-            <button type="submit">Send</button>
-        </form>
-      </main>
-    </div>
-
-    <footer class="mt-4">
-        <hr />
-        <span class="text-reset">Zachary Sheen</span>
-        <br />
-        <a href="https://github.com/Zachary-Sheen/startup">GitHub</a>
-    </footer>
-  </div>
+      </div>
 </body>
 </html>
