@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="styles.css">
     <script src = "scripts.js"></script>
 </head>
-<body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <div class = "d-flex">
     <aside id = "sidebar" class = "sidebar-toggle">
@@ -18,7 +17,7 @@
       </div>
       <ul class = "sidebar-nav p-0">
         <li class = "sidebar-item">
-          <a href = "index.html" class = "sidebar-link">
+          <a href = "dashboard.html" class = "sidebar-link">
             <i class="lni lni-user-4"></i>
               Account
           </a>
@@ -68,23 +67,37 @@
       </div>
     </aside>
     
-    <main>
-        <h2>Login</h2>
-        <form action="chatroom.html" method="get"> <!-- login.php not made yet, this is the placeholder for database access -->
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <br>
-            <button type="submit">Login</button>
+    <div class="main">
+      <nav class="navbar navbar-expand" id="heading">
+          <button class="toggler-btn" type="button">
+              <i class="lni lni-text-align-left"></i>
+          </button>
+          <h2 class="mx-auto"><strong>Login</strong></h2>
+      </nav>
+      
+      <form method="post" action="chatroom.html"> <!-- This is the placeholder for database access -->
+        <div class="d-flex justify-content-center align-items-center" style="height: 75vh; margin-top: 10vh;">
+          <div class="card text-center cardstyle shadow-lg" style="max-width: 400px; width: 100%;">
+            <div class="card-header">
+              Input Information
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Login</h5>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" required />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter your password" required />
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-dark w-100">Submit</button>
+              </div>
+            </div>
+          </div>
         </form>
-    </main>
-    <footer>
-        <hr />
-        <span class="text-reset">Zachary Sheen</span>
-        <br />
-        <a href="https://github.com/Zachary-Sheen/startup">GitHub</a>
-      </footer>
-</body>
+      </div>
+
 </html>

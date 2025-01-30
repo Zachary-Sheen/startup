@@ -18,7 +18,7 @@
         </div>
         <ul class = "sidebar-nav p-0">
           <li class = "sidebar-item">
-            <a href = "index.html" class = "sidebar-link">
+            <a href = "dashboard.html" class = "sidebar-link">
               <i class="lni lni-user-4"></i>
                 Account
             </a>
@@ -76,47 +76,34 @@
             <h2 class="mx-auto"><strong>Sign-Up</strong></h2>
         </nav>
         
-        <form method="post" action="chatroom.html"> <!-- this is the placeholder for database access -->
-          <div class = "card text-center">
-            <div class = "card-header">
-              Input Information
+        <form method="post" action="chatroom.html"> <!-- This is the placeholder for database access -->
+          <div class="d-flex justify-content-center align-items-center" style="height: 75vh; margin-top: 10vh;">
+            <div class="card text-center cardstyle shadow-lg" style="max-width: 400px; width: 100%;">
+              <div class="card-header">
+                Input Information
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Sign-Up</h5>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter your email" required />
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Enter your password" required />
+                </div>
+                <div class="mb-3">
+                  <label for="confirm-password" class="form-label">Confirm Password</label>
+                  <input type="password" class="form-control" id="confirm-password" placeholder="Repeat password" required />
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-dark w-100">Submit</button>
+                </div>
+              </div>
             </div>
-            <div class = "card-body">
-              <h5 class = "cart-title">Input Info to Sign-Up!</h5>
-              <div>
-                <!-- <span>@</span> -->
-                <label for = "password">Email</label>
-                <input type="text" placeholder="Enter your email"/>
-              </div>
-              <div>
-                <!-- <span>🔒</span> -->
-                <label for = "password">Password</label>
-                <input type="password" placeholder="Enter your password"/>
-              </div>
-              <div>
-                <!-- <span>🔒</span> -->
-                <label for = "password">Confirm Password</label>
-                <input type="password" placeholder="Repeat password"/>
-              </div>
-            </div>
-          </div>
-          <div>
-            <!-- <span>@</span> -->
-            <label for = "password">Email</label>
-            <input type="text" placeholder="Enter your email"/>
-          </div>
-          <div>
-            <!-- <span>🔒</span> -->
-            <label for = "password">Password</label>
-            <input type="password" placeholder="Enter your password"/>
-          </div>
-          <div>
-            <!-- <span>🔒</span> -->
-            <label for = "password">Confirm Password</label>
-            <input type="password" placeholder="Repeat password"/>
-          </div>
-          <button type="submit">Create Account</button>
-        </form>
+          </form>
+        </div>
       </div>
       <!-- <table>
         <thead>

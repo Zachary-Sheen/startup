@@ -1,0 +1,1 @@
+//forEach funciton goes through each, const words = ['hello', 'world']; words.forEach((word) => console.log(word));

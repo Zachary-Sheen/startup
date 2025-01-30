@@ -76,3 +76,16 @@ a {
     max-width:75vw;
     
  }
+/* .cardstyle{
+   max-width:40%;
+   max-height:40%;
+
+} */
+ @media (max-width:768px){
+   .sidebar-toggle{
+      margin-left:-264px
+   }
+   #sidebar.collapsed {
+      margin-left:0;
+   }
+ }
