@@ -102,12 +102,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [X] **Header, footer, and main content body** - For this, I made a header for each page that displays what type of page it is on, and a content body that has all the information for a page on it.  I then have a footer that shows the different pages that a user can go onto in the website.  I have two files, homestyle.css for the homepage and styles.css for each of the other 4 pages.
+- [X] **Navigation elements** - I used the bootstrap navbar that made making the navigation a lot easier.
+- [X] **Responsive to window resizing** - I used the Bootstrap resizing features and the 'display:flex" that made my page be responsive to any page size.
+- [X] **Application elements** - For my elements I used a lot of different sizing ideas such as the bootstrap built in columns and view width properties.  Also, I used a lot of "display:flex" to make the page look nice.
+- [X] **Application text content** - I imported a text font named OpenSans that looks really nice on the front page.  For all the other pages I kept the font the same.  I used a lot of centering styles to make the code stay in the middle to look nicer.
+- [X] **Application images** - I used an image on the homepage as a background for my page.  It has a cryptocurrency graph and it matches very well with the website.
 
 ## 🚀 React part 1: Routing deliverable
 
