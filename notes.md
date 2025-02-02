@@ -18,3 +18,6 @@ For this, part of the assignment was creating a page using html in Codepen which
 
 ## CSS Notes
 For this part of the assignment I created a page using just CSS in Codepen that you can find [here](https://codepen.io/Sheenster/pen/ogvaVxe).  Also, I leanred a lot about how using flexbox makes styling in CSS a lot easier than it used to be.  You can see how I use it in this [Codepen](https://codepen.io/Sheenster/pen/dPbrpYR).  I learned how to use Bootstrap and how it can help a lot in formatting and making a page look cool.  You can find the link for that [here](https://codepen.io/Sheenster/pen/RNbdGjJ).
+
+## React P1 Notes
+For this part I learned how Javascript and react work, and I used this [Codepen](https://codepen.io/Sheenster/pen/qEWMwjw) to see how arrays work in JavaScript.
