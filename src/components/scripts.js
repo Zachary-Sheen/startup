@@ -30,3 +30,34 @@
 // };
 // Adding a new key-value pair
 // dict.fourth = 'fourth';
+
+
+// 1 line update
+// function CLicker({ initialCount}) {
+//     const [count, setCount] = React.useState(initialCount);
+//     return <div onClick={() => setCount(count + 1)}>Click count: {count}</div>;
+// }
+// array distrubution
+// const arr = [1,2,3,4,5];
+// const [a,b,...c] = arr;
+//...c is the rest operator
+
+// local storage example
+// const obj = {name: 'value'};
+// localStorage.setItem('obj', JSON.stringify(obj));
+// const obj = JSON.parse(localStorage.getItem('obj'));
+
+//json example
+// const obj = {name: 'value'};
+// const json = JSON.stringify(obj);
+// const obj = JSON.parse(json);
+
+// use effect example
+// React.useEffect(() => {
+//     console.log('use effect');
+// });
+
+// conditional effect
+// React.useEffect(() => {
+//     console.log('use effect');
+// }, [count]);
