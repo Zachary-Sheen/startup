@@ -6,6 +6,14 @@ import './styles.css';
 import './scripts.js';
 
 const Sidebar = () => {
+    const [username, setUsername] = React.useState('');
+    
+        useEffect(() => {
+            const storedUsername = localStorage.getItem('username');
+            if (storedUsername) {
+                setUsername(storedUsername);
+            }
+        }, []);
     return (
         <aside id="sidebar" className="sidebar-toggle">
             <div className="sidebar-logo">
@@ -15,17 +23,20 @@ const Sidebar = () => {
                 <li className="sidebar-item">
                     <Link to="/account" className="sidebar-link">
                         <i className="lni lni-user-4"></i>
-                        Account
+                        {username ? username : 'Account'} {/* if username exists if not it is account */}
                     </Link>
                 </li>
                 <li className="sidebar-header">
-                    Tools
+                    Home
                 </li>
-                <li className="sidebar-item">
-                    <Link to="/" className="sidebar-link">
-                        <i className="lni lni-home-2"></i>
-                        Home Page
-                    </Link>
+                    <li className="sidebar-item">
+                        <Link to="/" className="sidebar-link">
+                            <i className="lni lni-home-2"></i>
+                            Home Page
+                        </Link>
+                    </li>
+                <li className="sidebar-header">
+                    Tools
                 </li>
                 <li className="sidebar-item">
                     <Link to="/dashboard" className="sidebar-link">

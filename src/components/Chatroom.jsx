@@ -7,6 +7,14 @@ import CryptoTable from './CryptoTable';
 import "./scripts.js";
 
 const Chatroom = () => {
+    const [username, setUsername] = React.useState('');
+        
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            setUsername(storedUsername);
+        }
+    }, []);
     return (
         <div className="d-flex">
             <Sidebar />

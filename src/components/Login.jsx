@@ -6,6 +6,15 @@ import './styles.css';
 import "./scripts.js";
 
 const Login = () => {
+    //use state example
+    // const [data, setData] = useState([]);
+    function checkLogin() {
+        //check if the user's credentials are correct
+        //if they are, redirect to chatroom
+        //if not, redirect to signup
+        email = document.getElementById("email");
+        password = document.getElementById("password");
+    }
     return (
         <div className="d-flex">
             <Sidebar />
@@ -34,7 +43,7 @@ const Login = () => {
                                 </div>
                             </div>
                             <div className="card-footer">
-                                <button type="submit" className="btn btn-dark w-100">Submit</button>
+                                <button type="submit" onClick={checkLogin()} className="btn btn-dark w-100">Submit</button>
                             </div>
                         </div>
                     </div>

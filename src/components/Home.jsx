@@ -5,6 +5,7 @@ import 'lineicons/dist/lineicons.css';
 import './homepgstyle.css';
 
 const Home = () => {
+    
     return (
         <div>
             <div className="header">
