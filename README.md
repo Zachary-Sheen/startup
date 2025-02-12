@@ -113,9 +113,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - Routing between login and voting components.
+- [X] **Bundled using Vite** - I bundled my server with Vite so I can test it remotely and use React to display my code.
+- [X] **Components** - I made componenets for each different page of my application,  There are different components for login, sign-up, dashboard, chatroom, and home page.  I also made a component for the cryptocurrency table that I will display on the chatroom and dashboard.  Also, I made a sidebar component so I didn't have to copy the code for every single page.
+- [X] **Router** - I implemented routing in my App.jsx so that the entire website can be routed through a single page just switching the components.
 
 ## 🚀 React part 2: Reactivity
 
