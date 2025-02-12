@@ -7,6 +7,17 @@ import './styles.css';
 import "./scripts.js";
 
 const Dashboard = () => {
+
+    const [username, setUsername] = React.useState('');
+
+    useEffect(() => {
+        const data = localStorage.getItem('accountData');
+        const storedUsername = data ? JSON.parse(data).username : null;
+        if (storedUsername) {
+            setUsername(storedUsername);
+        }
+    }, []);
+
     return (
         <div className="d-flex">
             <Sidebar />
@@ -15,7 +26,7 @@ const Dashboard = () => {
                     <button className="toggler-btn" type="button">
                         <i className="lni lni-menu-cheesburger"></i>
                     </button>
-                    <h2 className="mx-auto">Welcome back, <span id="userName"><strong>User!</strong></span></h2>
+                    <h2 className="mx-auto">Welcome back, <span id="userName"><strong>{username}!</strong></span></h2>
                 </nav>
                 <div className="container mt-5">
                     <div className="row">

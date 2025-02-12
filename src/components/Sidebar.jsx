@@ -10,7 +10,7 @@ const Sidebar = () => {
     
         useEffect(() => {
             const data = localStorage.getItem('accountData');
-            const storedUsername = data ? JSON.parse(data).email : null;
+            const storedUsername = data ? JSON.parse(data).username : null;
             if (storedUsername) {
                 setUsername(storedUsername);
             }
