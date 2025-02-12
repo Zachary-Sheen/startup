@@ -46,6 +46,9 @@
 // const obj = {name: 'value'};
 // localStorage.setItem('obj', JSON.stringify(obj));
 // const obj = JSON.parse(localStorage.getItem('obj'));
+// How to get name and name's value
+// const name = obj.name;
+// const value = obj[name];
 
 //json example
 // const obj = {name: 'value'};

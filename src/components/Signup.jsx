@@ -4,8 +4,39 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'lineicons/dist/lineicons.css';
 import './styles.css';
 import "./scripts.js";
+import bcrypt from 'bcryptjs';
 
 const Signup = () => {
+
+    async function hashPassword(password) {
+        try {
+            const salt = await bcrypt.genSalt(10);
+            const hash = await bcrypt.hash(password, salt);
+            console.log('Hashed Password:', hash);
+            return hash;
+        } catch (err) {
+            console.error('Error hashing password:', err);
+        }
+    }
+    
+    async function setCredentials(event) {
+        event.preventDefault();
+        const email = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+        const hashedPassword = await hashPassword(password);
+        const data = {
+            'username': email,
+            'hashedPassword': hashedPassword
+        };
+        localStorage.setItem('accountData', JSON.stringify(data));
+        window.location.href = '/chatroom';
+    }
+
     return (
         <div className="d-flex">
             <Sidebar />
@@ -17,7 +48,7 @@ const Signup = () => {
                     <h2 className="mx-auto"><strong>Sign-Up</strong></h2>
                 </nav>
                 
-                <form method="post" action="chatroom.html"> 
+                <form method="post" onSubmit={setCredentials}>
                     <div className="d-flex justify-content-center align-items-center" style={{ height: '75vh', marginTop: '10vh' }}>
                         <div className="card text-center cardstyle shadow-lg" style={{ maxWidth: '400px', width: '100%' }}>
                             <div className="card-header">
@@ -26,15 +57,15 @@ const Signup = () => {
                             <div className="card-body">
                                 <h5 className="card-title">Sign-Up</h5>
                                 <div className="mb-3">
-                                    <label for="email" className="form-label">Email</label>
-                                    <input type="email" className="form-control" id="email" placeholder="Enter your email" required />
+                                    <label htmlFor="username" className="form-label">Username</label>
+                                    <input type="username" className="form-control" id="username" placeholder="Enter your username" required />
                                 </div>
                                 <div className="mb-3">
-                                    <label for="password" className="form-label">Password</label>
+                                    <label htmlFor="password" className="form-label">Password</label>
                                     <input type="password" className="form-control" id="password" placeholder="Enter your password" required />
                                 </div>
                                 <div className="mb-3">
-                                    <label for="confirm-password" className="form-label">Confirm Password</label>
+                                    <label htmlFor="confirm-password" className="form-label">Confirm Password</label>
                                     <input type="password" className="form-control" id="confirm-password" placeholder="Repeat password" required />
                                 </div>
                             </div>

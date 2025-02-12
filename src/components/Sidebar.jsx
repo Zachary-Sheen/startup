@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'lineicons/dist/lineicons.css';
@@ -9,7 +9,8 @@ const Sidebar = () => {
     const [username, setUsername] = React.useState('');
     
         useEffect(() => {
-            const storedUsername = localStorage.getItem('username');
+            const data = localStorage.getItem('accountData');
+            const storedUsername = data ? JSON.parse(data).email : null;
             if (storedUsername) {
                 setUsername(storedUsername);
             }

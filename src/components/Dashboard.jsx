@@ -13,7 +13,7 @@ const Dashboard = () => {
             <div className="main">
                 <nav className="navbar navbar-expand" id="heading">
                     <button className="toggler-btn" type="button">
-                        <i class="lni lni-menu-cheesburger"></i>
+                        <i className="lni lni-menu-cheesburger"></i>
                     </button>
                     <h2 className="mx-auto">Welcome back, <span id="userName"><strong>User!</strong></span></h2>
                 </nav>
