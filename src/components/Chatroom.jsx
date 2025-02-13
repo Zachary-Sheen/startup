@@ -43,8 +43,10 @@ const Chatroom = () => {
         }
         const chatBox = document.getElementById('chatBox');
         const newMessage = document.createElement('div');
-        newMessage.className = 'message p-2 mb-2 bg-light rounded';
-        newMessage.innerHTML = `<strong>${username}:</strong> ${message}`;
+        newMessage.className = `message p-2 mb-2 rounded ${username !== null ? 'bg-primary text-white text-right' : 'bg-light'}`; //if username is user, bg-primary text-white text-right, else bg-light, showing different users texts
+        newMessage.style.alignSelf = username !== null ? 'flex-end' : 'flex-start';
+        console.log(newMessage.style)
+        newMessage.innerHTML = username !== null ? `<strong>${username}: </strong> ${message}`: `<strong>${username}:</strong> ${message}`;
         const addMessage = {username: username, message: message};
         setMessages([...messages, addMessage]); //...messages is the previous messages, addMessage is the new message
         chatBox.appendChild(newMessage);
@@ -57,6 +59,17 @@ const Chatroom = () => {
         }
     }
 
+
+    //Keep this code for now, we will use it later
+    //{messages.map((msg, index) => (
+//         <div
+//         key={index}
+//         className={`message p-2 mb-2 rounded ${msg.username === username ? 'bg-primary text-white text-right' : 'bg-light'}`}
+//         style={{ alignSelf: msg.username === username ? 'flex-end' : 'flex-start' }}
+//     >
+//         <strong>{msg.username}:</strong> {msg.text}
+//     </div>
+// ))}
     return (
         <div className="d-flex">
             <Sidebar />
@@ -77,7 +90,7 @@ const Chatroom = () => {
                                 <div className="card-header bg-dark text-white">
                                     Start Chatting!
                                 </div>
-                                <div className="card-body" style={{ height: '300px', overflowY: 'scroll' }} id="chatBox">
+                                <div className="card-body" style={{ height: '300px', overflowY: 'scroll',display: 'flex', flexDirection: 'column'  }} id="chatBox">
                                     <div className="message p-2 mb-2 bg-light rounded">
                                         <strong>User:</strong> What do you think about that bitcoin?
                                     </div>
