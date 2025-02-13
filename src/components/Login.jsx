@@ -28,6 +28,9 @@ const Login = () => {
         const password = document.getElementById("password").value;
         verifyPassword(password).then((result) => {
             if (result) {
+                const data = JSON.parse(localStorage.getItem('accountData'));
+                data.sessionStartTime = new Date().getTime();
+                localStorage.setItem('accountData', JSON.stringify(data));
                 navigate("/chatroom");
             } else {
                 navigate("/signup");

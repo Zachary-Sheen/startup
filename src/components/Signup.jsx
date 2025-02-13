@@ -38,7 +38,8 @@ const Signup = () => {
         const data = {
             'username': email,
             'hashedPassword': hashedPassword,
-            'authSession': authSession()
+            'sessionStartTime': new Date().getTime()
+
         };
         localStorage.setItem('accountData', JSON.stringify(data));
         window.location.href = '/chatroom';
