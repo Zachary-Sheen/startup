@@ -12,9 +12,21 @@ const Dashboard = () => {
 
     useEffect(() => {
         const data = localStorage.getItem('accountData');
-        const storedUsername = data ? JSON.parse(data).username : null;
-        if (storedUsername) {
-            setUsername(storedUsername);
+        if(data) {
+            const parsedData = JSON.parse(data);
+            const storedUsername = parsedData.username;
+            const sessionStartTime = parsedData.sessionStartTime;
+            const currentTime = new Date().getTime();
+            if (currentTime - sessionStartTime > 3600000) {
+                alert('Session expired. Please log in again.');
+                window.location.href = '/login';
+            } else {
+                setUsername(storedUsername);
+            }
+        }
+        else
+        {
+            window.location.href = '/login';
         }
     }, []);
 
