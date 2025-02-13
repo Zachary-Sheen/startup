@@ -7,6 +7,12 @@ import "./scripts.js";
 import bcrypt from 'bcryptjs';
 
 const Signup = () => {
+    
+
+    function authSession() {
+        const session = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        return session;
+    }
 
     async function hashPassword(password) {
         try {
@@ -31,7 +37,8 @@ const Signup = () => {
         const hashedPassword = await hashPassword(password);
         const data = {
             'username': email,
-            'hashedPassword': hashedPassword
+            'hashedPassword': hashedPassword,
+            'authSession': authSession()
         };
         localStorage.setItem('accountData', JSON.stringify(data));
         window.location.href = '/chatroom';

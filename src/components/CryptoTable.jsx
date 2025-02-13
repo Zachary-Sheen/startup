@@ -16,7 +16,7 @@ const CryptoTable = () => {
 
         // Un heur
         const intervalId = setInterval(fetchCryptoData, 3600000);
-
+        
         // Once that interval is done we clear it
         return () => clearInterval(intervalId);
     }, []);
