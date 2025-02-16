@@ -1,11 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'lineicons/dist/lineicons.css';
 import './homepgstyle.css';
 
 const Home = () => {
-    
+    const navigate = useNavigate();
+
+    function checkLogin() {
+        const data = localStorage.getItem('accountData');
+        if(data) {
+            const parsedData = JSON.parse(data);
+            const sessionStartTime = parsedData.sessionStartTime;
+            const currentTime = new Date().getTime();
+            if (currentTime - sessionStartTime > 3600000) {
+                window.location.href = '/login';
+            }
+        else if(!data){
+            navigate('/signup')
+        }
+        }
+    }
+
+
     return (
         <div>
             <div className="header">
@@ -15,8 +32,8 @@ const Home = () => {
                     </div>
                     <ul className="navelements">
                         <Link to="/"><li>Home</li></Link>
-                        <Link to="/dashboard"><li>Dashboard</li></Link>
-                        <Link to="/chatroom"><li>Chatroom</li></Link>
+                        <Link to="/dashboard" onClick = {checkLogin}><li>Dashboard</li></Link>
+                        <Link to="/chatroom" onClick = {checkLogin}><li>Chatroom</li></Link>
                         <Link to="/signup"><li>Sign Up</li></Link>
                         <Link to="/login"><li>Login</li></Link>
                         <Link to="/account"><li>Account</li></Link>
