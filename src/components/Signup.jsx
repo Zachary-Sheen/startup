@@ -9,10 +9,11 @@ import bcrypt from 'bcryptjs';
 const Signup = () => {
     
 
-    function authSession() {
-        const session = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        return session;
-    }
+    // function authSession() {
+    //     const session = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    //     return session;
+    // }
+
 
     async function hashPassword(password) {
         try {
@@ -42,6 +43,8 @@ const Signup = () => {
 
         };
         localStorage.setItem('accountData', JSON.stringify(data));
+        localStorage.setItem('usernameDisplay', email);
+        localStorage.setItem('favoriteCryptos', {});
         window.location.href = '/chatroom';
     }
 

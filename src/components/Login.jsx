@@ -9,7 +9,6 @@ import bcrypt from 'bcryptjs';
 
 const Login = () => {
     const navigate = useNavigate();
-    const [authed, setAuthed] = React.useState(false);
 
     async function verifyPassword(password) {
         try {
@@ -27,15 +26,15 @@ const Login = () => {
         event.preventDefault();
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
+        const usernamedisplay = username;
         verifyPassword(password).then((result) => {
             if (result) {
                 const data = JSON.parse(localStorage.getItem('accountData'));
                 data.sessionStartTime = new Date().getTime();
                 localStorage.setItem('accountData', JSON.stringify(data));
-                setAuthed(true);
+                localStorage.setItem('usernameDisplay', usernamedisplay);
                 navigate("/chatroom");
             } else {
-                setAuthed(false);
                 navigate("/signup");
             }
         });

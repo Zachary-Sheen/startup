@@ -19,7 +19,7 @@ const Dashboard = () => {
             const currentTime = new Date().getTime();
             if (currentTime - sessionStartTime > 3600000) {
                 // alert('Session expired. Please log in again.');
-                username("Account")
+                setUsername("Account")
                 window.location.href = '/login';
             } else {
                 setUsername(storedUsername);

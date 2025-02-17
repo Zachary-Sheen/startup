@@ -12,16 +12,16 @@ const Chatroom = () => {
         
     useEffect(() => {
         const data = localStorage.getItem('accountData');
+        const usernamedisplay = localStorage.getItem('usernameDisplay');
         if(data) {
             const parsedData = JSON.parse(data);
-            const storedUsername = parsedData.username;
             const sessionStartTime = parsedData.sessionStartTime;
             const currentTime = new Date().getTime();
             if (currentTime - sessionStartTime > 3600000) {
                 alert('Session expired. Please log in again.');
                 window.location.href = '/login';
             } else {
-                setUsername(storedUsername);
+                setUsername(usernamedisplay);
             }
         }
         else

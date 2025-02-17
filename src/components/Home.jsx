@@ -6,20 +6,23 @@ import './homepgstyle.css';
 
 const Home = () => {
     const navigate = useNavigate();
-
+    
     function checkLogin() {
         const data = localStorage.getItem('accountData');
-        if(data) {
+        if(data) 
+            {
             const parsedData = JSON.parse(data);
             const sessionStartTime = parsedData.sessionStartTime;
             const currentTime = new Date().getTime();
-            if (currentTime - sessionStartTime > 3600000) {
+            if (currentTime - sessionStartTime > 3600000) 
+                {
                 window.location.href = '/login';
+                }
             }
-        else if(!data){
+        else if(!data)
+            {
             navigate('/signup')
-        }
-        }
+            }
     }
 
 
