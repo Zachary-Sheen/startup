@@ -25,8 +25,13 @@ const CryptoTable = () => {
 
     useEffect(() => {
         const storedFavorites = localStorage.getItem('favoriteCryptos');
-        if (storedFavorites) {
-            setFavoriteCryptos(JSON.parse(storedFavorites));
+        try {
+            if (storedFavorites) {
+                setFavoriteCryptos(JSON.parse(storedFavorites));
+            }
+        } catch (error) {
+            console.error("Error parsing favoriteCryptos from localStorage:", error);
+            setFavoriteCryptos({});
         }
     }, []);
 
@@ -39,9 +44,7 @@ const CryptoTable = () => {
     };
 
     const handleFavorite = (selectedCryptoCurr) => {
-        
         const updatedFavorites = { ...favoriteCryptos };
-        console.log(updatedFavorites)
         if (updatedFavorites[selectedCryptoCurr.symbol]) {
             delete updatedFavorites[selectedCryptoCurr.symbol];
         } else {

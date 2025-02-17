@@ -44,7 +44,7 @@ const Signup = () => {
         };
         localStorage.setItem('accountData', JSON.stringify(data));
         localStorage.setItem('usernameDisplay', email);
-        localStorage.setItem('favoriteCryptos', {});
+        localStorage.setItem('favoriteCryptos', []);
         window.location.href = '/chatroom';
     }
 
