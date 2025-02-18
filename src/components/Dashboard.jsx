@@ -9,9 +9,15 @@ import "./scripts.js";
 const Dashboard = () => {
 
     const [username, setUsername] = React.useState('');
+    const [favoriteCryptos, setFavoriteCryptos] = React.useState([]);
 
     useEffect(() => {
         const data = localStorage.getItem('accountData');
+        const favoriteCryptos = localStorage.getItem('favoriteCryptos');
+        if(favoriteCryptos) {
+            setFavoriteCryptos(JSON.parse(favoriteCryptos));
+            // console.log(favoriteCryptos)[1]
+        }
         if(data) {
             const parsedData = JSON.parse(data);
             const storedUsername = parsedData.username;

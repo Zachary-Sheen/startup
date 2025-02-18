@@ -72,27 +72,110 @@ const CryptoTable = () => {
 
     if (selectedCrypto) {
         return (
-            <div className="crypto-details">
-                <button className="btn btn-secondary mb-3" onClick={handleBackClick}>Back to Table</button>
-                <h2>{selectedCrypto.name} Details <button onClick={() => handleFavorite(selectedCrypto)}>{isFavorite(selectedCrypto.symbol) ? filledStar : emptyStar}</button></h2>
-                <img src={selectedCrypto.image} alt={selectedCrypto.name} style={{ width: '50px', height: '50px' }} />
-                <p><strong>Symbol:</strong> {selectedCrypto.symbol.toUpperCase()}</p>
-                <p><strong>Current Price:</strong> ${selectedCrypto.current_price}</p>
-                <p><strong>Market Cap:</strong> ${selectedCrypto.market_cap}</p>
-                <p><strong>24H Volume:</strong> ${selectedCrypto.total_volume}</p>
-                <p><strong>24H Change Percentage:</strong> {selectedCrypto.price_change_percentage_24h}%</p>
-                <p><strong>All-Time High:</strong> ${selectedCrypto.ath}</p>
-                <p><strong>All-Time High Change Percentage:</strong> {selectedCrypto.ath_change_percentage}%</p>
-                <p><strong>All-Time High Date:</strong> {new Date(selectedCrypto.ath_date).toLocaleString()}</p>
-                <p><strong>All-Time Low:</strong> ${selectedCrypto.atl}</p>
-                <p><strong>All-Time Low Change Percentage:</strong> {selectedCrypto.atl_change_percentage}%</p>
-                <p><strong>All-Time Low Date:</strong> {new Date(selectedCrypto.atl_date).toLocaleString()}</p>
-                <p><strong>Circulating Supply:</strong> {selectedCrypto.circulating_supply}</p>
-                <p><strong>Max Supply:</strong> {selectedCrypto.max_supply}</p>
-                <p><strong>Total Supply:</strong> {selectedCrypto.total_supply}</p>
-                <p><strong>Market Cap Rank:</strong> {selectedCrypto.market_cap_rank}</p>
-                <p><strong>Last Updated:</strong> {new Date(selectedCrypto.last_updated).toLocaleString()}</p>
+            <div className="crypto-details container mt-4">
+            <button className="btn btn-outline-primary mb-4" onClick={handleBackClick}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                    <path d="M8 12a.75.75 0 0 0 .75-.75V4.707l4.146 4.147a.75.75 0 0 0 1.061-1.06l-5-5a.75.75 0 0 0-1.061 0l-5 5a.75.75 0 0 0 1.061 1.06L7.25 4.707V11.25a.75.75 0 0 0 .75.75z"/>
+                </svg> 
+                 Back to Table
+            </button>
+
+            <div className="card shadow-lg p-4">
+                <div className="d-flex align-items-center">
+                    <img src={selectedCrypto.image} alt={selectedCrypto.name} className="crypto-logo" />
+                    <h2 className="ms-3 d-flex align-items-center">
+                        {selectedCrypto.name} Details
+                        <button className="btn btn-link ms-3 favorite-btn" onClick={() => handleFavorite(selectedCrypto)}>
+                            <i className={`fs-3 favorite-star ${isFavorite(selectedCrypto.symbol) ? 'filled' : ''}`}>{isFavorite(selectedCrypto.symbol) ? filledStar : emptyStar}</i>
+                        </button>
+                    </h2>
+                </div>
+
+                    <div className="table-responsive mt-4">
+                        <table className="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Attribute</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Symbol</strong></td>
+                                    <td className="text-secondary">{selectedCrypto.symbol.toUpperCase()}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Current Price</strong></td>
+                                    <td className="text-secondary">${selectedCrypto.current_price}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Market Cap</strong></td>
+                                    <td className="text-secondary">${selectedCrypto.market_cap}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Market Cap Rank</strong></td>
+                                    <td className="text-secondary">{selectedCrypto.market_cap_rank}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>24H Volume</strong></td>
+                                    <td className="text-success">${selectedCrypto.total_volume}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>24H Change Percentage</strong></td>
+                                    <td className={selectedCrypto.price_change_percentage_24h > 0 ? 'text-success' : 'text-danger'}>
+                                        {selectedCrypto.price_change_percentage_24h}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>All-Time High</strong></td>
+                                    <td className="text-success">${selectedCrypto.ath}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>All-Time High Change Percentage</strong></td>
+                                    <td className={selectedCrypto.ath_change_percentage > 0 ? 'text-success' : 'text-danger'}>
+                                        {selectedCrypto.ath_change_percentage}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>All-Time High Date</strong></td>
+                                    <td>{new Date(selectedCrypto.ath_date).toLocaleString()}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>All-Time Low</strong></td>
+                                    <td className="text-danger">${selectedCrypto.atl}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>All-Time Low Change Percentage</strong></td>
+                                    <td className={selectedCrypto.atl_change_percentage > 0 ? 'text-success' : 'text-danger'}>
+                                        {selectedCrypto.atl_change_percentage}%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>All-Time Low Date</strong></td>
+                                    <td>{new Date(selectedCrypto.atl_date).toLocaleString()}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Circulating Supply</strong></td>
+                                    <td className="text-secondary">{selectedCrypto.circulating_supply}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Max Supply</strong></td>
+                                    <td className="text-secondary">{selectedCrypto.max_supply}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total Supply</strong></td>
+                                    <td className="text-secondary">{selectedCrypto.total_supply}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Last Updated</strong></td>
+                                    <td>{new Date(selectedCrypto.last_updated).toLocaleString()}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+
         );
     }
 

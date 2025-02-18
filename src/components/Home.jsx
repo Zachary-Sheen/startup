@@ -16,11 +16,13 @@ const Home = () => {
             const currentTime = new Date().getTime();
             if (currentTime - sessionStartTime > 3600000) 
                 {
+                localStorage.setItem('usernameDisplay', 'Account');
                 window.location.href = '/login';
                 }
             }
         else if(!data)
             {
+            localStorage.setItem('usernameDisplay', 'Account');
             navigate('/signup')
             }
     }

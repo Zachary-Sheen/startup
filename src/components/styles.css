@@ -95,6 +95,33 @@ a {
    transition: all .2s ease-out;
 }
 
+.table-hover tbody tr:hover {
+   background-color: #f8f9fa;
+}
+
+
+.favorite-btn .favorite-star {
+   transition: transform 0.3s ease, color 0.3s ease;
+}
+
+
+.favorite-btn .favorite-star.filled {
+   transform: scale(1.2) rotate(20deg);
+   color: gold; 
+}
+
+.favorite-btn .favorite-star:hover {
+   transform: scale(1.4) rotate(30deg); 
+}
+
+
+.card {
+   transition: transform 0.3s ease;
+}
+
+.card:hover {
+   transform: translateY(-5px); 
+}
 
 @media (max-width:768px){
    .sidebar-toggle{
