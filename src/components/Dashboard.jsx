@@ -52,12 +52,13 @@ const Dashboard = () => {
                         <div className="col-md-12 mb-4">
                             <div className="box bg-dark text-white p-3 rounded">
                                 <h5>Favorite Cryptocurrencies ⭐</h5>
-                                <ul>
-                                    <li>Bitcoin (BTC)</li>
-                                    <li>Ethereum (ETH)</li>
-                                    <li>Ripple (XRP)</li>
-                                    <li>Litecoin (LTC)</li>
-                                    <li>Cardano (ADA)</li>
+                                <ul> 
+                                    {Object.entries(favoriteCryptos).map(([symbol, crypto]) => (
+                                        <li key={symbol} className="d-flex align-items-center">
+                                            <img src={crypto.image} alt={crypto.name} style={{ width: '20px', height: '20px', marginRight: '10px' }} />
+                                            <span>{crypto.name} ({symbol.toUpperCase()}) - ${crypto.current_price}</span>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                         </div>
