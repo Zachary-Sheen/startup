@@ -50,7 +50,7 @@ const Dashboard = () => {
                 <div className="container mt-5">
                     <div className="row">
                         <div className="col-md-12 mb-4">
-                            <div className="box bg-dark text-white p-3 rounded">
+                            <div className="box bg-dark text-white p-3 rounded" style = {{height: '190px', overflowY: 'scroll'}}>
                                 <h5>Favorite Cryptocurrencies ⭐</h5>
                                 <ul> 
                                     {Object.entries(favoriteCryptos).map(([symbol, crypto]) => (

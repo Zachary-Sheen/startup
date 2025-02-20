@@ -9,18 +9,30 @@ const CryptoTable = () => {
     const fetchCryptoData = () => {
         fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1")
             .then(response => response.json())
-            .then(data => setData(data))
+            .then(data => {
+                setData(data);
+                localStorage.setItem('CryptoData', JSON.stringify({ Date: new Date(), Data: data }));
+            })
             .catch(error => console.error("Error fetching data:", error));
     };
 
     useEffect(() => {
-        fetchCryptoData();
-        
-        // Fetch data every hour
-        const intervalId = setInterval(fetchCryptoData, 3600000);
-        
-        // Clear the interval when the component unmounts
-        return () => clearInterval(intervalId);
+        const cryptoData = localStorage.getItem('CryptoData');
+        if (cryptoData) {
+            try {
+                const parsedCryptoData = JSON.parse(cryptoData);
+                if (Object.keys(parsedCryptoData).length === 0 || new Date() - new Date(parsedCryptoData.Date) > 3600000) {
+                    fetchCryptoData();
+                } else {
+                    setData(parsedCryptoData.Data);
+                }
+            } catch (error) {
+                console.error("Error parsing CryptoData from localStorage:", error);
+                fetchCryptoData();
+            }
+        } else {
+            fetchCryptoData();
+        }
     }, []);
 
     useEffect(() => {
