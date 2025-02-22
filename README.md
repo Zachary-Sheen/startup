@@ -121,8 +121,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [ ] **All functionality implemented or mocked out** - I completed this part of the deliverable.  I added my third-party data pull to the CoinGecko API to get current information about cryptocurrencies.  Then, I take that data and display it in a table for users to look at.  Further, I made a way for the user to click a given cryptocurrency and see all relevant information about it.  The user is also allowed to favorite it, allowing the specific cryptocurrency's price and name to be shown in their dashboard.  I also implemented a signup feature that hashes users' passwords in local storage.  There is a login feature to go along with it aswell.  If a user tries to go to any given page without logging in, it will re-route them to the signup/login pages.  Also, a user is allowed to chat with other users through the chatroom's message system.  
+- [ ] **Hooks** - I added multiple useState and useEffect hooks to keep track of important data, such as message history, account name, favorite cryptocurrencies, etc.  This allowed me to effectively collect data from the user's actions and store it for further use.
 
 ## 🚀 Service deliverable
 
