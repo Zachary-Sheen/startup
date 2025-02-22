@@ -22,5 +22,5 @@ For this part of the assignment I created a page using just CSS in Codepen that 
 ## React P1 Notes
 For this part I learned how React works and how I can use it to manipulate the HTML of my website, which I demonstrate [here](https://codepen.io/Sheenster/pen/KwPYBwq).  I figured out how do to routing within React, which you can see [here](https://codepen.io/Sheenster/pen/emOojVP).
 
-## React P2 Notes (Accidentally started)
-For this part I learned how Javascript and React work, and I used this [Codepen](https://codepen.io/Sheenster/pen/qEWMwjw) to see how arrays work in JavaScript.  I also learned a lot about promises and how I can use them to better run my code to get information back to the user quickly, [here](https://codepen.io/leesjensen/pen/RwJJKwj) is the code for that.
+## React P2 Notes
+For this part I learned how Javascript and React work, and I used this [Codepen](https://codepen.io/Sheenster/pen/qEWMwjw) to see how arrays work in JavaScript.  I also learned a lot about promises and how I can use them to better run my code to get information back to the user quickly, [here](https://codepen.io/leesjensen/pen/RwJJKwj) is the code for that.  I learned how to use async and await to help with running processes in the background.  The code I used to learn that is [here](https://codepen.io/Sheenster/pen/mydErjM).  Also, I learned how useState works in being able to take user input and automatically change data.  I used the code [here](https://codepen.io/Sheenster/pen/Eaxygda) to learn it.
