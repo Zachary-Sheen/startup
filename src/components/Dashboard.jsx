@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'lineicons/dist/lineicons.css';
@@ -71,7 +72,7 @@ const Dashboard = () => {
                         <div className="col-md-4 mb-4">
                             <div className="box bg-dark text-white p-3 rounded" style={{ height: '100%' }}>
                                 <h5>Messages</h5>
-                                <p>Read the latest messages and notifications from the chat.</p>
+                                <p>Read the latest messages and notifications from the <Link to = "/chatroom">chat.</Link></p>
                             </div>
                         </div>
                         <div className="col-md-4 mb-4">

@@ -73,9 +73,14 @@ a {
     border-left: 2px solid black;
  }
  .messagesend{
-    max-width:75vw;
-    
+    max-width:75vw;  
  }
+ 
+ .message {
+   word-wrap: break-word;
+   word-break: break-word;
+   overflow-wrap: break-word;
+}
 
 .sidebar-link[data-bs-toggle="collapse"]::after {
     border:solid;

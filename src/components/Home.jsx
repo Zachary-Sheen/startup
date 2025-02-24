@@ -41,7 +41,7 @@ const Home = () => {
                         <Link to="/chatroom" onClick = {checkLogin}><li>Chatroom</li></Link>
                         <Link to="/signup"><li>Sign Up</li></Link>
                         <Link to="/login"><li>Login</li></Link>
-                        <Link to="/account"><li>Account</li></Link>
+                        {/* <Link to="/account"><li>Account</li></Link> */}
                     </ul>
                 </div>
             </div>
