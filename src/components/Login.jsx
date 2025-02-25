@@ -33,6 +33,7 @@ const Login = () => {
                 data.sessionStartTime = new Date().getTime();
                 localStorage.setItem('accountData', JSON.stringify(data));
                 localStorage.setItem('usernameDisplay', usernamedisplay);
+                localStorage.setItem('authenticated', true);
                 // localStorage.setItem('CryptoData', JSON.stringify({}));
                 navigate("/chatroom");
             } else {
