@@ -15,6 +15,10 @@ const Chatroom = () => {
         const usernamedisplay = localStorage.getItem('usernameDisplay');
         if(data) {
             const parsedData = JSON.parse(data);
+            const messages = localStorage.getItem('messages');
+            if (messages) {
+                setMessages(JSON.parse(messages));
+            }
             const sessionStartTime = parsedData.sessionStartTime;
             const currentTime = new Date().getTime();
             if (currentTime - sessionStartTime > 3600000) {
@@ -28,7 +32,23 @@ const Chatroom = () => {
         {
             window.location.href = '/login';
         }
+        
     }, []);
+
+    useEffect(() => {
+        const chatBox = document.getElementById('chatBox');
+        console.log("is this running?")
+        console.log(messages)
+        chatBox.innerHTML = ''; 
+        messages.forEach((msg) => {
+            const newMessage = document.createElement('div');
+            console.log("how many times is this running?")
+            newMessage.className = `message p-2 mb-2 rounded ${msg.username === username ? 'bg-primary text-white text-right' : 'bg-light'}`;
+            newMessage.style.alignSelf = msg.username === username ? 'flex-end' : 'flex-start';
+            newMessage.innerHTML = `<strong>${msg.username}:</strong> ${msg.message}`;
+            chatBox.appendChild(newMessage);
+        });
+    }, [messages]);
 
     
     function sendMessage() 
@@ -48,7 +68,9 @@ const Chatroom = () => {
         console.log(newMessage.style)
         newMessage.innerHTML = username !== null ? `<strong>${username}: </strong> ${message}`: `<strong>${username}:</strong> ${message}`;
         const addMessage = {username: username, message: message};
-        setMessages([...messages, addMessage]); //...messages is the previous messages, addMessage is the new message
+        const updatedMessages = [...messages, addMessage];
+        setMessages(updatedMessages); //...messages is the previous messages, addMessage is the new message
+        localStorage.setItem('messages', JSON.stringify(updatedMessages));
         chatBox.appendChild(newMessage);
         messageInput.value = '';
     }
@@ -59,17 +81,6 @@ const Chatroom = () => {
         }
     }
 
-
-    //Keep this code for now, we will use it later
-    //{messages.map((msg, index) => (
-//         <div
-//         key={index}
-//         className={`message p-2 mb-2 rounded ${msg.username === username ? 'bg-primary text-white text-right' : 'bg-light'}`}
-//         style={{ alignSelf: msg.username === username ? 'flex-end' : 'flex-start' }}
-//     >
-//         <strong>{msg.username}:</strong> {msg.text}
-//     </div>
-// ))}
     return (
         <div className="d-flex">
             <Sidebar />

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'lineicons/dist/lineicons.css';
 import './styles.css';
@@ -7,16 +7,37 @@ import './scripts.js';
 
 const Sidebar = () => {
     const [username, setUsername] = React.useState('');
+    const navigate = useNavigate();
     
         useEffect(() => {
             // const data = localStorage.getItem('accountData');
             // const storedUsername = data ? JSON.parse(data).username : null;
             const storedUsername = localStorage.getItem('usernameDisplay') ? localStorage.getItem('usernameDisplay') : 'Account';
+            const authed = localStorage.getItem('authenticated') === 'true';
 
-            if (storedUsername) {
+            if (storedUsername && authed) {
                 setUsername(storedUsername);
+            } else {
+                setUsername('Account');
             }
         }, []);
+
+    const checkAuthed = () => {
+        const authed = localStorage.getItem('authenticated') === 'true';
+        console.log('Authed:', authed);
+        if (authed) {
+            return true;
+        }
+        return false;
+    };
+
+    const handleNavigation = (e, path) => {
+        e.preventDefault();
+        if (checkAuthed()) {
+            navigate(path);
+        }
+    };
+
     return (
         <aside id="sidebar" className="sidebar-toggle">
             <div className="sidebar-logo">
@@ -42,13 +63,13 @@ const Sidebar = () => {
                     Tools
                 </li>
                 <li className="sidebar-item">
-                    <Link to="/dashboard" className="sidebar-link">
+                    <Link to="/dashboard"  onClick={(e) => handleNavigation(e, '/dashboard')} className="sidebar-link">
                         <i className="lni lni-dashboard-square-1"></i>
                         Dashboard
                     </Link>
                 </li>
                 <li className="sidebar-item">
-                    <Link to="/chatroom" className="sidebar-link">
+                    <Link to="/chatroom"  onClick={(e) => handleNavigation(e, '/chatroom')} className="sidebar-link">
                         <i className="lni lni-message-3-text"></i>
                         Chatroom
                     </Link>
@@ -66,6 +87,25 @@ const Sidebar = () => {
                     <Link to="/signup" className="sidebar-link">
                         <i className="lni lni-enter"></i>
                         Sign-up
+                    </Link>
+                </li>
+                <li className = "sidebar-header">
+                    Sign Out
+                </li>
+                <li className="sidebar-item">
+                    <Link to = "/"  className = "sidebar-link" onClick={(e) => {
+                        const authed = localStorage.getItem('authenticated') === 'true';
+                        if (!authed) {
+                            e.preventDefault();
+                            return;
+                        } else {
+                            localStorage.setItem('authenticated', false);
+                            window.location.href = '/';
+                        }
+                    }
+                    }>
+                        <i className="lni lni-exit"></i>
+                        Sign Out
                     </Link>
                 </li>
             </ul>

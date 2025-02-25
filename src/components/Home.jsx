@@ -13,8 +13,9 @@ const Home = () => {
             {
             const parsedData = JSON.parse(data);
             const sessionStartTime = parsedData.sessionStartTime;
+            const authed = localStorage.getItem('authenticated') === 'true';
             const currentTime = new Date().getTime();
-            if (currentTime - sessionStartTime > 3600000) 
+            if (currentTime - sessionStartTime > 3600000 || !parsedData.authenticated) 
                 {
                 localStorage.setItem('usernameDisplay', 'Account');
                 window.location.href = '/login';
@@ -27,6 +28,12 @@ const Home = () => {
             }
     }
 
+    const handleNavigation = (e, path) => {
+        e.preventDefault();
+        if (checkLogin()) {
+            navigate(path);
+        }
+    };
 
     return (
         <div>
@@ -37,8 +44,8 @@ const Home = () => {
                     </div>
                     <ul className="navelements">
                         <Link to="/"><li>Home</li></Link>
-                        <Link to="/dashboard" onClick = {checkLogin}><li>Dashboard</li></Link>
-                        <Link to="/chatroom" onClick = {checkLogin}><li>Chatroom</li></Link>
+                        <Link to="/dashboard" onClick={(e) => handleNavigation(e, '/dashboard')}><li>Dashboard</li></Link>
+                        <Link to="/chatroom" onClick={(e) => handleNavigation(e, '/dashboard')}><li>Chatroom</li></Link>
                         <Link to="/signup"><li>Sign Up</li></Link>
                         <Link to="/login"><li>Login</li></Link>
                         {/* <Link to="/account"><li>Account</li></Link> */}
