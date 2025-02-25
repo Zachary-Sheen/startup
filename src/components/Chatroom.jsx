@@ -35,22 +35,23 @@ const Chatroom = () => {
         
     }, []);
 
+    // useEffect(() => {
+    //     const chatBox = document.getElementById('chatBox');
+    // }, []);
+
     useEffect(() => {
         const chatBox = document.getElementById('chatBox');
-        console.log("is this running?")
-        console.log(messages)
         chatBox.innerHTML = ''; 
         messages.forEach((msg) => {
             const newMessage = document.createElement('div');
-            console.log("how many times is this running?")
             newMessage.className = `message p-2 mb-2 rounded ${msg.username === username ? 'bg-primary text-white text-right' : 'bg-light'}`;
             newMessage.style.alignSelf = msg.username === username ? 'flex-end' : 'flex-start';
             newMessage.innerHTML = `<strong>${msg.username}:</strong> ${msg.message}`;
             chatBox.appendChild(newMessage);
         });
-    }, [messages]);
+        chatBox.scrollTop = chatBox.scrollHeight; 
+    }, [messages, username]);
 
-    
     function sendMessage() 
     {
         console.log("trying to send message")
@@ -61,17 +62,10 @@ const Chatroom = () => {
         if (message === '') {
             return;
         }
-        const chatBox = document.getElementById('chatBox');
-        const newMessage = document.createElement('div');
-        newMessage.className = `message p-2 mb-2 rounded ${username !== null ? 'bg-primary text-white text-right' : 'bg-light'}`; //if username is user, bg-primary text-white text-right, else bg-light, showing different users texts
-        newMessage.style.alignSelf = username !== null ? 'flex-end' : 'flex-start';
-        console.log(newMessage.style)
-        newMessage.innerHTML = username !== null ? `<strong>${username}: </strong> ${message}`: `<strong>${username}:</strong> ${message}`;
-        const addMessage = {username: username, message: message};
-        const updatedMessages = [...messages, addMessage];
-        setMessages(updatedMessages); //...messages is the previous messages, addMessage is the new message
-        localStorage.setItem('messages', JSON.stringify(updatedMessages));
-        chatBox.appendChild(newMessage);
+        const newMessage = {username: username, message: message};
+        const updatedMessages = [...messages, newMessage];
+        setMessages(updatedMessages); // Update the messages state
+        localStorage.setItem('messages', JSON.stringify(updatedMessages)); // Update localStorage with the new messages array
         messageInput.value = '';
     }
 

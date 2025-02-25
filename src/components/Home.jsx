@@ -15,10 +15,13 @@ const Home = () => {
             const sessionStartTime = parsedData.sessionStartTime;
             const authed = localStorage.getItem('authenticated') === 'true';
             const currentTime = new Date().getTime();
-            if (currentTime - sessionStartTime > 3600000 || !parsedData.authenticated) 
+            if (currentTime - sessionStartTime > 3600000 || !authed) 
                 {
                 localStorage.setItem('usernameDisplay', 'Account');
                 window.location.href = '/login';
+                }
+                else{
+                    return true;
                 }
             }
         else if(!data)
