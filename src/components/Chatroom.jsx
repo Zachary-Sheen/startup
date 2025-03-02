@@ -16,14 +16,17 @@ const Chatroom = () => {
         .then((data) => {
             setMessages(data.messages);
         });
+        console.log("trying to fetch messages")
         fetch('api/authenticated')
         .then((res) => res.json())
         .then((data) => {
+            console.log(data);
             if (!data.authenticated) {
                 window.location.href = '/login';
             }
             setUsername(data.username);
         });
+        console.log("trying to fetch authenticated")
     }, []);
     //     const data = localStorage.getItem('accountData');
     //     const usernamedisplay = localStorage.getItem('usernameDisplay');

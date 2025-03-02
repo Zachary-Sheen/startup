@@ -8,6 +8,7 @@ let users = [
     { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': [], 'sessionCreatedAt': new Date(), 'authenticated': false }
 ];
 let messages = [{ 'username': 'admin', 'message': 'Welcome to the chatroom!' }];
+let cryptoData = {};
 
 app.use(express.json());
 app.use(cookieParser());
@@ -76,6 +77,7 @@ app.post('/logout', authCheck, (req, res) => {
 });
 
 app.post('/signup', async (req, res) => {
+    console.log("signup");
     const username = req.body.username;
     if (users.find(u => u.username === username)) {
         return res.status(400).send({ error: 'Try a different name' });
@@ -91,6 +93,9 @@ app.get('/api/authenticated' , authCheck, (req, res) => {
     res.status(200).send({"authenticated": req.user.authenticated, "username": req.user.username})
 });
 
+app.get('/api/cryptoData', authCheck, (req, res) => {
+    res.status(200).send({ 'cryptoData': cryptoData });
+});
 app.get('/api/users' , (req, res) => {
     res.status(200).send({ 'users': users });
 });
