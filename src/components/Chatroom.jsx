@@ -22,6 +22,7 @@ const Chatroom = () => {
             if (!data.authenticated) {
                 window.location.href = '/login';
             }
+            setUsername(data.username);
         });
     }, []);
     //     const data = localStorage.getItem('accountData');

@@ -41,6 +41,7 @@ function authCheck(req, res, next) {
                 console.log("Session is less than 4 hours old");
                 return next();
             } else {
+                console.log("Session is more than 4 hours old");
                 user.sessionID = null;
                 user.authenticated = false;
                 res.clearCookie('sessionID');
