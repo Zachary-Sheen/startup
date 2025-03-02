@@ -11,6 +11,7 @@ let messages = [{ 'username': 'admin', 'message': 'Welcome to the chatroom!' }];
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static('public'));
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
@@ -23,6 +24,10 @@ async function hashPassword(password) {
     } catch (err) {
         console.error('Error hashing password:', err);
     }
+}
+
+function passwordGoodEnough(password) {
+    return password.length > 7 && password.match(/[0-9]/) && password.match(/[a-z]/) && password.match(/[A-Z]/);
 }
 
 function authCheck(req, res, next) {
@@ -70,32 +75,50 @@ app.post('/signup', async (req, res) => {
     if (users.find(u => u.username === username)) {
         return res.status(400).send({ error: 'Try a different name' });
     }
+    if (!passwordGoodEnough(req.body.password)) {
+        return res.status(400).send({ error: 'Password must be at least 8 characters long and contain at least one number, one lowercase letter, and one uppercase letter' });
+    }
     const password = await hashPassword(req.body.password);
     const sessionID = uuid.v4();
     users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': [], 'sessionCreatedAt': new Date() });
     res.cookie('sessionID', sessionID, { httpOnly: true });
-    res.send({ message: 'Signup successful' });
+    res.status(200).send({ message: 'Signup successful' });
 });
 
 app.get('/api/messages', authCheck, (req, res) => {
-    res.send({ 'messages': messages });
+    res.status(200).send({ 'messages': messages });
 });
 
 app.post('/api/messages', authCheck, (req, res) => {
     const message = req.body.message;
     const username = req.user.username;
     messages.push({ 'username': username, 'message': message });
-    res.send({ 'messages': messages });
+    res.status(200).send({ 'messages': messages });
+});
+
+app.get('/api/favorites', authCheck, (req, res) => {
+    const username = req.user.username;
+    const user = users.find(u => u.username === username);
+    const favoriteCryptos = user.favoriteCryptos;
+    res.status(200).send({ 'favoriteCryptos': favoriteCryptos });
+});
+
+app.post('/api/favorites', authCheck, (req, res) => {
+    const username = req.user.username;
+    const user = users.find(u => u.username === username);
+    const favoriteCrypto = req.body.favoriteCrypto;
+    if (!user.favoriteCryptos.includes(favoriteCrypto)) {
+        user.favoriteCryptos.push(favoriteCrypto);
+    }
+    res.status(200).send({ 'favoriteCryptos': user.favoriteCryptos });
 });
 
 app.use(function (err, req, res, next) {
     res.status(500).send("Something went wrong");
 });
 
-app.use(express.static('public'));
-
 app.use((_req, res) => {
-    res.sendFile('index.html', { root: 'public' });
+    res.status(404).send({ error: 'Not found' });
 });
 
 app.listen(port, () => {
