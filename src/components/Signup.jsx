@@ -28,7 +28,7 @@ const Signup = () => {
     
     async function setCredentials(event) {
         event.preventDefault();
-        const email = document.getElementById("username").value;
+        const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirm-password").value;
         if (password !== confirmPassword) {
@@ -37,20 +37,34 @@ const Signup = () => {
         }
         const hashedPassword = await hashPassword(password);
         const data = {
-            'username': email,
-            'hashedPassword': hashedPassword,
-            'sessionStartTime': new Date().getTime()
-
+            'username': username,
+            'hashedPassword': hashedPassword
         };
-        localStorage.setItem('accountData', JSON.stringify(data));
-        localStorage.setItem('usernameDisplay', email);
-        localStorage.setItem('favoriteCryptos', []);
-        localStorage.setItem('CryptoData', JSON.stringify({}));
-        localStorage.setItem('authenticated', true);
-        localStorage.getItem('messsages');
-        if(localStorage.getItem('messages') === null){
-            localStorage.setItem('messages', JSON.stringify([]));
-        }
+        // localStorage.setItem('accountData', JSON.stringify(data));
+        // localStorage.setItem('usernameDisplay', email);
+        // localStorage.setItem('favoriteCryptos', []);
+        // localStorage.setItem('CryptoData', JSON.stringify({}));
+        // localStorage.setItem('authenticated', true);
+        // localStorage.getItem('messsages');
+        // if(localStorage.getItem('messages') === null){
+        //     localStorage.setItem('messages', JSON.stringify([]));
+        // }
+        fetch('/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            if (data.success) {
+                console.log("success");
+            } else{
+                console.log("fail");
+            }
+        });
         window.location.href = '/chatroom';
     }
 

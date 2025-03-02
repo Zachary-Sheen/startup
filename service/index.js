@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 
 let users = [
-    { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': [], 'sessionCreatedAt': new Date() }
+    { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': [], 'sessionCreatedAt': new Date(), 'authenticated': false }
 ];
 let messages = [{ 'username': 'admin', 'message': 'Welcome to the chatroom!' }];
 
@@ -38,9 +38,11 @@ function authCheck(req, res, next) {
             const sessionAge = (new Date() - new Date(user.sessionCreatedAt)) / (1000 * 60 * 60); 
             if (sessionAge < 4) { 
                 req.user = user;
+                console.log("Session is less than 4 hours old");
                 return next();
             } else {
                 user.sessionID = null;
+                user.authenticated = false;
                 res.clearCookie('sessionID');
                 return res.status(401).send({ error: 'Session expired. Please log in again.' });
             }
@@ -56,6 +58,7 @@ app.post('/login', async (req, res) => {
         const sessionID = uuid.v4();
         user.sessionID = sessionID;
         user.sessionCreatedAt = new Date();
+        user.authenticated = true;
         res.cookie('sessionID', sessionID, { httpOnly: true });
         res.send({ message: 'Login successful' });
     } else {
@@ -66,6 +69,7 @@ app.post('/login', async (req, res) => {
 app.post('/logout', authCheck, (req, res) => {
     req.user.sessionID = null;
     req.user.sessionCreatedAt = null;
+    req.user.authenticated = false;
     res.clearCookie('sessionID');
     res.send({ message: 'Logout successful' });
 });
@@ -75,14 +79,19 @@ app.post('/signup', async (req, res) => {
     if (users.find(u => u.username === username)) {
         return res.status(400).send({ error: 'Try a different name' });
     }
-    if (!passwordGoodEnough(req.body.password)) {
-        return res.status(400).send({ error: 'Password must be at least 8 characters long and contain at least one number, one lowercase letter, and one uppercase letter' });
-    }
-    const password = await hashPassword(req.body.password);
+    const password = req.body.password;
     const sessionID = uuid.v4();
-    users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': [], 'sessionCreatedAt': new Date() });
+    users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': [], 'sessionCreatedAt': new Date(), 'authenticated': true });
     res.cookie('sessionID', sessionID, { httpOnly: true });
     res.status(200).send({ message: 'Signup successful' });
+});
+
+app.get('/api/authenticated' , authCheck, (req, res) => {
+    res.status(200).send({"authenticated": req.user.authenticated, "username": req.user.username})
+});
+
+app.get('/api/users' , (req, res) => {
+    res.status(200).send({ 'users': users });
 });
 
 app.get('/api/messages', authCheck, (req, res) => {
@@ -92,6 +101,10 @@ app.get('/api/messages', authCheck, (req, res) => {
 app.post('/api/messages', authCheck, (req, res) => {
     const message = req.body.message;
     const username = req.user.username;
+    if (messages.length >= 50) 
+    {
+        messages.shift(); 
+    }
     messages.push({ 'username': username, 'message': message });
     res.status(200).send({ 'messages': messages });
 });
