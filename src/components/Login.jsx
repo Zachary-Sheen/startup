@@ -26,20 +26,38 @@ const Login = () => {
         event.preventDefault();
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
-        const usernamedisplay = username;
-        verifyPassword(password).then((result) => {
-            if (result) {
-                const data = JSON.parse(localStorage.getItem('accountData'));
-                data.sessionStartTime = new Date().getTime();
-                localStorage.setItem('accountData', JSON.stringify(data));
-                localStorage.setItem('usernameDisplay', usernamedisplay);
-                localStorage.setItem('authenticated', true);
-                // localStorage.setItem('CryptoData', JSON.stringify({}));
-                navigate("/chatroom");
-            } else {
+        // const usernamedisplay = username;
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({username, password})
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.status === 200)
+            {
+                navigate("/chatroom");  
+            }
+            else
+            {
                 navigate("/signup");
             }
         });
+        // verifyPassword(password).then((result) => {
+        //     if (result) {
+        //         const data = JSON.parse(localStorage.getItem('accountData'));
+        //         data.sessionStartTime = new Date().getTime();
+        //         localStorage.setItem('accountData', JSON.stringify(data));
+        //         localStorage.setItem('usernameDisplay', usernamedisplay);
+        //         localStorage.setItem('authenticated', true);
+        //         // localStorage.setItem('CryptoData', JSON.stringify({}));
+        //         navigate("/chatroom");
+        //     } else {
+        //         navigate("/signup");
+        //     }
+        // });
     }
 
     return (

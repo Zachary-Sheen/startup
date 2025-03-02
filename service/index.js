@@ -61,7 +61,7 @@ app.post('/login', async (req, res) => {
         user.sessionCreatedAt = new Date();
         user.authenticated = true;
         res.cookie('sessionID', sessionID, { httpOnly: true });
-        res.send({ message: 'Login successful' });
+        res.status(200).send({ message: 'Login successful' });
     } else {
         res.status(401).send({ error: 'Invalid credentials' });
     }
