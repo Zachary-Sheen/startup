@@ -14,13 +14,17 @@ const Signup = () => {
     //     return session;
     // }
 
-    useEffect(() => {
-        fetch('/api/users')
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-        });
-    }, []);
+    // useEffect(() => {
+    //     fetch('/api/users')
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //         console.log(data);
+    //     })
+    //     .catch((err) => {
+    //         console.error('Error fetching users:', err);
+    //     }
+    //     );
+    // }, []);
 
     async function hashPassword(password) {
         try {

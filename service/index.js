@@ -12,7 +12,7 @@ let cryptoData = {};
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
 app.use((req, res, next) => {
     console.log(`Received ${req.method} request for ${req.url}`);
@@ -105,6 +105,7 @@ apiRouter.get('/cryptoData', authCheck, (req, res) => {
     res.status(200).send({ 'cryptoData': cryptoData });
 });
 apiRouter.get('/users' , (req, res) => {
+    console.log('in users')
     res.status(200).send({ 'users': users });
 });
 
