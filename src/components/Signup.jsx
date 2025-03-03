@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Sidebar from './Sidebar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'lineicons/dist/lineicons.css';
@@ -14,6 +14,13 @@ const Signup = () => {
     //     return session;
     // }
 
+    useEffect(() => {
+        fetch('/api/users')
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        });
+    }, []);
 
     async function hashPassword(password) {
         try {
@@ -56,7 +63,12 @@ const Signup = () => {
             },
             body: JSON.stringify(data)
         })
-        .then((res) => res.json())
+        .then((res) => {
+            if (!res.ok) {
+                return res.text().then(text => { throw new Error(text) });
+            }
+            return res.json();
+        })
         .then((data) => {
             console.log(data);
             if (data.success) {
@@ -64,7 +76,11 @@ const Signup = () => {
             } else{
                 console.log("fail");
             }
-        });
+        }) 
+        .catch((err) => {
+            console.error('Error signing up:', err);
+        }
+        );
         window.location.href = '/chatroom';
     }
 

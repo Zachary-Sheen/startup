@@ -14,6 +14,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
 
+app.use((req, res, next) => {
+    console.log(`Received ${req.method} request for ${req.url}`);
+    next();
+});
+
+var apiRouter = express.Router();
+app.use(`/api`, apiRouter);
+
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 async function hashPassword(password) {
@@ -53,7 +61,7 @@ function authCheck(req, res, next) {
     res.status(401).send({ error: 'Unauthorized' });
 }
 
-app.post('/login', async (req, res) => {
+apiRouter.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = users.find(u => u.username === username);
     if (user && await bcrypt.compare(password, user.password)) {
@@ -68,7 +76,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.post('/logout', authCheck, (req, res) => {
+apiRouter.post('/logout', authCheck, (req, res) => {
     req.user.sessionID = null;
     req.user.sessionCreatedAt = null;
     req.user.authenticated = false;
@@ -76,7 +84,7 @@ app.post('/logout', authCheck, (req, res) => {
     res.send({ message: 'Logout successful' });
 });
 
-app.post('/signup', async (req, res) => {
+apiRouter.post('/signup', async (req, res) => {
     console.log("signup");
     const username = req.body.username;
     if (users.find(u => u.username === username)) {
@@ -89,22 +97,22 @@ app.post('/signup', async (req, res) => {
     res.status(200).send({ message: 'Signup successful' });
 });
 
-app.get('/api/authenticated' , authCheck, (req, res) => {
+apiRouter.get('/authenticated' , authCheck, (req, res) => {
     res.status(200).send({"authenticated": req.user.authenticated, "username": req.user.username})
 });
 
-app.get('/api/cryptoData', authCheck, (req, res) => {
+apiRouter.get('/cryptoData', authCheck, (req, res) => {
     res.status(200).send({ 'cryptoData': cryptoData });
 });
-app.get('/api/users' , (req, res) => {
+apiRouter.get('/users' , (req, res) => {
     res.status(200).send({ 'users': users });
 });
 
-app.get('/api/messages', authCheck, (req, res) => {
+apiRouter.get('/messages', authCheck, (req, res) => {
     res.status(200).send({ 'messages': messages });
 });
 
-app.post('/api/messages', authCheck, (req, res) => {
+apiRouter.post('/messages', authCheck, (req, res) => {
     const message = req.body.message;
     const username = req.user.username;
     if (messages.length >= 50) 
@@ -115,14 +123,14 @@ app.post('/api/messages', authCheck, (req, res) => {
     res.status(200).send({ 'messages': messages });
 });
 
-app.get('/api/favorites', authCheck, (req, res) => {
+apiRouter.get('/favorites', authCheck, (req, res) => {
     const username = req.user.username;
     const user = users.find(u => u.username === username);
     const favoriteCryptos = user.favoriteCryptos;
     res.status(200).send({ 'favoriteCryptos': favoriteCryptos });
 });
 
-app.post('/api/favorites', authCheck, (req, res) => {
+apiRouter.post('/favorites', authCheck, (req, res) => {
     const username = req.user.username;
     const user = users.find(u => u.username === username);
     const favoriteCrypto = req.body.favoriteCrypto;
@@ -132,12 +140,15 @@ app.post('/api/favorites', authCheck, (req, res) => {
     res.status(200).send({ 'favoriteCryptos': user.favoriteCryptos });
 });
 
-app.use(function (err, req, res, next) {
-    res.status(500).send("Something went wrong");
+
+apiRouter.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).json({ error: "Something went wrong" });
 });
 
-app.use((_req, res) => {
-    res.status(404).send({ error: 'Not found' });
+// Catch-all route to handle unmatched routes and return a JSON response
+apiRouter.use((_req, res) => {
+    res.status(404).json({ error: 'Not found' });
 });
 
 app.listen(port, () => {
