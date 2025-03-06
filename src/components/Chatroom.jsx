@@ -11,13 +11,19 @@ const Chatroom = () => {
     const [messages, setMessages] = React.useState([]);
         
     useEffect(() => {
-        fetch('api/messages')
+        fetch('api/messages', {
+            credentials: 'include',
+        })
         .then((res) => res.json())
         .then((data) => {
             setMessages(data.messages);
+        })
+        .catch((err) => {
+            console.error('Error fetching messages:', err);
         });
-        console.log("trying to fetch messages")
-        fetch('api/authenticated')
+        fetch('api/authenticated', {
+            credentials: 'include',
+        })
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
@@ -25,6 +31,9 @@ const Chatroom = () => {
                 window.location.href = '/login';
             }
             setUsername(data.username);
+        })
+        .catch((err) => {
+            console.error('Error fetching authenticated:', err);
         });
         console.log("trying to fetch authenticated")
     }, []);
@@ -83,6 +92,7 @@ const Chatroom = () => {
         // const updatedMessages = [...messages, newMessage];
         fetch('/api/messages', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },

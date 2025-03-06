@@ -9,42 +9,97 @@ const CryptoTable = () => {
     const fetchCryptoData = () => {
         fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1")
             .then(response => response.json())
-            .then(data => {
-                setData(data);
-                localStorage.setItem('CryptoData', JSON.stringify({ Date: new Date(), Data: data }));
+            .then(info => {
+                console.log(info);
+                setData(info);
+                fetch('/api/cryptoData', {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ cryptoData: info }) 
+                })
+                .then((res) => res.json())
+                .then((info) => {
+                    console.log(info);
+                })
+                .catch((err) => {
+                    console.error('Error saving cryptoData:', err);
+                });
             })
             .catch(error => console.error("Error fetching data:", error));
     };
 
     useEffect(() => {
-        const cryptoData = localStorage.getItem('CryptoData');
-        if (cryptoData) {
-            try {
-                const parsedCryptoData = JSON.parse(cryptoData);
-                if (Object.keys(parsedCryptoData).length === 0 || new Date() - new Date(parsedCryptoData.Date) > 3600000) {
-                    fetchCryptoData();
-                } else {
-                    setData(parsedCryptoData.Data);
-                }
-            } catch (error) {
-                console.error("Error parsing CryptoData from localStorage:", error);
+        fetch('api/cryptoData', {
+            credentials: 'include',
+        })
+        .then((res) => res.json())
+        .then((info) => {
+            console.log(info);
+            console.log("is the data empty: " + info.isempty );
+            console.log("is the data empty: " + info.cryptoData.Date );
+            if (info.isempty || new Date() - new Date(info.cryptoData.date) > 3600000)
+            {
+                console.log("fetching data again")
                 fetchCryptoData();
             }
-        } else {
-            fetchCryptoData();
-        }
+            else 
+            {
+                console.log(info.cryptoData);
+                setData(info.cryptoData.Data);
+            }
+        })
+        .catch((err) => {
+            console.error('Error fetching cryptoData:', err);
+        });
+        console.log(data)
+        // const cryptoData = localStorage.getItem('CryptoData');
+        // if (cryptoData) {
+        //     try {
+        //         const parsedCryptoData = JSON.parse(cryptoData);
+        //         if (Object.keys(parsedCryptoData).length === 0 || new Date() - new Date(parsedCryptoData.Date) > 3600000) {
+        //             fetchCryptoData();
+        //         } else {
+        //             setData(parsedCryptoData.Data);
+        //         }
+        //     } catch (error) {
+        //         console.error("Error parsing CryptoData from localStorage:", error);
+        //         fetchCryptoData();
+        //     }
+        // } else {
+        //     fetchCryptoData();
+        // }
     }, []);
 
     useEffect(() => {
-        const storedFavorites = localStorage.getItem('favoriteCryptos');
-        try {
-            if (storedFavorites) {
-                setFavoriteCryptos(JSON.parse(storedFavorites));
+        fetch('api/favorites', {
+            credentials: 'include',
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            if(data){
+                setFavoriteCryptos(data);
             }
-        } catch (error) {
-            console.error("Error parsing favoriteCryptos from localStorage:", error);
-            setFavoriteCryptos({});
-        }
+            else
+            {
+                setFavoriteCryptos({});
+            }
+        })
+        .catch((err) => {
+            console.error('Error fetching favorites:', err);
+        });
+        // const storedFavorites = localStorage.getItem('favoriteCryptos');
+        // try {
+        //     if (storedFavorites) {
+        //         setFavoriteCryptos(JSON.parse(storedFavorites));
+        //     }
+        // } catch (error) {
+        //     console.error("Error parsing favoriteCryptos from localStorage:", error);
+        //     setFavoriteCryptos({});
+        // }
     }, []);
 
     const handleRowClick = (crypto) => {
@@ -57,13 +112,36 @@ const CryptoTable = () => {
 
     const handleFavorite = (selectedCryptoCurr) => {
         const updatedFavorites = { ...favoriteCryptos };
-        if (updatedFavorites[selectedCryptoCurr.symbol]) {
-            delete updatedFavorites[selectedCryptoCurr.symbol];
-        } else {
-            updatedFavorites[selectedCryptoCurr.symbol] = selectedCryptoCurr;
-        }
-        setFavoriteCryptos(updatedFavorites);
-        localStorage.setItem('favoriteCryptos', JSON.stringify(updatedFavorites));
+        fetch('api/favorites', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(selectedCryptoCurr)
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            // if(updatedFavorites[selectedCryptoCurr.symbol]) {
+            //     delete updatedFavorites[selectedCryptoCurr.symbol];
+            // }
+            // else {
+            //     updatedFavorites[selectedCryptoCurr.symbol] = selectedCryptoCurr;
+            // }
+            setFavoriteCryptos(data);
+        })
+        .catch((err) => {
+            console.error('Error saving favorite:', err);
+        });
+
+        // if (updatedFavorites[selectedCryptoCurr.symbol]) {
+        //     delete updatedFavorites[selectedCryptoCurr.symbol];
+        // } else {
+        //     updatedFavorites[selectedCryptoCurr.symbol] = selectedCryptoCurr;
+        // }
+        // setFavoriteCryptos(updatedFavorites);
+        // localStorage.setItem('favoriteCryptos', JSON.stringify(updatedFavorites));
     };
 
     const isFavorite = (symbol) => {

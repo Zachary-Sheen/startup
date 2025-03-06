@@ -60,19 +60,15 @@ const Signup = () => {
         // if(localStorage.getItem('messages') === null){
         //     localStorage.setItem('messages', JSON.stringify([]));
         // }
-        fetch('/signup', {
+        fetch('/api/signup', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
         })
-        .then((res) => {
-            if (!res.ok) {
-                return res.text().then(text => { throw new Error(text) });
-            }
-            return res.json();
-        })
+        .then((res) => res.json())
         .then((data) => {
             console.log(data);
             if (data.success) {

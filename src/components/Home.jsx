@@ -6,30 +6,55 @@ import './homepgstyle.css';
 
 const Home = () => {
     const navigate = useNavigate();
-    
-    function checkLogin() {
-        const data = localStorage.getItem('accountData');
-        if(data) 
-            {
-            const parsedData = JSON.parse(data);
-            const sessionStartTime = parsedData.sessionStartTime;
-            const authed = localStorage.getItem('authenticated') === 'true';
-            const currentTime = new Date().getTime();
-            if (currentTime - sessionStartTime > 3600000 || !authed) 
-                {
-                localStorage.setItem('usernameDisplay', 'Account');
-                window.location.href = '/login';
+    function checkLogin() 
+    {
+        fetch('/api/authenticated', {
+            credentials: 'include',
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            if(data){
+                if (!data.authenticated) {
+                    localStorage.setItem('usernameDisplay', 'Account');
+                    window.location.href = '/login';
                 }
                 else{
                     return true;
                 }
             }
-        else if(!data)
+            else if(!data)
             {
-            localStorage.setItem('usernameDisplay', 'Account');
-            navigate('/signup')
+                navigate('/signup')
             }
+        })
+        .catch((err) => {
+            console.error('Error fetching authenticated:', err);
+        });
     }
+    // function checkLogin() {
+    //     const data = localStorage.getItem('accountData');
+    //     if(data) 
+    //         {
+    //         const parsedData = JSON.parse(data);
+    //         const sessionStartTime = parsedData.sessionStartTime;
+    //         const authed = localStorage.getItem('authenticated') === 'true';
+    //         const currentTime = new Date().getTime();
+    //         if (currentTime - sessionStartTime > 3600000 || !authed) 
+    //             {
+    //             localStorage.setItem('usernameDisplay', 'Account');
+    //             window.location.href = '/login';
+    //             }
+    //             else{
+    //                 return true;
+    //             }
+    //         }
+    //     else if(!data)
+    //         {
+    //         localStorage.setItem('usernameDisplay', 'Account');
+    //         navigate('/signup')
+    //         }
+    // }
 
     const handleNavigation = (e, path) => {
         e.preventDefault();

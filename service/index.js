@@ -5,17 +5,19 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 
 let users = [
-    { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': [], 'sessionCreatedAt': new Date(), 'authenticated': false }
+    { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': false }
 ];
 let messages = [{ 'username': 'admin', 'message': 'Welcome to the chatroom!' }];
 let cryptoData = {};
 
 app.use(express.json());
 app.use(cookieParser());
-// app.use(express.static('public'));
+app.use(express.static('public'));
 
 app.use((req, res, next) => {
     console.log(`Received ${req.method} request for ${req.url}`);
+    console.log('Cookies:', req.cookies);
+    console.log('Body:', req.body);
     next();
 });
 
@@ -40,8 +42,15 @@ function passwordGoodEnough(password) {
 }
 
 function authCheck(req, res, next) {
+    // print("in middleware")
+    // print(req.cookies)
+    // print(req.body)
+    // console.log("in middleware")
+    // console.log(req.cookies, req.cookies == null)
+    // console.log(req.body)
     const sessionID = req.cookies.sessionID;
     if (sessionID) {
+        console.log("Session ID exists")
         const user = users.find(u => u.sessionID === sessionID);
         if (user) {
             const sessionAge = (new Date() - new Date(user.sessionCreatedAt)) / (1000 * 60 * 60); 
@@ -58,6 +67,7 @@ function authCheck(req, res, next) {
             }
         }
     }
+    console.log("authCheck returning unauthorized")
     res.status(401).send({ error: 'Unauthorized' });
 }
 
@@ -70,13 +80,14 @@ apiRouter.post('/login', async (req, res) => {
         user.sessionCreatedAt = new Date();
         user.authenticated = true;
         res.cookie('sessionID', sessionID, { httpOnly: true });
+        console.log("Login successful")
         res.status(200).send({ message: 'Login successful' });
     } else {
         res.status(401).send({ error: 'Invalid credentials' });
     }
 });
 
-apiRouter.post('/logout', authCheck, (req, res) => {
+apiRouter.delete('/logout', authCheck, (req, res) => {
     req.user.sessionID = null;
     req.user.sessionCreatedAt = null;
     req.user.authenticated = false;
@@ -90,20 +101,31 @@ apiRouter.post('/signup', async (req, res) => {
     if (users.find(u => u.username === username)) {
         return res.status(400).send({ error: 'Try a different name' });
     }
-    const password = req.body.password;
+    const password = req.body.hashedPassword;
     const sessionID = uuid.v4();
-    users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': [], 'sessionCreatedAt': new Date(), 'authenticated': true });
+    users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
+    console.log(users)
     res.cookie('sessionID', sessionID, { httpOnly: true });
     res.status(200).send({ message: 'Signup successful' });
 });
 
 apiRouter.get('/authenticated' , authCheck, (req, res) => {
+    // console.log('in authenticated, ' + req.user)
     res.status(200).send({"authenticated": req.user.authenticated, "username": req.user.username})
 });
 
 apiRouter.get('/cryptoData', authCheck, (req, res) => {
-    res.status(200).send({ 'cryptoData': cryptoData });
+    console.log("Trying to get cryptoData: \n\n" + cryptoData)
+    console.log("CryptoData length " + !cryptoData.Data)
+    console.log({'isempty': !cryptoData.Data})
+    res.status(200).send({'isempty': !cryptoData.Data,'cryptoData': cryptoData });
 });
+
+apiRouter.post('/cryptoData', authCheck, (req, res) => {
+    cryptoData = {Date: new Date(), Data: req.body.cryptoData};
+    res.status(200).send({'cryptoData': cryptoData });
+});
+
 apiRouter.get('/users' , (req, res) => {
     console.log('in users')
     res.status(200).send({ 'users': users });
@@ -128,17 +150,19 @@ apiRouter.get('/favorites', authCheck, (req, res) => {
     const username = req.user.username;
     const user = users.find(u => u.username === username);
     const favoriteCryptos = user.favoriteCryptos;
-    res.status(200).send({ 'favoriteCryptos': favoriteCryptos });
+    res.status(200).send({'favoriteCryptos': favoriteCryptos });
 });
 
 apiRouter.post('/favorites', authCheck, (req, res) => {
-    const username = req.user.username;
-    const user = users.find(u => u.username === username);
     const favoriteCrypto = req.body.favoriteCrypto;
-    if (!user.favoriteCryptos.includes(favoriteCrypto)) {
-        user.favoriteCryptos.push(favoriteCrypto);
+    const symbol = favoriteCrypto.symbol;
+
+    if (!req.user.favoriteCryptos[symbol]) {
+        req.user.favoriteCryptos[symbol] = favoriteCrypto;
+    } else {
+        delete req.user.favoriteCryptos[symbol];
     }
-    res.status(200).send({ 'favoriteCryptos': user.favoriteCryptos });
+    res.status(200).send({ 'favoriteCryptos': req.user.favoriteCryptos });
 });
 
 
@@ -151,6 +175,16 @@ apiRouter.use(function (err, req, res, next) {
 apiRouter.use((_req, res) => {
     res.status(404).json({ error: 'Not found' });
 });
+
+// function setAuthCookie(res, user) {
+//     user.sessionID = uuid.v4();
+//     res.cookie(token, authToken, {
+//       secure: true,
+//       httpOnly: true,
+//       sameSite: 'strict',
+//     });
+//   }
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

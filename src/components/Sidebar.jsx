@@ -7,33 +7,63 @@ import './scripts.js';
 
 const Sidebar = () => {
     const [username, setUsername] = React.useState('');
+    const [authed, setAuthed] = React.useState(false);
     const navigate = useNavigate();
     
-        useEffect(() => {
-            // const data = localStorage.getItem('accountData');
-            // const storedUsername = data ? JSON.parse(data).username : null;
-            const storedUsername = localStorage.getItem('usernameDisplay') ? localStorage.getItem('usernameDisplay') : 'Account';
-            const authed = localStorage.getItem('authenticated') === 'true';
+    useEffect(() => {
+        // if(window.location.pathname === '/login' || window.location.pathname === '/signup') {
+        //     return;
+        // }
+        fetch('/api/authenticated', {
+            credentials: 'include', 
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data) {
+                    console.log(data);
+                    if (data.error === 'Unauthorized') {
+                        setUsername('Account');
+                        if(window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
+                            navigate('/login');
+                        } 
+                    } else {
+                        setUsername(data.username);
+                        setAuthed(true);
+                    }
+                }
+            })
+            .catch((err) => {
+                console.error('Error fetching authenticated:', err);
+            });
 
-            if (storedUsername && authed) {
-                setUsername(storedUsername);
-            } else {
-                setUsername('Account');
-            }
+            // const storedUsername = localStorage.getItem('usernameDisplay') ? localStorage.getItem('usernameDisplay') : 'Account';
+            // const authed = localStorage.getItem('authenticated') === 'true';
+
+            // if (storedUsername && authed) {
+            //     setUsername(storedUsername);
+            // } else {
+            //     setUsername('Account');
+            // }
         }, []);
 
-    const checkAuthed = () => {
-        const authed = localStorage.getItem('authenticated') === 'true';
-        console.log('Authed:', authed);
-        if (authed) {
-            return true;
-        }
-        return false;
-    };
+    // const checkAuthed = () => {
+    //     const authed = localStorage.getItem('authenticated') === 'true';
+    //     console.log('Authed:', authed);
+    //     if (authed) {
+    //         return true;
+    //     }
+    //     return false;
+    // };
 
     const handleNavigation = (e, path) => {
         e.preventDefault();
-        if (checkAuthed()) {
+        if ((path === '/login' || path === '/signup') && authed) {
+            console.log('Already logged in');
+        }
+        else if((path === 'chatroom' || path === 'dashboard') && !authed) {
+            console.log('Not logged in');
+        }
+        else {
             navigate(path);
         }
     };
@@ -78,13 +108,13 @@ const Sidebar = () => {
                     Login/Sign-up
                 </li>
                 <li className="sidebar-item">
-                    <Link to="/login" className="sidebar-link">
+                    <Link to="/login" onClick={(e) => handleNavigation(e, '/login')} className="sidebar-link">
                         <i className="lni lni-user-4"></i>
                         Login
                     </Link>
                 </li>
                 <li className="sidebar-item">
-                    <Link to="/signup" className="sidebar-link">
+                    <Link to="/signup" onClick={(e) => handleNavigation(e, '/signup')} className="sidebar-link">
                         <i className="lni lni-enter"></i>
                         Sign-up
                     </Link>
@@ -94,14 +124,31 @@ const Sidebar = () => {
                 </li>
                 <li className="sidebar-item">
                     <Link to = "/"  className = "sidebar-link" onClick={(e) => {
-                        const authed = localStorage.getItem('authenticated') === 'true';
                         if (!authed) {
                             e.preventDefault();
                             return;
                         } else {
-                            localStorage.setItem('authenticated', false);
-                            window.location.href = '/';
+                            fetch('/api/logout', {
+                                method: 'DELETE', 
+                                credentials: 'include', 
+                            })
+                            .then((res) => res.json())
+                            .then((data) => {
+                                console.log(data);
+                                window.location.href = '/';
+                            })
+                            .catch((err) => {
+                                console.error('Error logging out:', err);
+                            });
                         }
+                        // const authed = localStorage.getItem('authenticated') === 'true';
+                        // if (!authed) {
+                        //     e.preventDefault();
+                        //     return;
+                        // } else {
+                        //     localStorage.setItem('authenticated', false);
+                        //     window.location.href = '/';
+                        // }
                     }
                     }>
                         <i className="lni lni-exit"></i>

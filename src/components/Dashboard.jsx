@@ -13,29 +13,54 @@ const Dashboard = () => {
     const [favoriteCryptos, setFavoriteCryptos] = React.useState([]);
 
     useEffect(() => {
-        const data = localStorage.getItem('accountData');
-        const favoriteCryptos = localStorage.getItem('favoriteCryptos');
-        if(favoriteCryptos) {
-            setFavoriteCryptos(JSON.parse(favoriteCryptos));
-            // console.log(favoriteCryptos)[1]
-        }
-        if(data) {
-            const parsedData = JSON.parse(data);
-            const storedUsername = parsedData.username;
-            const sessionStartTime = parsedData.sessionStartTime;
-            const currentTime = new Date().getTime();
-            if (currentTime - sessionStartTime > 3600000) {
-                // alert('Session expired. Please log in again.');
-                setUsername("Account")
+        fetch('/api/favorites', {
+            credentials: 'include',
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            setFavoriteCryptos(data.favoriteCryptos);
+        })
+        .catch((err) => {
+            console.error('Error fetching favorites:', err);
+        });
+        
+        fetch('/api/authenticated', {
+            credentials: 'include',
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            if (!data.authenticated) {
                 window.location.href = '/login';
-            } else {
-                setUsername(storedUsername);
             }
-        }
-        else
-        {
-            window.location.href = '/login';
-        }
+            setUsername(data.username);
+        })
+        .catch((err) => {
+            console.error('Error fetching authenticated:', err);
+        });
+        // const data = localStorage.getItem('accountData');
+        // const favoriteCryptos = localStorage.getItem('favoriteCryptos');
+        // if(favoriteCryptos) {
+        //     setFavoriteCryptos(JSON.parse(favoriteCryptos));
+        //     // console.log(favoriteCryptos)[1]
+        // }
+        // if(data) {
+        //     const parsedData = JSON.parse(data);
+        //     const storedUsername = parsedData.username;
+        //     const sessionStartTime = parsedData.sessionStartTime;
+        //     const currentTime = new Date().getTime();
+        //     if (currentTime - sessionStartTime > 3600000) {
+        //         // alert('Session expired. Please log in again.');
+        //         setUsername("Account")
+        //         window.location.href = '/login';
+        //     } else {
+        //         setUsername(storedUsername);
+        //     }
+        // }
+        // else
+        // {
+        //     window.location.href = '/login';
+        // }
     }, []);
 
     return (

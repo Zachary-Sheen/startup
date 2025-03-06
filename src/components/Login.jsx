@@ -27,8 +27,9 @@ const Login = () => {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         // const usernamedisplay = username;
-        fetch('/login', {
+        fetch('/api/login', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -36,7 +37,8 @@ const Login = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-            if (data.status === 200)
+            console.log(data);
+            if (data.message === 'Login successful')
             {
                 navigate("/chatroom");  
             }
