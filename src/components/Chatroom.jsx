@@ -105,7 +105,7 @@ const Chatroom = () => {
             messageInput.value = '';
         });
         // setMessages(updatedMessages); // Update the messages state
-        localStorage.setItem('messages', JSON.stringify(updatedMessages)); // Update localStorage with the new messages array
+        // localStorage.setItem('messages', JSON.stringify(updatedMessages)); // Update localStorage with the new messages array
         messageInput.value = '';
     }
 

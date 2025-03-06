@@ -154,6 +154,7 @@ apiRouter.get('/favorites', authCheck, (req, res) => {
 });
 
 apiRouter.post('/favorites', authCheck, (req, res) => {
+    console.log(req.body);
     const favoriteCrypto = req.body.favoriteCrypto;
     const symbol = favoriteCrypto.symbol;
 

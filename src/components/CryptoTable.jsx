@@ -22,7 +22,7 @@ const CryptoTable = () => {
                 })
                 .then((res) => res.json())
                 .then((info) => {
-                    console.log(info);
+                    console.log("grabbed info")
                 })
                 .catch((err) => {
                     console.error('Error saving cryptoData:', err);
@@ -118,18 +118,11 @@ const CryptoTable = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(selectedCryptoCurr)
+            body: JSON.stringify({favoriteCrypto: selectedCryptoCurr})
         })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
-            // if(updatedFavorites[selectedCryptoCurr.symbol]) {
-            //     delete updatedFavorites[selectedCryptoCurr.symbol];
-            // }
-            // else {
-            //     updatedFavorites[selectedCryptoCurr.symbol] = selectedCryptoCurr;
-            // }
-            setFavoriteCryptos(data);
+            setFavoriteCryptos(data.favoriteCryptos);
         })
         .catch((err) => {
             console.error('Error saving favorite:', err);
@@ -145,6 +138,9 @@ const CryptoTable = () => {
     };
 
     const isFavorite = (symbol) => {
+        if(!favoriteCryptos) {
+            return false;
+        }
         return favoriteCryptos.hasOwnProperty(symbol);
     };
 

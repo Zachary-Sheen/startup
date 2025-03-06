@@ -20,7 +20,6 @@ const Sidebar = () => {
             .then((res) => res.json())
             .then((data) => {
                 if (data) {
-                    console.log(data);
                     if (data.error === 'Unauthorized') {
                         setUsername('Account');
                         if(window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
@@ -134,7 +133,6 @@ const Sidebar = () => {
                             })
                             .then((res) => res.json())
                             .then((data) => {
-                                console.log(data);
                                 window.location.href = '/';
                             })
                             .catch((err) => {
