@@ -1,6 +1,6 @@
 # CS 260 Notes
 
-[My startup](https://simon.cs260.click)
+[My startup](https://startup.vcoinchat.com)
 
 ## Helpful links
 
