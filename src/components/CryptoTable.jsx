@@ -10,7 +10,7 @@ const CryptoTable = () => {
         fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1")
             .then(response => response.json())
             .then(info => {
-                console.log(info);
+                // console.log(info);
                 setData(info);
                 fetch('/api/cryptoData', {
                     method: 'POST',
@@ -37,9 +37,9 @@ const CryptoTable = () => {
         })
         .then((res) => res.json())
         .then((info) => {
-            console.log(info);
-            console.log("is the data empty: " + info.isempty );
-            console.log("is the data empty: " + info.cryptoData.Date );
+            // console.log(info);
+            // console.log("is the data empty: " + info.isempty );
+            // console.log("is the data empty: " + info.cryptoData.Date );
             if (info.isempty || new Date() - new Date(info.cryptoData.date) > 3600000)
             {
                 console.log("fetching data again")
@@ -47,30 +47,14 @@ const CryptoTable = () => {
             }
             else 
             {
-                console.log(info.cryptoData);
+                // console.log(info.cryptoData);
                 setData(info.cryptoData.Data);
             }
         })
         .catch((err) => {
             console.error('Error fetching cryptoData:', err);
         });
-        console.log(data)
-        // const cryptoData = localStorage.getItem('CryptoData');
-        // if (cryptoData) {
-        //     try {
-        //         const parsedCryptoData = JSON.parse(cryptoData);
-        //         if (Object.keys(parsedCryptoData).length === 0 || new Date() - new Date(parsedCryptoData.Date) > 3600000) {
-        //             fetchCryptoData();
-        //         } else {
-        //             setData(parsedCryptoData.Data);
-        //         }
-        //     } catch (error) {
-        //         console.error("Error parsing CryptoData from localStorage:", error);
-        //         fetchCryptoData();
-        //     }
-        // } else {
-        //     fetchCryptoData();
-        // }
+        // console.log(data);
     }, []);
 
     useEffect(() => {
@@ -79,7 +63,7 @@ const CryptoTable = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             if(data){
                 setFavoriteCryptos(data);
             }
@@ -91,15 +75,6 @@ const CryptoTable = () => {
         .catch((err) => {
             console.error('Error fetching favorites:', err);
         });
-        // const storedFavorites = localStorage.getItem('favoriteCryptos');
-        // try {
-        //     if (storedFavorites) {
-        //         setFavoriteCryptos(JSON.parse(storedFavorites));
-        //     }
-        // } catch (error) {
-        //     console.error("Error parsing favoriteCryptos from localStorage:", error);
-        //     setFavoriteCryptos({});
-        // }
     }, []);
 
     const handleRowClick = (crypto) => {

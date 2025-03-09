@@ -14,8 +14,8 @@ app.use(express.static('public'));
 
 app.use((req, res, next) => {
     console.log(`Received ${req.method} request for ${req.url}`);
-    console.log('Cookies:', req.cookies);
-    console.log('Body:', req.body);
+    // console.log('Cookies:', req.cookies);
+    // console.log('Body:', req.body);
     next();
 });
 
@@ -28,7 +28,6 @@ async function hashPassword(password) {
     try {
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
-        console.log('Hashed Password:', hash);
         return hash;
     } catch (err) {
         console.error('Error hashing password:', err);
@@ -42,7 +41,6 @@ function passwordGoodEnough(password) {
 function authCheck(req, res, next) {
     const sessionID = req.cookies.sessionID;
     if (sessionID) {
-        console.log("Session ID exists")
         const user = users.find(u => u.sessionID === sessionID);
         if (user) {
             const sessionAge = (new Date() - new Date(user.sessionCreatedAt)) / (1000 * 60 * 60); 
@@ -104,7 +102,6 @@ apiRouter.post('/signup', async (req, res) => {
     const password = req.body.hashedPassword;
     const sessionID = uuid.v4();
     users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
-    console.log(users)
     setAuthCookie(res, sessionID);
     res.status(200).send({ message: 'Signup successful' });
 });
@@ -145,7 +142,7 @@ apiRouter.get('/favorites', authCheck, (req, res) => {
 });
 
 apiRouter.post('/favorites', authCheck, (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const favoriteCrypto = req.body.favoriteCrypto;
     const symbol = favoriteCrypto.symbol;
 

@@ -26,7 +26,7 @@ const Chatroom = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (!data.authenticated) {
                 window.location.href = '/login';
             }
@@ -35,35 +35,8 @@ const Chatroom = () => {
         .catch((err) => {
             console.error('Error fetching authenticated:', err);
         });
-        console.log("trying to fetch authenticated")
+        // console.log("trying to fetch authenticated")
     }, []);
-    //     const data = localStorage.getItem('accountData');
-    //     const usernamedisplay = localStorage.getItem('usernameDisplay');
-    //     if(data) {
-    //         const parsedData = JSON.parse(data);
-    //         const messages = localStorage.getItem('messages');
-    //         if (messages) {
-    //             setMessages(JSON.parse(messages));
-    //         }
-    //         const sessionStartTime = parsedData.sessionStartTime;
-    //         const currentTime = new Date().getTime();
-    //         if (currentTime - sessionStartTime > 3600000) {
-    //             alert('Session expired. Please log in again.');
-    //             window.location.href = '/login';
-    //         } else {
-    //             setUsername(usernamedisplay);
-    //         }
-    //     }
-    //     else
-    //     {
-    //         window.location.href = '/login';
-    //     }
-        
-    // }, []);
-
-    // useEffect(() => {
-    //     const chatBox = document.getElementById('chatBox');
-    // }, []);
 
     useEffect(() => {
         const chatBox = document.getElementById('chatBox');
@@ -80,16 +53,14 @@ const Chatroom = () => {
 
     function sendMessage() 
     {
-        console.log("trying to send message")
-        console.log(username)
-        console.log(messages)
+        // console.log("trying to send message")
+        // console.log(username)
+        // console.log(messages)
         const messageInput = document.getElementById('messageInput');
         const message = messageInput.value;
         if (message === '') {
             return;
         }
-        // const newMessage = {username: username, message: message};
-        // const updatedMessages = [...messages, newMessage];
         fetch('/api/messages', {
             method: 'POST',
             credentials: 'include',
@@ -100,12 +71,10 @@ const Chatroom = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             setMessages(data.messages);
             messageInput.value = '';
         });
-        // setMessages(updatedMessages); // Update the messages state
-        // localStorage.setItem('messages', JSON.stringify(updatedMessages)); // Update localStorage with the new messages array
         messageInput.value = '';
     }
 

@@ -46,19 +46,6 @@ const Login = () => {
                 navigate("/signup");
             }
         });
-        // verifyPassword(password).then((result) => {
-        //     if (result) {
-        //         const data = JSON.parse(localStorage.getItem('accountData'));
-        //         data.sessionStartTime = new Date().getTime();
-        //         localStorage.setItem('accountData', JSON.stringify(data));
-        //         localStorage.setItem('usernameDisplay', usernamedisplay);
-        //         localStorage.setItem('authenticated', true);
-        //         // localStorage.setItem('CryptoData', JSON.stringify({}));
-        //         navigate("/chatroom");
-        //     } else {
-        //         navigate("/signup");
-        //     }
-        // });
     }
 
     return (
