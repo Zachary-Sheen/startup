@@ -4,10 +4,8 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 
-let users = [
-    { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': false }
-];
-let messages = [{ 'username': 'admin', 'message': 'Welcome to the chatroom!' }];
+let users = []; // ex : { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': false }
+let messages = [];  // ex: { 'username': 'admin', 'message': 'Welcome to the chatroom!' }
 let cryptoData = {};
 
 app.use(express.json());
@@ -126,10 +124,10 @@ apiRouter.post('/cryptoData', authCheck, (req, res) => {
     res.status(200).send({'cryptoData': cryptoData });
 });
 
-apiRouter.get('/users' , (req, res) => {
-    console.log('in users')
-    res.status(200).send({ 'users': users });
-});
+// apiRouter.get('/users' , (req, res) => {
+//     console.log('in users')
+//     res.status(200).send({ 'users': users });
+// });
 
 apiRouter.get('/messages', authCheck, (req, res) => {
     res.status(200).send({ 'messages': messages });
@@ -176,16 +174,6 @@ apiRouter.use(function (err, req, res, next) {
 apiRouter.use((_req, res) => {
     res.status(404).json({ error: 'Not found' });
 });
-
-// function setAuthCookie(res, user) {
-//     user.sessionID = uuid.v4();
-//     res.cookie(token, authToken, {
-//       secure: true,
-//       httpOnly: true,
-//       sameSite: 'strict',
-//     });
-//   }
-
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
