@@ -1,6 +1,6 @@
 # CS 260 Notes
 
-[My startup](https://simon.cs260.click)
+[My startup](https://startup.vcoinchat.com)
 
 ## Helpful links
 
@@ -24,3 +24,6 @@ For this part I learned how React works and how I can use it to manipulate the H
 
 ## React P2 Notes
 For this part I learned how Javascript and React work, and I used this [Codepen](https://codepen.io/Sheenster/pen/qEWMwjw) to see how arrays work in JavaScript.  I also learned a lot about promises and how I can use them to better run my code to get information back to the user quickly, [here](https://codepen.io/leesjensen/pen/RwJJKwj) is the code for that.  I learned how to use async and await to help with running processes in the background.  The code I used to learn that is [here](https://codepen.io/Sheenster/pen/mydErjM).  Also, I learned how useState works in being able to take user input and automatically change data.  I used the code [here](https://codepen.io/Sheenster/pen/Eaxygda) to learn it.
+
+## Service Deliverable Notes
+For this part I learned how to setup a service using NodeJS and express and implemented mutliple service endpoints to make my app work while being able to securely contain information in my backend.  I learned a lot about different endpoints such as get, post, put, and delete, which I used in my application to make the service available to the front end.  I also learned how to configure vite to allow me to debug the service in my development environment.
