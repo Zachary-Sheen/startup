@@ -34,25 +34,8 @@ const Sidebar = () => {
             .catch((err) => {
                 console.error('Error fetching authenticated:', err);
             });
-
-            // const storedUsername = localStorage.getItem('usernameDisplay') ? localStorage.getItem('usernameDisplay') : 'Account';
-            // const authed = localStorage.getItem('authenticated') === 'true';
-
-            // if (storedUsername && authed) {
-            //     setUsername(storedUsername);
-            // } else {
-            //     setUsername('Account');
-            // }
         }, []);
 
-    // const checkAuthed = () => {
-    //     const authed = localStorage.getItem('authenticated') === 'true';
-    //     console.log('Authed:', authed);
-    //     if (authed) {
-    //         return true;
-    //     }
-    //     return false;
-    // };
 
     const handleNavigation = (e, path) => {
         e.preventDefault();

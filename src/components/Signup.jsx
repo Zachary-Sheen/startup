@@ -7,24 +7,6 @@ import "./scripts.js";
 import bcrypt from 'bcryptjs';
 
 const Signup = () => {
-    
-
-    // function authSession() {
-    //     const session = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    //     return session;
-    // }
-
-    // useEffect(() => {
-    //     fetch('/api/users')
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //         console.log(data);
-    //     })
-    //     .catch((err) => {
-    //         console.error('Error fetching users:', err);
-    //     }
-    //     );
-    // }, []);
 
     async function hashPassword(password) {
         try {
@@ -51,15 +33,7 @@ const Signup = () => {
             'username': username,
             'hashedPassword': hashedPassword
         };
-        // localStorage.setItem('accountData', JSON.stringify(data));
-        // localStorage.setItem('usernameDisplay', email);
-        // localStorage.setItem('favoriteCryptos', []);
-        // localStorage.setItem('CryptoData', JSON.stringify({}));
-        // localStorage.setItem('authenticated', true);
-        // localStorage.getItem('messsages');
-        // if(localStorage.getItem('messages') === null){
-        //     localStorage.setItem('messages', JSON.stringify([]));
-        // }
+        
         fetch('/api/signup', {
             method: 'POST',
             credentials: 'include',

@@ -40,12 +40,6 @@ function passwordGoodEnough(password) {
 }
 
 function authCheck(req, res, next) {
-    // print("in middleware")
-    // print(req.cookies)
-    // print(req.body)
-    // console.log("in middleware")
-    // console.log(req.cookies, req.cookies == null)
-    // console.log(req.body)
     const sessionID = req.cookies.sessionID;
     if (sessionID) {
         console.log("Session ID exists")
@@ -69,6 +63,14 @@ function authCheck(req, res, next) {
     res.status(401).send({ error: 'Unauthorized' });
 }
 
+function setAuthCookie(res, authToken) {
+    res.cookie('sessionID', authToken, {
+        secure: true,
+        httpOnly: true,
+        sameSite: 'Strict',
+    });
+}
+
 apiRouter.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = users.find(u => u.username === username);
@@ -77,7 +79,7 @@ apiRouter.post('/login', async (req, res) => {
         user.sessionID = sessionID;
         user.sessionCreatedAt = new Date();
         user.authenticated = true;
-        res.cookie('sessionID', sessionID, { httpOnly: true });
+        setAuthCookie(res, sessionID);
         console.log("Login successful")
         res.status(200).send({ message: 'Login successful' });
     } else {
@@ -103,19 +105,15 @@ apiRouter.post('/signup', async (req, res) => {
     const sessionID = uuid.v4();
     users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
     console.log(users)
-    res.cookie('sessionID', sessionID, { httpOnly: true });
+    setAuthCookie(res, sessionID);
     res.status(200).send({ message: 'Signup successful' });
 });
 
 apiRouter.get('/authenticated' , authCheck, (req, res) => {
-    // console.log('in authenticated, ' + req.user)
     res.status(200).send({"authenticated": req.user.authenticated, "username": req.user.username})
 });
 
 apiRouter.get('/cryptoData', authCheck, (req, res) => {
-    console.log("Trying to get cryptoData: \n\n" + cryptoData)
-    console.log("CryptoData length " + !cryptoData.Data)
-    console.log({'isempty': !cryptoData.Data})
     res.status(200).send({'isempty': !cryptoData.Data,'cryptoData': cryptoData });
 });
 
@@ -123,11 +121,6 @@ apiRouter.post('/cryptoData', authCheck, (req, res) => {
     cryptoData = {Date: new Date(), Data: req.body.cryptoData};
     res.status(200).send({'cryptoData': cryptoData });
 });
-
-// apiRouter.get('/users' , (req, res) => {
-//     console.log('in users')
-//     res.status(200).send({ 'users': users });
-// });
 
 apiRouter.get('/messages', authCheck, (req, res) => {
     res.status(200).send({ 'messages': messages });
@@ -163,7 +156,6 @@ apiRouter.post('/favorites', authCheck, (req, res) => {
     }
     res.status(200).send({ 'favoriteCryptos': req.user.favoriteCryptos });
 });
-
 
 apiRouter.use(function (err, req, res, next) {
     console.error(err.stack);
