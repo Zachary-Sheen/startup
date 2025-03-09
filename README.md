@@ -128,12 +128,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box [x] and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I installed express with npm and ran the service on port 3000.
-- [ ] **Static middleware for frontend** - I made enpoints in my service/index.js file to make sure people had the right authorization for ports that required information to be passed back.
-- [ ] **Calls to third party endpoints** - I called my third party API, CoinGecko, in my code and pass it into the service for secure storage.
-- [ ] **Backend service endpoints** - I made endpoints for message display, updating messages, getting cryptoData, setting cryptoData, and updating and displaying favorite crypto information.
-- [ ] **Frontend calls service endpoints** - I removed all functionality from the front end and replaced it with all the needed functionality in the service index file.  
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I made a get function for login, a post function for signup, and a delete function for logout.  Logout requires you to be authorized and most other endpoints are that way aswell.
+- [X] **Node.js/Express HTTP service** - I installed express with npm and ran the service on port 3000.
+- [X] **Static middleware for frontend** - I made enpoints in my service/index.js file to make sure people had the right authorization for ports that required information to be passed back.
+- [X] **Calls to third party endpoints** - I called my third party API, CoinGecko, in my code and pass it into the service for secure storage.
+- [X] **Backend service endpoints** - I made endpoints for message display, updating messages, getting cryptoData, setting cryptoData, and updating and displaying favorite crypto information.
+- [X] **Frontend calls service endpoints** - I removed all functionality from the front end and replaced it with all the needed functionality in the service index file.  
+- [X] **Supports registration, login, logout, and restricted endpoint** - I made a get function for login, a post function for signup, and a delete function for logout.  Logout requires you to be authorized and most other endpoints are that way aswell.
 
 ## 🚀 DB/Login deliverable
 
