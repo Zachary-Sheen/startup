@@ -99,7 +99,7 @@ const Home = () => {
                     </div>
                     <div className="box">
                         <h2 id="boxheader">Technologies</h2>
-                        <p id="subbox">HTML, CSS, JavaScript, React, Fill in, WebSocket, and hosted through AWS.</p>
+                        <p id="subbox">HTML, CSS, JavaScript, React, Node, Fill in, WebSocket, and hosted through AWS.</p>
                     </div>
                 </div>
             </main>
