@@ -105,7 +105,7 @@ apiRouter.post('/signup', async (req, res) => {
     const sessionID = uuid.v4();
     users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
     setAuthCookie(res, sessionID);
-    console.log(res);
+    // console.log(res);
     res.status(200).send({ message: 'Signup successful' });
 });
 
