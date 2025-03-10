@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 async function hashPassword(password) {
     try {
@@ -62,11 +62,13 @@ function authCheck(req, res, next) {
 }
 
 function setAuthCookie(res, authToken) {
+    console.log("Setting auth cookie");
     res.cookie('sessionID', authToken, {
         secure: true,
         httpOnly: true,
         sameSite: 'Strict',
     });
+    console.log("Cookie set");
 }
 
 apiRouter.post('/login', async (req, res) => {
@@ -103,6 +105,7 @@ apiRouter.post('/signup', async (req, res) => {
     const sessionID = uuid.v4();
     users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
     setAuthCookie(res, sessionID);
+    console.log(res);
     res.status(200).send({ message: 'Signup successful' });
 });
 

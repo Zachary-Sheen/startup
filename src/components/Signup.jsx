@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'lineicons/dist/lineicons.css';
@@ -8,11 +9,12 @@ import bcrypt from 'bcryptjs';
 
 const Signup = () => {
 
+    const navigate = useNavigate();
+
     async function hashPassword(password) {
         try {
             const salt = await bcrypt.genSalt(10);
             const hash = await bcrypt.hash(password, salt);
-            console.log('Hashed Password:', hash);
             return hash;
         } catch (err) {
             console.error('Error hashing password:', err);
@@ -44,18 +46,19 @@ const Signup = () => {
         })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
-            if (data.success) {
+            // console.log(data);
+            if (data.message == 'Signup successful') {
                 console.log("success");
+                navigate('/chatroom');
             } else{
                 console.log("fail");
+                navigate('/login');
             }
         }) 
         .catch((err) => {
             console.error('Error signing up:', err);
         }
         );
-        window.location.href = '/chatroom';
     }
 
     return (
