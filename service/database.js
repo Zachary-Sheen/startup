@@ -41,23 +41,12 @@ function updateUser(user)
     return users.updateOne({ email: user.email }, { $set: user });
 }
 
+function getCryptoData(){
+    return cryptoData.find().toArray();
+}
 
-// try
-// {
-//     await main();
-//     const house = 
-//     {
-//         address: '123 Main St',
-//         city: 'Springfield',
-//         state: 'IL',
-//         zip: '62701',
-//         rent: 1000
-//     };
-//     await collection.insertOne(house);
-//     console.log('Inserted house:', house);
-//     const houses = await collection.find({}).toArray();
-//     console.log('Found houses:', houses);
-//     process.exit(0);
-// } catch (err) {
-//     console.error('Error inserting house:', err);
-// }
+function addCryptoData(data){
+    cryptoData.deleteMany({});
+    return cryptoData.insertOne(data);
+}
+
