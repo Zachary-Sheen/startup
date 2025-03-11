@@ -50,3 +50,16 @@ function addCryptoData(data){
     return cryptoData.insertOne(data);
 }
 
+async function getMessages() {
+    return await messages.find().sort({ _id: 1 }).toArray().reverse();
+}
+
+async function addMessage(message){
+    await messages.insertOne(message);
+    const count = await messages.countDocuments();
+    if(count > 75){
+        await messages.deleteOne();
+    } 
+
+}
+
