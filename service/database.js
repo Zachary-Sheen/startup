@@ -9,18 +9,38 @@ const config = JSON.parse(
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
 const client = new MongoClient(url);
-const db = client.db('rental');
-const collection = db.collection('house');
+const db = client.db('data');
+const users = db.collection('users');
+const cryptoData = db.collection('cryptoData');
+const messages = db.collection('messages');
 
-async function main() {
+(async function testConnection() {
     try {
-        await db.command({ ping: 1 });
-        console.log('Connected to MongoDB');
-    } catch (err) {
-        console.error('Error connecting to MongoDB:', err);
-        process.exit(1);
+      await db.command({ ping: 1 });
+      console.log(`Connect to database`);
+    } catch (ex) {
+      console.log(`Unable to connect to database with ${url} because ${ex.message}`);
+      process.exit(1);
     }
+  })();
+
+function getUser(username) {
+    return users.findOne({ username });
 }
+
+function getUserBySessionID(sessionID) {
+    return users.findOne({ sessionID });
+}
+
+function addUser(user){
+    return users.insertOne(user);
+}
+
+function updateUser(user)
+{
+    return users.updateOne({ email: user.email }, { $set: user });
+}
+
 
 // try
 // {
