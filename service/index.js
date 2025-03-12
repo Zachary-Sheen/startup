@@ -3,6 +3,8 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
+const DB = require('./database.js')
+
 
 let users = []; // ex : { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': false }
 let messages = [];  // ex: { 'username': 'admin', 'message': 'Welcome to the chatroom!' }
@@ -41,7 +43,8 @@ function passwordGoodEnough(password) {
 function authCheck(req, res, next) {
     const sessionID = req.cookies.sessionID;
     if (sessionID) {
-        const user = users.find(u => u.sessionID === sessionID);
+        const user = findUserBySessionID(sessionID);
+        console.log(user);
         if (user) {
             const sessionAge = (new Date() - new Date(user.sessionCreatedAt)) / (1000 * 60 * 60); 
             if (sessionAge < 4) { 
@@ -52,6 +55,8 @@ function authCheck(req, res, next) {
                 console.log("Session is more than 4 hours old");
                 user.sessionID = null;
                 user.authenticated = false;
+                user.sessionCreatedAt = null;
+                updateUser(user);
                 res.clearCookie('sessionID');
                 return res.status(401).send({ error: 'Session expired. Please log in again.' });
             }
@@ -73,7 +78,8 @@ function setAuthCookie(res, authToken) {
 
 apiRouter.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    const user = users.find(u => u.username === username);
+    const user = findUser(username);
+    console.log(user);
     if (user && await bcrypt.compare(password, user.password)) {
         const sessionID = uuid.v4();
         user.sessionID = sessionID;

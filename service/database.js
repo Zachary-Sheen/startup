@@ -63,3 +63,14 @@ async function addMessage(message){
 
 }
 
+module.exports = {
+  getUser,
+  getUserBySessionID,
+  addUser,
+  updateUser,
+  getCryptoData,
+  addCryptoData,
+  getMessages,
+  addMessage
+};
+
