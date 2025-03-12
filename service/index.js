@@ -98,19 +98,23 @@ apiRouter.delete('/logout', authCheck, (req, res) => {
     req.user.sessionCreatedAt = null;
     req.user.authenticated = false;
     res.clearCookie('sessionID');
+    updateUser(req.user);
     res.send({ message: 'Logout successful' });
 });
 
 apiRouter.post('/signup', async (req, res) => {
     console.log("signup");
     const username = req.body.username;
-    if (users.find(u => u.username === username)) {
+    const user = findUser(username);
+    if (user) {
         return res.status(400).send({ error: 'Try a different name' });
     }
     const password = req.body.hashedPassword;
     const sessionID = uuid.v4();
-    users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
+    addUser({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
     setAuthCookie(res, sessionID);
+    // users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
+    // setAuthCookie(res, sessionID);
     // console.log(res);
     res.status(200).send({ message: 'Signup successful' });
 });
