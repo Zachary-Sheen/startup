@@ -43,7 +43,7 @@ function passwordGoodEnough(password) {
 function authCheck(req, res, next) {
     const sessionID = req.cookies.sessionID;
     if (sessionID) {
-        const user = findUserBySessionID(sessionID);
+        const user = DB.findUserBySessionID(sessionID);
         console.log(user);
         if (user) {
             const sessionAge = (new Date() - new Date(user.sessionCreatedAt)) / (1000 * 60 * 60); 
@@ -56,7 +56,7 @@ function authCheck(req, res, next) {
                 user.sessionID = null;
                 user.authenticated = false;
                 user.sessionCreatedAt = null;
-                updateUser(user);
+                DB.updateUser(user);
                 res.clearCookie('sessionID');
                 return res.status(401).send({ error: 'Session expired. Please log in again.' });
             }
@@ -78,13 +78,14 @@ function setAuthCookie(res, authToken) {
 
 apiRouter.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    const user = findUser(username);
+    const user = DB.findUser(username);
     console.log(user);
     if (user && await bcrypt.compare(password, user.password)) {
         const sessionID = uuid.v4();
         user.sessionID = sessionID;
         user.sessionCreatedAt = new Date();
         user.authenticated = true;
+        DB.updateUser(user);
         setAuthCookie(res, sessionID);
         console.log("Login successful")
         res.status(200).send({ message: 'Login successful' });
@@ -98,7 +99,7 @@ apiRouter.delete('/logout', authCheck, (req, res) => {
     req.user.sessionCreatedAt = null;
     req.user.authenticated = false;
     res.clearCookie('sessionID');
-    updateUser(req.user);
+    DB.updateUser(req.user);
     res.send({ message: 'Logout successful' });
 });
 
@@ -111,7 +112,7 @@ apiRouter.post('/signup', async (req, res) => {
     }
     const password = req.body.hashedPassword;
     const sessionID = uuid.v4();
-    addUser({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
+    DB.addUser({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
     setAuthCookie(res, sessionID);
     // users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
     // setAuthCookie(res, sessionID);
@@ -124,6 +125,7 @@ apiRouter.get('/authenticated' , authCheck, (req, res) => {
 });
 
 apiRouter.get('/cryptoData', authCheck, (req, res) => {
+    cryptoData = DB.getCryptoData();
     res.status(200).send({'isempty': !cryptoData.Data,'cryptoData': cryptoData });
 });
 
