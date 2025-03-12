@@ -6,9 +6,9 @@ const uuid = require('uuid');
 const DB = require('./database.js')
 
 
-let users = []; // ex : { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': false }
-let messages = [];  // ex: { 'username': 'admin', 'message': 'Welcome to the chatroom!' }
-let cryptoData = {};
+// let users = []; // ex : { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': false }
+// let messages = [];  // ex: { 'username': 'admin', 'message': 'Welcome to the chatroom!' }
+// let cryptoData = {};
 
 app.use(express.json());
 app.use(cookieParser());
@@ -131,28 +131,31 @@ apiRouter.get('/cryptoData', authCheck, (req, res) => {
 
 apiRouter.post('/cryptoData', authCheck, (req, res) => {
     cryptoData = {Date: new Date(), Data: req.body.cryptoData};
+    DB.addCryptoData(cryptoData);
     res.status(200).send({'cryptoData': cryptoData });
 });
 
 apiRouter.get('/messages', authCheck, (req, res) => {
+    messages = DB.getMessages();
     res.status(200).send({ 'messages': messages });
 });
 
 apiRouter.post('/messages', authCheck, (req, res) => {
     const message = req.body.message;
     const username = req.user.username;
-    if (messages.length >= 50) 
-    {
-        messages.shift(); 
-    }
-    messages.push({ 'username': username, 'message': message });
+    // if (messages.length >= 50) 
+    // {
+    //     messages.shift(); 
+    // }
+    const messages = DB.addMessage({ 'username': username, 'message': message });
+    // messages.push({ 'username': username, 'message': message });
     res.status(200).send({ 'messages': messages });
 });
 
 apiRouter.get('/favorites', authCheck, (req, res) => {
-    const username = req.user.username;
-    const user = users.find(u => u.username === username);
-    const favoriteCryptos = user.favoriteCryptos;
+    // const username = req.user.username;
+    // const user = users.find(u => u.username === username);
+    const favoriteCryptos = req.user.favoriteCryptos;
     res.status(200).send({'favoriteCryptos': favoriteCryptos });
 });
 
@@ -166,6 +169,7 @@ apiRouter.post('/favorites', authCheck, (req, res) => {
     } else {
         delete req.user.favoriteCryptos[symbol];
     }
+    DB.updateUser(req.user);
     res.status(200).send({ 'favoriteCryptos': req.user.favoriteCryptos });
 });
 

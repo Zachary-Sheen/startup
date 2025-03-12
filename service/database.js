@@ -60,7 +60,7 @@ async function addMessage(message){
     if(count > 75){
         await messages.deleteOne();
     } 
-
+    return await getMessages();
 }
 
 module.exports = {
