@@ -11,6 +11,7 @@ const Dashboard = () => {
 
     const [username, setUsername] = React.useState('');
     const [favoriteCryptos, setFavoriteCryptos] = React.useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('/api/favorites', {
@@ -30,7 +31,7 @@ const Dashboard = () => {
         .then((res) => res.json())
         .then((data) => {
             if (!data.authenticated) {
-                window.location.href = '/login';
+                navigate('/login');
             }
             setUsername(data.username);
         })

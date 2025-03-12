@@ -116,20 +116,12 @@ const Sidebar = () => {
                             })
                             .then((res) => res.json())
                             .then((data) => {
-                                window.location.href = '/';
+                                navigate('/');
                             })
                             .catch((err) => {
                                 console.error('Error logging out:', err);
                             });
                         }
-                        // const authed = localStorage.getItem('authenticated') === 'true';
-                        // if (!authed) {
-                        //     e.preventDefault();
-                        //     return;
-                        // } else {
-                        //     localStorage.setItem('authenticated', false);
-                        //     window.location.href = '/';
-                        // }
                     }
                     }>
                         <i className="lni lni-exit"></i>

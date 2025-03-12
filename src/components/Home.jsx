@@ -16,8 +16,7 @@ const Home = () => {
             // console.log(data);
             if(data){
                 if (!data.authenticated) {
-                    localStorage.setItem('usernameDisplay', 'Account');
-                    window.location.href = '/login';
+                    navigate('/login');
                 }
                 else{
                     return true;

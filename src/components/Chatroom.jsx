@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'lineicons/dist/lineicons.css';
@@ -9,6 +10,7 @@ import "./scripts.js";
 const Chatroom = () => {
     const [username, setUsername] = React.useState('');
     const [messages, setMessages] = React.useState([]);
+    const navigate = useNavigate();
         
     useEffect(() => {
         fetch('api/messages', {
@@ -28,7 +30,7 @@ const Chatroom = () => {
         .then((data) => {
             // console.log(data);
             if (!data.authenticated) {
-                window.location.href = '/login';
+                navigate('/login');
             }
             setUsername(data.username);
         })
