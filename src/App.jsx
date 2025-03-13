@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Chatroom from './components/Chatroom';
 import Dashboard from './components/Dashboard';
@@ -10,7 +11,7 @@ import 'lineicons/dist/lineicons.css';
 
 function App() {
     return (
-        <Router>
+        <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/chatroom" element={<Chatroom />} />
@@ -19,7 +20,7 @@ function App() {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="*" element={<Home />} />
             </Routes>
-        </Router>
+        </BrowserRouter>
     );
 }
 

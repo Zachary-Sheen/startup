@@ -3,7 +3,8 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
-const DB = require('./database.js')
+const DB = require('./database.js');
+const path = require('path');
 
 
 // let users = []; // ex : { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': false }
@@ -182,6 +183,11 @@ apiRouter.use(function (err, req, res, next) {
 apiRouter.use((_req, res) => {
     res.status(404).json({ error: 'Not found' });
 });
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

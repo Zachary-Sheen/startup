@@ -6,6 +6,7 @@ import './homepgstyle.css';
 
 const Home = () => {
     const navigate = useNavigate();
+
     function checkLogin() 
     {
         fetch('/api/authenticated', {
@@ -28,7 +29,7 @@ const Home = () => {
             }
         })
         .catch((err) => {
-            console.error('Error fetching authenticated:', err);
+            console.log('Error fetching authenticated:', err);
         });
     }
     
@@ -50,7 +51,7 @@ const Home = () => {
                     <ul className="navelements">
                         <Link to="/"><li>Home</li></Link>
                         <Link to="/dashboard" onClick={(e) => handleNavigation(e, '/dashboard')}><li>Dashboard</li></Link>
-                        <Link to="/chatroom" onClick={(e) => handleNavigation(e, '/dashboard')}><li>Chatroom</li></Link>
+                        <Link to="/chatroom" onClick={(e) => handleNavigation(e, '/chatroom')}><li>Chatroom</li></Link>
                         <Link to="/signup"><li>Sign Up</li></Link>
                         <Link to="/login"><li>Login</li></Link>
                         {/* <Link to="/account"><li>Account</li></Link> */}

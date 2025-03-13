@@ -32,17 +32,18 @@ const Sidebar = () => {
                 }
             })
             .catch((err) => {
-                console.error('Error fetching authenticated:', err);
+                console.log('Error fetching authenticated:', err);
             });
         }, []);
 
 
     const handleNavigation = (e, path) => {
+        console.log("path: ", path);
         e.preventDefault();
         if ((path === '/login' || path === '/signup') && authed) {
             console.log('Already logged in');
         }
-        else if((path === 'chatroom' || path === 'dashboard') && !authed) {
+        else if((path === '/chatroom' || path === '/dashboard') && !authed) {
             console.log('Not logged in');
         }
         else {
@@ -62,45 +63,60 @@ const Sidebar = () => {
                         {username ? username : 'Account'} {/* if username exists if not it is account */}
                     </Link>
                 </li>
-                <li className="sidebar-header">
-                    Home
-                </li>
+                {!authed && (
+                    <>
+                    <li className="sidebar-header">
+                        Home
+                    </li>
+                        <li className="sidebar-item">
+                            <Link to="/" className="sidebar-link">
+                                <i className="lni lni-home-2"></i>
+                                Home Page
+                            </Link>
+                        </li>
+                    </>
+                )}
+                {authed && (
+                    <>
+                    <li className="sidebar-header">
+                        Tools
+                    </li>
                     <li className="sidebar-item">
-                        <Link to="/" className="sidebar-link">
-                            <i className="lni lni-home-2"></i>
-                            Home Page
+                        <Link to="/dashboard"  onClick={(e) => handleNavigation(e, '/dashboard')} className="sidebar-link">
+                            <i className="lni lni-dashboard-square-1"></i>
+                            Dashboard
                         </Link>
                     </li>
-                <li className="sidebar-header">
-                    Tools
-                </li>
-                <li className="sidebar-item">
-                    <Link to="/dashboard"  onClick={(e) => handleNavigation(e, '/dashboard')} className="sidebar-link">
-                        <i className="lni lni-dashboard-square-1"></i>
-                        Dashboard
-                    </Link>
-                </li>
-                <li className="sidebar-item">
-                    <Link to="/chatroom"  onClick={(e) => handleNavigation(e, '/chatroom')} className="sidebar-link">
-                        <i className="lni lni-message-3-text"></i>
-                        Chatroom
-                    </Link>
-                </li>
-                <li className="sidebar-header">
-                    Login/Sign-up
-                </li>
-                <li className="sidebar-item">
-                    <Link to="/login" onClick={(e) => handleNavigation(e, '/login')} className="sidebar-link">
-                        <i className="lni lni-user-4"></i>
-                        Login
-                    </Link>
-                </li>
-                <li className="sidebar-item">
-                    <Link to="/signup" onClick={(e) => handleNavigation(e, '/signup')} className="sidebar-link">
-                        <i className="lni lni-enter"></i>
-                        Sign-up
-                    </Link>
-                </li>
+                    <li className="sidebar-item">
+                        <Link to="/chatroom"  onClick={(e) => handleNavigation(e, '/chatroom')} className="sidebar-link">
+                            <i className="lni lni-message-3-text"></i>
+                            Chatroom
+                        </Link>
+                    </li>
+                    </>
+                )
+                }
+                {!authed && (
+                    <>
+                    <li className="sidebar-header">
+                        Login/Sign-up
+                    </li>
+                    <li className="sidebar-item">
+                        <Link to="/login" onClick={(e) => handleNavigation(e, '/login')} className="sidebar-link">
+                            <i className="lni lni-user-4"></i>
+                            Login
+                        </Link>
+                    </li>
+                    <li className="sidebar-item">
+                        <Link to="/signup" onClick={(e) => handleNavigation(e, '/signup')} className="sidebar-link">
+                            <i className="lni lni-enter"></i>
+                            Sign-up
+                        </Link>
+                    </li>
+                    </>
+                )}
+                {authed && (
+                    <>
                 <li className = "sidebar-header">
                     Sign Out
                 </li>
@@ -128,6 +144,8 @@ const Sidebar = () => {
                         Sign Out
                     </Link>
                 </li>
+                </>
+                )}
             </ul>
             <div className="sidebar-footer">
                 <a href="https://github.com/Zachary-Sheen/startup" className="sidebar-link">
