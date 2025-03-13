@@ -1,10 +1,5 @@
-import { MongoClient } from 'mongodb';
-import { readFile } from 'fs/promises';
-const config = JSON.parse(
-    await readFile(
-      new URL('./dbConfig.json', import.meta.url)
-    )
-  );
+const { MongoClient } = require('mongodb');
+const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
@@ -33,7 +28,13 @@ function getUserBySessionID(sessionID) {
 }
 
 function addUser(user){
-    return users.insertOne(user);
+    const username = user.username;
+    const password = user.password;
+    const sessionID = user.sessionID;
+    const favoriteCryptos = user.favoriteCryptos;
+    const sessionCreatedAt = user.sessionCreatedAt;
+    const authenticated = user.authenticated;
+    return users.insertOne({ "_id" : username, username, password, sessionID, favoriteCryptos, sessionCreatedAt, authenticated });
 }
 
 function updateUser(user)
@@ -41,7 +42,7 @@ function updateUser(user)
     return users.updateOne({ email: user.email }, { $set: user });
 }
 
-function getCryptoData(){
+async function getCryptoData(){
     return cryptoData.find().toArray();
 }
 
@@ -51,7 +52,8 @@ function addCryptoData(data){
 }
 
 async function getMessages() {
-    return await messages.find().sort({ _id: 1 }).toArray().reverse();
+    const messageList = await messages.find().toArray();
+    return messageList;
 }
 
 async function addMessage(message){
