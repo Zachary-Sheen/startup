@@ -7,29 +7,15 @@ const DB = require('./database.js');
 const path = require('path');
 
 
-let users = []; // ex : { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': false }
-let messages = [];  // ex: { 'username': 'admin', 'message': 'Welcome to the chatroom!' }
-let cryptoData = {};
+// let users = []; // ex : { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': false }
+// let messages = [];  // ex: { 'username': 'admin', 'message': 'Welcome to the chatroom!' }
+// let cryptoData = {};
+
+//Database stuff
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
-
-app.use((req, res, next) => {
-    console.log(`Received ${req.method} request for ${req.url}`);
-    // console.log('Cookies:', req.cookies);
-    // console.log('Body:', req.body);
-    next();
-});
-
-var apiRouter = express.Router();
-app.use(`/api`, apiRouter);
-
-
-// app.use(express.static(path.join(__dirname, "build")));
-
-
-//Database stuff
 
 app.use((req, res, next) => {
     console.log(`Received ${req.method} request for ${req.url}`);
@@ -58,6 +44,11 @@ function passwordGoodEnough(password) {
 }
 
 async function authCheck(req, res, next) {
+    const cookiesExist = req.cookies;
+    if (!cookiesExist) {
+        console.log("No cookies exist");
+        return res.status(401).send({ error: 'Unauthorized' });
+    }
     const sessionID = req.cookies.sessionID;
     if (sessionID) {
         const user = await DB.getUserBySessionID(sessionID);
@@ -94,9 +85,11 @@ function setAuthCookie(res, authToken) {
 }
 
 apiRouter.post('/login', async (req, res) => {
+    console.log(req.body);
     const { username, password } = req.body;
-    const user = DB.getUser(username);
+    const user = await DB.getUser(username);
     console.log(user);
+    console.log("Pass right? ", await bcrypt.compare(password, user.password));
     if (user && await bcrypt.compare(password, user.password)) {
         const sessionID = uuid.v4();
         user.sessionID = sessionID;
@@ -111,12 +104,12 @@ apiRouter.post('/login', async (req, res) => {
     }
 });
 
-apiRouter.delete('/logout', authCheck, (req, res) => {
+apiRouter.delete('/logout', authCheck, async (req, res) => {
     req.user.sessionID = null;
     req.user.sessionCreatedAt = null;
     req.user.authenticated = false;
     res.clearCookie('sessionID');
-    DB.updateUser(req.user);
+    await DB.updateUser(req.user);
     res.send({ message: 'Logout successful' });
 });
 

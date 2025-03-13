@@ -12,7 +12,7 @@ const messages = db.collection('messages');
 (async function testConnection() {
     try {
       await db.command({ ping: 1 });
-      console.log(`Connect to database`);
+      console.log(`Connected to database`);
     } catch (ex) {
       console.log(`Unable to connect to database with ${url} because ${ex.message}`);
       process.exit(1);
@@ -39,7 +39,8 @@ function addUser(user){
 
 function updateUser(user)
 {
-    return users.updateOne({ email: user.email }, { $set: user });
+    const {_id, ...rest} = user;
+    return users.updateOne({ "_id": user.username }, { $set: rest });
 }
 
 async function getCryptoData(){

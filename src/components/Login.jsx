@@ -27,6 +27,7 @@ const Login = () => {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         // const usernamedisplay = username;
+        // console.log(username, password);
         fetch('/api/login', {
             method: 'POST',
             credentials: 'include',
@@ -45,6 +46,9 @@ const Login = () => {
             {
                 navigate("/signup");
             }
+        })
+        .catch((err) => {
+            console.error('Error checking login:', err);
         });
     }
 
