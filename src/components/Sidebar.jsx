@@ -93,6 +93,12 @@ const Sidebar = () => {
                             Chatroom
                         </Link>
                     </li>
+                    <li className = "sidebar-item">
+                        <Link to = "/cryptoCharts" onClick={(e) => handleNavigation(e, '/cryptoCharts')} className = "sidebar-link">
+                            <i class="lni lni-bar-chart-4"></i>
+                            Crypto Charts
+                        </Link>
+                    </li>
                     </>
                 )
                 }

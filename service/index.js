@@ -52,7 +52,7 @@ async function authCheck(req, res, next) {
     const sessionID = req.cookies.sessionID;
     if (sessionID) {
         const user = await DB.getUserBySessionID(sessionID);
-        console.log(user);
+        // console.log(user);
         if (user) {
             const sessionAge = (new Date() - new Date(user.sessionCreatedAt)) / (1000 * 60 * 60); 
             if (sessionAge < 4) { 
@@ -88,7 +88,6 @@ apiRouter.post('/login', async (req, res) => {
     console.log(req.body);
     const { username, password } = req.body;
     const user = await DB.getUser(username);
-    console.log(user);
     console.log("Pass right? ", await bcrypt.compare(password, user.password));
     if (user && await bcrypt.compare(password, user.password)) {
         const sessionID = uuid.v4();
@@ -138,6 +137,8 @@ apiRouter.get('/authenticated' , authCheck, (req, res) => {
 
 apiRouter.get('/cryptoData', authCheck, async (req, res) => {
     cryptoData = await DB.getCryptoData();
+    cryptoData = cryptoData[0];
+    // console.log(cryptoData);
     res.status(200).send({'isempty': !cryptoData.Data,'cryptoData': cryptoData });
 });
 

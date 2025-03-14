@@ -1,0 +1,41 @@
+.black-white-theme .accordion-item {
+    background-color: #000; 
+    border: 1px solid #fff;
+    color: #fff;
+}
+
+.black-white-theme .accordion-button {
+    background-color: #000000; 
+    color: #fff;
+    border: none;
+}
+.accordion-button::after {
+    color: black; /* Change the caret color to black */
+}
+
+.black-white-theme .accordion-button:hover {
+    background-color: #222; 
+}
+
+.black-white-theme .accordion-button:focus {
+    box-shadow: none; 
+}
+
+.black-white-theme .accordion-button:not(.collapsed) {
+    background-color: #333; 
+    color: #fff;
+}
+
+.black-white-theme .accordion-body {
+    background-color: #000;
+    color: #ddd;
+    border-top: 1px solid #fff;
+}
+
+.crypto-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    vertical-align: middle;
+    border-radius: 50%;
+}

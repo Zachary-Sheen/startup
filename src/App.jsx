@@ -6,6 +6,7 @@ import Chatroom from './components/Chatroom';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import SignUp from './components/Signup'; // Ensure this matches the file name
+import CryptoCharts from './components/CryptoCharts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'lineicons/dist/lineicons.css';
 
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
+                <Route path="/cryptoCharts" element={<CryptoCharts />} />
                 <Route path="*" element={<Home />} />
             </Routes>
         </BrowserRouter>
