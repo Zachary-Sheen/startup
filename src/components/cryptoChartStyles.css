@@ -1,41 +1,95 @@
+/* To remove default accordion borders */
 .black-white-theme .accordion-item {
-    background-color: #000; 
-    border: 1px solid #fff;
-    color: #fff;
+    border: none !important;
 }
 
 .black-white-theme .accordion-button {
-    background-color: #000000; 
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.black-white-theme .accordion-collapse {
+    border: none !important;
+}
+/* -------------------- */
+
+.black-white-theme {
+    background-color: #000;
+    font-family: 'Poppins', sans-serif;
+}
+.black-white-theme .accordion-item {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.black-white-theme .accordion-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+}
+
+.black-white-theme .accordion-button {
+    background-color: #000;
     color: #fff;
     border: none;
-}
-.accordion-button::after {
-    color: black; /* Change the caret color to black */
+    font-weight: bold;
+    padding: 10px 15px;
+    transition: all 0.3s ease-in-out;
 }
 
 .black-white-theme .accordion-button:hover {
-    background-color: #222; 
-}
-
-.black-white-theme .accordion-button:focus {
-    box-shadow: none; 
+    background-color: #222;
 }
 
 .black-white-theme .accordion-button:not(.collapsed) {
-    background-color: #333; 
-    color: #fff;
+    background-color: #333;
+    color: #ffcc00;
 }
 
 .black-white-theme .accordion-body {
     background-color: #000;
     color: #ddd;
-    border-top: 1px solid #fff;
+}
+
+
+
+.crypto-info {
+    padding:5px 0;
+    padding-left:15px;
+}
+.crypto-info li {
+    list-style-type: none;
+    margin-bottom: 5px;
+}
+
+
+.crypto-table th {
+    background-color: #222;
+    color: #ffcc00;
 }
 
 .crypto-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
-    vertical-align: middle;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.trading-chart {
+    border-radius: 10px;
+    overflow: hidden;
+    background: #121212;
+    padding: 15px;
+}
+
+.accordion-collapse {
+    transition: all 0.3s ease-in-out;
+}
+
+.glow {
+    text-shadow: 0px 0px 12px rgba(255, 255, 255, 0.6);
 }
