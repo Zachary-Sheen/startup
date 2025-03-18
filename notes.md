@@ -9,7 +9,7 @@
 - [MDN](https://developer.mozilla.org)
 
 ## AWS Notes
-
+Ss
 For this, AWS wasn't terrible setting up, it was just assigning an elastic IP that took me a while because I had to make sure I was in the right region.  Once I got that done, everything else was easy.  Assigning a Route 53 domain name was pretty easy and assigning the IP address to connect and launch was pretty easy. 
 
 ## HTML Notes
@@ -27,3 +27,6 @@ For this part I learned how Javascript and React work, and I used this [Codepen]
 
 ## Service Deliverable Notes
 For this part I learned how to setup a service using NodeJS and express and implemented mutliple service endpoints to make my app work while being able to securely contain information in my backend.  I learned a lot about different endpoints such as get, post, put, and delete, which I used in my application to make the service available to the front end.  I also learned how to configure vite to allow me to debug the service in my development environment.
+
+## Database Deliverable
+For this part I learned how to setup a MongoDB database and then connect to it locally so I can store different types of information in it.  Also, I learned how to filter the database to gather different types of information that I parse in my back end.  Setting the database up and switching the endpoints over to call MongoDB was somewhat easy and very useful.
