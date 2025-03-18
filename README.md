@@ -139,8 +139,8 @@ For this deliverable I did the following. I checked the box [x] and added a desc
 
 For this deliverable I did the following. I checked the box [x] and added a description for things I completed.
 
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [X] **Stores data in MongoDB** - I store all of the users and all information needed for them, crypto data, and all the messages in my MongoDB database.  All of the connection and input/output in the database is done through service/index.js
+- [X] **Stores credentials in MongoDB** - I stored all of the credentials needed in my user table including usernaame, session ID, and their hashed password.  This is done in service/index.js.
  
 ## 🚀 WebSocket deliverable
 
