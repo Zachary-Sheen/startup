@@ -54,7 +54,7 @@ const AdvancedDisplay = () => {
                         <div className="accordion-body">
                             <div className="trading-chart">
                                 <ul className = "crypto-info">
-                                    <li>Current Price: <span className='crypto-data'>${crypto.current_price.toLocaleString()}</span></li>
+                                    {/* <li>Current Price: <span className='crypto-data'>${crypto.current_price.toLocaleString()}</span></li> */}
                                     <li>Market Cap: ${crypto.market_cap.toLocaleString()}</li>
                                     <li>24h High: ${crypto.high_24h.toLocaleString()}</li>
                                     <li>24h Low: ${crypto.low_24h.toLocaleString()}</li>

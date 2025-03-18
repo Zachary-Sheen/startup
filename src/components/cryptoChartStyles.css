@@ -15,7 +15,7 @@
 /* -------------------- */
 
 .black-white-theme {
-    background-color: #000;
+    background-color: #ececec;
     font-family: 'Poppins', sans-serif;
 }
 .black-white-theme .accordion-item {
@@ -32,8 +32,8 @@
 }
 
 .black-white-theme .accordion-button {
-    background-color: #000;
-    color: #fff;
+    background-color: #ececec;
+    color: #000000;
     border: none;
     font-weight: bold;
     padding: 10px 15px;
@@ -41,16 +41,16 @@
 }
 
 .black-white-theme .accordion-button:hover {
-    background-color: #222;
+    background-color: #d4d4d4;
 }
 
 .black-white-theme .accordion-button:not(.collapsed) {
-    background-color: #333;
-    color: #ffcc00;
+    background-color: #d4d4d4;
+    color: #1900ff;
 }
 
 .black-white-theme .accordion-body {
-    background-color: #000;
+    background-color: #121212;
     color: #ddd;
 }
 
@@ -82,7 +82,7 @@
 .trading-chart {
     border-radius: 10px;
     overflow: hidden;
-    background: #121212;
+    background: rgb(24, 20, 20); /*121212*/
     padding: 15px;
 }
 
