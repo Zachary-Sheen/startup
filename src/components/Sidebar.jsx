@@ -57,8 +57,8 @@ const Sidebar = () => {
 
     return (
         <aside id="sidebar" className="sidebar-toggle">
-            <div className="sidebar-logo">
-                <Link to="#">Navigation</Link>
+            <div className="crypto-logo">
+                <h1>Crypto<sup>&reg;</sup><br></br><span>Haven</span></h1>
             </div>
             <ul className="sidebar-nav p-0">
                 <li className="sidebar-item">
@@ -86,21 +86,21 @@ const Sidebar = () => {
                         Tools
                     </li>
                     <li className={getSidebarItemClass('/dashboard')}>
-                        <Link to="/dashboard"  onClick={(e) => handleNavigation(e, '/dashboard')} className="sidebar-link">
+                        <Link to="/dashboard" onClick={(e) => handleNavigation(e, '/dashboard')} className="sidebar-link">
                             <i className="lni lni-dashboard-square-1"></i>
-                            Dashboard
+                            <span>Dashboard</span>
                         </Link>
                     </li>
                     <li className={getSidebarItemClass('/chatroom')}>
-                        <Link to="/chatroom"  onClick={(e) => handleNavigation(e, '/chatroom')} className="sidebar-link">
+                        <Link to="/chatroom" onClick={(e) => handleNavigation(e, '/chatroom')} className="sidebar-link">
                             <i className="lni lni-message-3-text"></i>
-                            Chatroom
+                            <span>Chatroom</span>
                         </Link>
                     </li>
-                    <li className = {getSidebarItemClass('/cryptoCharts')}>
-                        <Link to = "/cryptoCharts" onClick={(e) => handleNavigation(e, '/cryptoCharts')} className = "sidebar-link">
-                            <i class="lni lni-bar-chart-4"></i>
-                            Crypto Charts
+                    <li className={getSidebarItemClass('/cryptoCharts')}>
+                        <Link to="/cryptoCharts" onClick={(e) => handleNavigation(e, '/cryptoCharts')} className="sidebar-link">
+                            <i className="lni lni-bar-chart-4"></i>
+                            <span>Crypto Charts</span>
                         </Link>
                     </li>
                     </>
