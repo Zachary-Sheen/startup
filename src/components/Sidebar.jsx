@@ -9,7 +9,11 @@ const Sidebar = () => {
     const [username, setUsername] = React.useState('');
     const [authed, setAuthed] = React.useState(false);
     const navigate = useNavigate();
-    
+
+    const getSidebarItemClass = (path) => {
+        return window.location.pathname === path ? 'selected-sidebar-link' : 'sidebar-item';
+    };
+
     useEffect(() => {
         // if(window.location.pathname === '/login' || window.location.pathname === '/signup') {
         //     return;
@@ -81,19 +85,19 @@ const Sidebar = () => {
                     <li className="sidebar-header">
                         Tools
                     </li>
-                    <li className="sidebar-item">
+                    <li className={getSidebarItemClass('/dashboard')}>
                         <Link to="/dashboard"  onClick={(e) => handleNavigation(e, '/dashboard')} className="sidebar-link">
                             <i className="lni lni-dashboard-square-1"></i>
                             Dashboard
                         </Link>
                     </li>
-                    <li className="sidebar-item">
+                    <li className={getSidebarItemClass('/chatroom')}>
                         <Link to="/chatroom"  onClick={(e) => handleNavigation(e, '/chatroom')} className="sidebar-link">
                             <i className="lni lni-message-3-text"></i>
                             Chatroom
                         </Link>
                     </li>
-                    <li className = "sidebar-item">
+                    <li className = {getSidebarItemClass('/cryptoCharts')}>
                         <Link to = "/cryptoCharts" onClick={(e) => handleNavigation(e, '/cryptoCharts')} className = "sidebar-link">
                             <i class="lni lni-bar-chart-4"></i>
                             Crypto Charts
@@ -107,13 +111,13 @@ const Sidebar = () => {
                     <li className="sidebar-header">
                         Login/Sign-up
                     </li>
-                    <li className="sidebar-item">
+                    <li className={getSidebarItemClass('/login')}>
                         <Link to="/login" onClick={(e) => handleNavigation(e, '/login')} className="sidebar-link">
                             <i className="lni lni-user-4"></i>
                             Login
                         </Link>
                     </li>
-                    <li className="sidebar-item">
+                    <li className={getSidebarItemClass('/signup')}>
                         <Link to="/signup" onClick={(e) => handleNavigation(e, '/signup')} className="sidebar-link">
                             <i className="lni lni-enter"></i>
                             Sign-up

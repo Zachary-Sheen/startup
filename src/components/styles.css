@@ -26,6 +26,9 @@ a {
 #sidebar.collapsed {
     margin-left:-264px;
 }
+.selected-sidebar-link{
+    background-color: rgb(41, 40, 40);
+}
 
 .toggler-btn {
     background-color: transparent;
