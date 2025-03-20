@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'lineicons/dist/lineicons.css';
 import AdvancedDisplay from './AdvancedDisplay.jsx';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './styles.css';
 import "./scripts.js";
 import './cryptoChartStyles.css';
@@ -35,10 +36,10 @@ const CryptoCharts = () => {
             <Sidebar />
             <div className="main">
                 <nav className="navbar navbar-expand" id="heading">
-                    <button className="toggler-btn" type="button">
+                    {/* <button className="toggler-btn" type="button">
                         <i className="lni lni-menu-cheesburger"></i>
-                    </button>
-                    <h2 className="mx-auto"><span id="userName"><strong>Crypto Charts</strong></span></h2>
+                    </button> */}
+                    <h2 className="ml-auto pagename"><span id="userName"><strong>Crypto Charts</strong></span></h2>
                 </nav>
                 <AdvancedDisplay />
             </div>

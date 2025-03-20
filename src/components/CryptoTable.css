@@ -1,0 +1,90 @@
+body {
+    background-color: #121212;
+    color: white;
+    font-family: 'Arial', sans-serif;
+}
+
+.crypto-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.crypto-table th, .crypto-table td {
+    padding: 12px;
+    text-align: left;
+}
+
+.crypto-table th {
+    background-color: #222;
+    color: gold;
+    font-weight: bold;
+    border-bottom: 2px solid gold;
+}
+
+.crypto-table tr:nth-child(even) {
+    background-color: #292929;
+}
+
+.crypto-table tr:hover {
+    background-color: #333;
+    transition: background 0.3s ease-in-out;
+}
+
+#cryptoTable tbody tr {
+    background-color: black;
+    color: white;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#cryptoTable tbody tr:hover {
+    background-color: gold;
+    color: black;
+}
+
+.crypto-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid gold;
+}
+
+.favorite-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.1);
+}
+
+.favorite-star {
+    color: gold;
+    font-size: 1.5rem;
+}
+
+.favorite-star.filled {
+    color: yellow;
+}
+
+.card {
+    background-color: #1e1e1e;
+    color: white;
+    border: 1px solid gold;
+}
+
+.btn-outline-primary {
+    color: gold;
+    border-color: gold;
+}
+
+.btn-outline-primary:hover {
+    background-color: gold;
+    color: black;
+}

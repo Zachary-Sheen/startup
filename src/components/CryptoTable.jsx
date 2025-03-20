@@ -244,7 +244,7 @@ const CryptoTable = () => {
 
     return (
         <div className="table-responsive">
-            <table className="table table-hover table-striped table-bordered" id="cryptoTable"> 
+            <table className="table table-hover table-bordered crypto-table" id="cryptoTable"> {/*table-striped   */}
                 <thead>
                     <tr>
                         <th>Cryptocurrency</th>

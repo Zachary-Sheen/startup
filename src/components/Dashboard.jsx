@@ -45,10 +45,8 @@ const Dashboard = () => {
             <Sidebar />
             <div className="main">
                 <nav className="navbar navbar-expand" id="heading">
-                    <button className="toggler-btn" type="button">
-                        <i className="lni lni-menu-cheesburger"></i>
-                    </button>
-                    <h2 className="mx-auto">Welcome back, <span id="userName"><strong>{username}!</strong></span></h2>
+                    {/* <h2 className="mx-auto">Welcome back, <span id="userName"><strong>{username}!</strong></span></h2> */}
+                    <h2 className="ml-auto pagename"><span id="userName"><strong>Dashboard</strong></span></h2>
                 </nav>
                 <div className="container mt-5">
                     <div className="row">
