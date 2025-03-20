@@ -57,10 +57,7 @@ const Login = () => {
             <Sidebar />
             <div className="main">
                 <nav className="navbar navbar-expand" id="heading">
-                    <button className="toggler-btn" type="button" > {/* onClick="toggleMenu()" */}
-                        <i className="lni lni-menu-cheesburger"></i>
-                    </button>
-                    <h2 className="mx-auto"><strong>Login</strong></h2>
+                    <h2 className="ml-auto pagename"><strong>Login</strong></h2>
                 </nav>
                 <form method="post" onSubmit={checkLogin}> 
                     <div className="d-flex justify-content-center align-items-center" style={{ height: '75vh', marginTop: '10vh' }}>
@@ -80,7 +77,7 @@ const Login = () => {
                                 </div>
                             </div>
                             <div className="card-footer">
-                                <button type="submit" className="btn btn-dark w-100">Submit</button>
+                                <button type="submit" className="btn submit-btn w-100">Submit</button>
                             </div>
                         </div>
                     </div>

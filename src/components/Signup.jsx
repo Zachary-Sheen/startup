@@ -66,10 +66,7 @@ const Signup = () => {
             <Sidebar />
             <div className="main">
                 <nav className="navbar navbar-expand" id="heading">
-                    <button className="toggler-btn" type="button">
-                        <i className="lni lni-menu-cheesburger"></i>
-                    </button>
-                    <h2 className="mx-auto"><strong>Sign-Up</strong></h2>
+                    <h2 className="ml-auto pagename"><strong>Sign-Up</strong></h2>
                 </nav>
                 
                 <form method="post" onSubmit={setCredentials}>
@@ -94,7 +91,7 @@ const Signup = () => {
                                 </div>
                             </div>
                             <div className="card-footer">
-                                <button type="submit" className="btn btn-dark w-100">Submit</button>
+                                <button type="submit" className="btn submit-btn w-100">Submit</button>
                             </div>
                         </div>
                     </div>

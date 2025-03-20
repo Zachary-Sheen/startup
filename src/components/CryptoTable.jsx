@@ -65,7 +65,7 @@ const CryptoTable = () => {
         .then((data) => {
             // console.log(data);
             if(data){
-                setFavoriteCryptos(data);
+                setFavoriteCryptos(data.favoriteCryptos);
             }
             else
             {
@@ -116,7 +116,9 @@ const CryptoTable = () => {
         if(!favoriteCryptos) {
             return false;
         }
-        return favoriteCryptos.hasOwnProperty(symbol);
+        const normalizedSymbol = symbol.toLowerCase();
+        console.log(favoriteCryptos, normalizedSymbol, favoriteCryptos.hasOwnProperty(normalizedSymbol), Object.keys(favoriteCryptos));
+        return favoriteCryptos.hasOwnProperty(normalizedSymbol);
     };
 
     const emptyStar = (
