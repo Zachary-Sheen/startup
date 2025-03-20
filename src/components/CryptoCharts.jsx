@@ -10,7 +10,11 @@ import './cryptoChartStyles.css';
 
 
 const CryptoCharts = () => {
-        
+        //
+
+        // MAKE THE DATA INTO CARDS, AND THEN WHEN YOU CLICK ON THE CARD, SHOW DIALOGUE BOX WITH THE CHART
+
+        //
     useEffect(() => {
         fetch('/api/authenticated', {
             credentials: 'include',
@@ -19,7 +23,7 @@ const CryptoCharts = () => {
         .then((data) => {
             if (!data.authenticated) {
                 navigate('/login');
-            }
+            } 
         })
         .catch((err) => {
             console.error('Error fetching authenticated:', err);
