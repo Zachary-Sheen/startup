@@ -34,7 +34,7 @@ const AdvancedDisplay = () => {
                     <div className="col-md-4 mb-4" key={index}>
                         <div className="card h-100 cryptocards hover" style={{ maxWidth: '100%' }}>
                             <div className="row g-0">
-                                <div className="col-md-4 d-flex justify-content-center align-items-center">
+                                <div className="col-md-4 d-flex justify-content-center align-items-center padded">
                                     <img src={crypto.image} className="img-fluid rounded-start" alt={crypto.name} />
                                 </div>
                                 <div className="col-md-8">
@@ -71,7 +71,7 @@ const AdvancedDisplay = () => {
                 aria-hidden="true"
             >
                 <div className="modal-dialog modal-lg modal-dialog-centered">
-                    <div className="modal-content">
+                    <div className="modal-content dark-modal">
                         <div className="modal-header">
                             <h5 className="modal-title" id="cryptoChartModalLabel">
                                 {selectedCrypto && selectedCrypto.name} ({selectedCrypto && selectedCrypto.symbol.toUpperCase()}) {/* Fix this */}

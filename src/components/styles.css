@@ -201,6 +201,30 @@ a.sidebar-link:hover{
    /* box-shadow: 0 0 15px #FFB400; */
    color:white;
 }
+.padded{
+   padding: 1rem;
+}
+#cryptoChartModal {
+   /* background-color: #292828; */
+   color: white;
+}
+.dark-modal {
+   background-color: #1e1e1e;
+   color: #ffffff;
+   border-radius: 8px; 
+}
+
+.dark-modal .modal-header {
+   border-bottom: 1px solid #444;
+}
+
+.dark-modal .modal-body {
+   background-color: #2a2a2a;
+}
+
+.dark-modal .btn-close {
+   filter: invert(1); 
+}
 .hover {
    transition: transform 0.2s ease, box-shadow 0.2s ease; 
 }

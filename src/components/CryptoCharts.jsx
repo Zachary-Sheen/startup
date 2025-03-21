@@ -39,7 +39,7 @@ const CryptoCharts = () => {
                     {/* <button className="toggler-btn" type="button">
                         <i className="lni lni-menu-cheesburger"></i>
                     </button> */}
-                    <h2 className="ml-auto pagename"><span id="userName"><strong>Crypto Charts</strong></span></h2>
+                    <h2 className="ml-auto pagename"><span id="userName">Crypto Charts</span></h2>
                 </nav>
                 <AdvancedDisplay />
             </div>
