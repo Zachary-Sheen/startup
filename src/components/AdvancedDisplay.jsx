@@ -22,8 +22,8 @@ const AdvancedDisplay = () => {
     }, []);
 
     const handleClicked = (crypto) => {
-        console.log('Clicked:', crypto);
-        console.log(crypto.name, crypto.symbol.toUpperCase());
+        // console.log('Clicked:', crypto);
+        // console.log(crypto.name, crypto.symbol.toUpperCase());
         setSelectedCrypto(crypto);
     }
 

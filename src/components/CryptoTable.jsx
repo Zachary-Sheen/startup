@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./cryptoTable.css";
 
 const CryptoTable = () => {
     const [data, setData] = useState([]);
@@ -117,7 +118,7 @@ const CryptoTable = () => {
             return false;
         }
         const normalizedSymbol = symbol.toLowerCase();
-        console.log(favoriteCryptos, normalizedSymbol, favoriteCryptos.hasOwnProperty(normalizedSymbol), Object.keys(favoriteCryptos));
+        // console.log(favoriteCryptos, normalizedSymbol, favoriteCryptos.hasOwnProperty(normalizedSymbol), Object.keys(favoriteCryptos));
         return favoriteCryptos.hasOwnProperty(normalizedSymbol);
     };
 
@@ -136,14 +137,14 @@ const CryptoTable = () => {
     if (selectedCrypto) {
         return (
             <div className="crypto-details container mt-4">
-            <button className="btn btn-outline-primary mb-4" onClick={handleBackClick}>
+            <button className="btn mb-4 submit-btn" onClick={handleBackClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                     <path d="M8 12a.75.75 0 0 0 .75-.75V4.707l4.146 4.147a.75.75 0 0 0 1.061-1.06l-5-5a.75.75 0 0 0-1.061 0l-5 5a.75.75 0 0 0 1.061 1.06L7.25 4.707V11.25a.75.75 0 0 0 .75.75z"/>
                 </svg> 
                  Back to Table
             </button>
 
-            <div className="card shadow-lg p-4">
+            <div className="card shadow-lg p-4 crypto-card">
                 <div className="d-flex align-items-center">
                     <img src={selectedCrypto.image} alt={selectedCrypto.name} className="crypto-logo" />
                     <h2 className="ms-3 d-flex align-items-center">
@@ -155,7 +156,7 @@ const CryptoTable = () => {
                 </div>
 
                     <div className="table-responsive mt-4">
-                        <table className="table table-striped table-bordered table-hover">
+                        <table className="table table-bordered specific-crypto-table">
                             <thead>
                                 <tr>
                                     <th>Attribute</th>
