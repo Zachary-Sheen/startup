@@ -30,3 +30,6 @@ For this part I learned how to setup a service using NodeJS and express and impl
 
 ## Database Deliverable
 For this part I learned how to setup a MongoDB database and then connect to it locally so I can store different types of information in it.  Also, I learned how to filter the database to gather different types of information that I parse in my back end.  Setting the database up and switching the endpoints over to call MongoDB was somewhat easy and very useful.
+
+## WebSocket Deliverable
+For this part of the startup I learned how to set up a user-to-user chat.  First, I learned basic WebSocket communication by testing within the browser and debugging local code to see each part of the communication.  I learned how to connect, send, and recieve messages in WebSocket.
