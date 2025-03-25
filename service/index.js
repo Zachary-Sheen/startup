@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const DB = require('./database.js');
 const path = require('path');
+const { WebSocketServer } = require('ws');
+const { createSocket } = require('./socket.js');
 
 
 // let users = []; // ex : { 'username': 'example', 'password': 'ewdassdawd', 'sessionID': '1234', 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': false }
@@ -201,6 +203,8 @@ app.get('*', (req, res) => {
 });
 
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+createSocket(server);
