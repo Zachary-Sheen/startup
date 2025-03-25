@@ -6,6 +6,7 @@ import 'lineicons/dist/lineicons.css';
 import './styles.css';
 import CryptoTable from './CryptoTable';
 import "./scripts.js";
+import { chatNotifier, EventMessage } from './chatNotifier';
 
 const Chatroom = () => {
     const [username, setUsername] = React.useState('');

@@ -12,7 +12,7 @@ function createSocket(server){
     //   });
     
     wss.on('connection', function connection(ws, request) {
-        const id = uuid.v4();
+        // const id = uuid.v4();
         // clients[id] = {alive: true, ws: ws};
 
         //forwarding message to all clients
@@ -40,7 +40,7 @@ function createSocket(server){
                 return client.terminate();
             }
             client.isAlive = false;
-            client.ping(() => {});
+            client.ping();
         });
     }, 10000);
 }
