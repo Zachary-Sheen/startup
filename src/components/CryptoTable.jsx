@@ -38,9 +38,9 @@ const CryptoTable = () => {
         })
         .then((res) => res.json())
         .then((info) => {
-            console.log(info);
-            console.log("is the data empty: " + info.isempty );
-            console.log("is the data empty: " + info.cryptoData.Date );
+            // console.log(info);
+            // console.log("is the data empty: " + info.isempty );
+            // console.log("is the data empty: " + info.cryptoData.Date );
             if (info.isempty || new Date() - new Date(info.cryptoData.date) > 3600000)
             {
                 console.log("fetching data again")
