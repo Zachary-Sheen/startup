@@ -38,52 +38,66 @@ const Chatroom = () => {
         .catch((err) => {
             console.error('Error fetching authenticated:', err);
         });
+        const eventHandler = (event) => {
+            if (event.event === 'message') {
+                setMessages((messages) => [...messages, { username: event.from, message: event.data }]);
+            } else if (event.event === 'enter') {
+                setMessages((messages) => [...messages, { username: 'system', message: `${event.from} has entered the chat`}]);
+            } else if (event.event === 'leave') {
+                setMessages((messages) => [...messages, { username: 'system', message: `${event.from} has left the chat`}]);
+            }
+        };
+    
+        chatNotifier.addHandler(eventHandler);
+    
+        return () => {
+            chatNotifier.removeHandler(eventHandler);
+        };
         // console.log("trying to fetch authenticated")
     }, []);
 
-    useEffect(() => {
-        const chatBox = document.getElementById('chatBox');
-        chatBox.innerHTML = ''; 
-        messages.forEach((msg) => {
-            const newMessage = document.createElement('div');
-            newMessage.className = `message p-2 mb-2 rounded ${msg.username === username ? 'bg-primary text-white text-right' : 'bg-light'}`;
-            newMessage.style.alignSelf = msg.username === username ? 'flex-end' : 'flex-start';
-            newMessage.innerHTML = `<strong>${msg.username}:</strong> ${msg.message}`;
-            chatBox.appendChild(newMessage);
-        });
-        chatBox.scrollTop = chatBox.scrollHeight; 
-    }, [messages, username]);
+    // useEffect(() => {
+    //     const chatBox = document.getElementById('chatBox');
+    //     chatBox.innerHTML = ''; 
+    //     messages.forEach((msg) => {
+    //         const newMessage = document.createElement('div');
+    //         newMessage.className = `message p-2 mb-2 rounded ${msg.username === username ? 'bg-primary text-white text-right' : 'bg-light'}`;
+    //         newMessage.style.alignSelf = msg.username === username ? 'flex-end' : 'flex-start';
+    //         newMessage.innerHTML = `<strong>${msg.username}:</strong> ${msg.message}`;
+    //         chatBox.appendChild(newMessage);
+    //     });
+    //     chatBox.scrollTop = chatBox.scrollHeight; 
+    // }, [messages, username]);
 
-    function sendMessage() 
-    {
-        // console.log("trying to send message")
-        // console.log(username)
-        // console.log(messages)
+    
+
+    function sendMessage() {
         const messageInput = document.getElementById('messageInput');
-        const message = messageInput.value;
-        if (message === '') {
-            return;
-        }
-        fetch('/api/messages', {
+        const message = messageInput.value.trim();
+        if (!message) return;
+    
+        fetch('/api/messages', {  
             method: 'POST',
             credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: username, message: message })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, message }),
         })
-        .then((res) => res.json())
-        .then((data) => {
-            // console.log(data);
-            setMessages(data.messages);
-            messageInput.value = '';
-        });
-        messageInput.value = '';
+        .then((res) => res.json())   
+        .then((data) => setMessages(data.messages));  
+    
+        messageInput.value = ''; 
     }
 
     function handleKeyDown(event) {
         if (event.key === 'Enter') {
-            sendMessage();
+            const messageInput = document.getElementById('messageInput');
+        const message = messageInput.value;
+        if (message.trim() === '')
+        {
+            return;
+        }
+        chatNotifier.sendEvent(new EventMessage(username, 'message', message));
+        messageInput.value = '';
         }
     }
 
@@ -105,12 +119,15 @@ const Chatroom = () => {
                                     Start Chatting!
                                 </div>
                                 <div className="card-body chat-box" style={{ height: '300px', overflowY: 'scroll',display: 'flex', flexDirection: 'column'  }} id="chatBox">
-                                    {/* <div className="message p-2 mb-2 bg-light rounded">
-                                        <strong>User:</strong> What do you think about that bitcoin?
-                                    </div>
-                                    <div className="message p-2 mb-2 bg-light rounded">
-                                        <strong>User:</strong> I think it's pretty awesome!
-                                    </div> */}
+                                    {messages.map((msg, index) => (
+                                            <div
+                                                key={index}
+                                                className={`message p-2 mb-2 rounded ${msg.username === username ? 'bg-primary text-white text-right' : 'bg-light'}`}
+                                                style={{ alignSelf: msg.username === username ? 'flex-end' : 'flex-start' }}
+                                            >
+                                                <strong>{msg.username}:</strong> {msg.message}
+                                            </div>
+                                    ))}
                                 </div>
                                 <div className="card-footer">
                                     <div className="input-group">

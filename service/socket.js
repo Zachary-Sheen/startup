@@ -25,7 +25,7 @@ function createSocket(server){
         })
         //remove client on close
         ws.on('close', function close() {
-            wss.terminate();
+            console.log('Client disconnected');
         });
         
         //Respond to pong
@@ -35,7 +35,10 @@ function createSocket(server){
     });
 
     setInterval(() => {
-        clients.forEach(client => {
+        console.log("Checking if clients are alive");
+        console.log(Object.values(wss.clients));
+        wss.clients.forEach(client => {
+            console.log("Is this client alive? " + client.isAlive);
             if (client.isAlive === false) {
                 return client.terminate();
             }
@@ -45,4 +48,4 @@ function createSocket(server){
     }, 10000);
 }
 
-module.exports = createSocket;
+module.exports = { createSocket };

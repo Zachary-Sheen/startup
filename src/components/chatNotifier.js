@@ -1,13 +1,13 @@
 const GameEvent = {
     System: 'system',
-    End: 'leaveChat',
-    Start: 'enterChat',
+    End: 'leave',
+    Start: 'enter',
   };
 
 class EventMessage {
-    constructor(from, event, type, data){
+    constructor(from, event, data){
         this.from = from;
-        this.type = type;
+        this.event = event;
         this.data = data;
     }
 }
@@ -21,7 +21,7 @@ class ChatNotifier {
         this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
         this.socket.onopen = () => {
             console.log('New WebSocket connection established');
-            this.socket.send(sendEvent(EventMessage("chat", GameEvent.Start, 'User has entered the chat')));
+            this.sendEvent(new EventMessage("chat", GameEvent.Start, 'User has entered the chat'));
         }
         this.socket.onmessage = (event) => {
             const data = JSON.parse(event.data);
@@ -29,7 +29,7 @@ class ChatNotifier {
         }
         this.socket.onclose = () => {
             console.log('WebSocket connection closed');
-            this.socket.send(sendEvent(EventMessage("chat", GameEvent.End, 'User has left the chat')));
+            this.receiveEvent(new EventMessage("chat", GameEvent.End, 'User has left the chat'));
         }
     }
     addHandler(handler){
