@@ -17,8 +17,10 @@ function createSocket(server){
 
         //forwarding message to all clients
         ws.on('message', function message(msg) {
+            console.log('received: %s', msg);
             wss.clients.forEach(function each(client) {
                 if (client.readyState === WebSocket.OPEN && client !== ws) {
+                    console.log('forwarding message to client');
                     client.send(msg);
                 }
             });
@@ -36,7 +38,7 @@ function createSocket(server){
 
     setInterval(() => {
         console.log("Checking if clients are alive");
-        console.log(Object.values(wss.clients));
+        // console.log(Object.values(wss.clients));
         wss.clients.forEach(client => {
             console.log("Is this client alive? " + client.isAlive);
             if (client.isAlive === false) {
@@ -45,7 +47,7 @@ function createSocket(server){
             client.isAlive = false;
             client.ping();
         });
-    }, 10000);
+    }, 30000);
 }
 
 module.exports = { createSocket };

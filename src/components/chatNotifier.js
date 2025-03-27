@@ -23,9 +23,19 @@ class ChatNotifier {
             console.log('New WebSocket connection established');
             this.sendEvent(new EventMessage("chat", GameEvent.Start, 'User has entered the chat'));
         }
-        this.socket.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            this.receiveEvent(data);
+        this.socket.onmessage = async (event) => {
+            if (event.data instanceof Blob) {
+                // Convert Blob to text
+                const text = await event.data.text();
+                const data = JSON.parse(text);
+                console.log('Received message:', data);
+                this.receiveEvent(data);
+            } else {
+                // Handle non-Blob data (e.g., plain JSON string)
+                const data = JSON.parse(event.data);
+                console.log('Received message:', data);
+                this.receiveEvent(data);
+            }
         }
         this.socket.onclose = () => {
             console.log('WebSocket connection closed');

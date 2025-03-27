@@ -97,6 +97,7 @@ const Chatroom = () => {
             return;
         }
         chatNotifier.sendEvent(new EventMessage(username, 'message', message));
+        setMessages((messages) => [...messages, { username, message }]);
         messageInput.value = '';
         }
     }
