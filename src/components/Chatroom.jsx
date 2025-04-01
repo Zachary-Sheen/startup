@@ -38,11 +38,10 @@ const Chatroom = () => {
         .catch((err) => {
             console.error('Error fetching authenticated:', err);
         });
+
         const eventHandler = (event) => {
             if (event.event === 'message') {
                 setMessages((messages) => [...messages, { username: event.from, message: event.data }]);
-                const chatBox = document.getElementById('chatBox');
-                chatBox.scrollTop = chatBox.scrollHeight; 
             } else if (event.event === 'enter') {
                 setMessages((messages) => [...messages, { username: 'system', message: `${event.from} has entered the chat`}]);
             } else if (event.event === 'leave') {
@@ -57,6 +56,13 @@ const Chatroom = () => {
         };
         // console.log("trying to fetch authenticated")
     }, []);
+
+    useEffect(() => {
+        const chatBox = document.getElementById('chatBox');
+        if (chatBox) {
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+        }
+    }, [messages]);
 
     // useEffect(() => {
     //     const chatBox = document.getElementById('chatBox');
@@ -109,8 +115,6 @@ const Chatroom = () => {
         })
         .then((res) => res.json())
         .then((data) => setMessages(data.messages));
-        const chatBox = document.getElementById('chatBox');
-        chatBox.scrollTop = chatBox.scrollHeight; 
         console.log("Messages - " + messages);
         messageInput.value = '';
         }
