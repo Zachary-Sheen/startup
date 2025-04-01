@@ -43,9 +43,9 @@ const Chatroom = () => {
             if (event.event === 'message') {
                 setMessages((messages) => [...messages, { username: event.from, message: event.data }]);
             } else if (event.event === 'enter') {
-                setMessages((messages) => [...messages, { username: 'system', message: `${event.from} has entered the chat`}]);
+                setMessages((messages) => [...messages, { username: 'system', message: `User has entered the chat`}]); //${event.from} 
             } else if (event.event === 'leave') {
-                setMessages((messages) => [...messages, { username: 'system', message: `${event.from} has left the chat`}]);
+                setMessages((messages) => [...messages, { username: 'system', message: `User has left the chat`}]); //${event.from} 
             }
         };
     

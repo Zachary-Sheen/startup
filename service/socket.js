@@ -3,19 +3,8 @@ const uuid = require('uuid');
 
 function createSocket(server){
     const wss = new WebSocketServer({ server });
-    const clients = {};
-
-    // server.on('upgrade', (request, socket, head) => {
-    //     wss.handleUpgrade(request, socket, head, function done(ws) {
-    //       wss.emit('connection', ws, request);
-    //     });
-    //   });
     
     wss.on('connection', function connection(ws, request) {
-        // const id = uuid.v4();
-        // clients[id] = {alive: true, ws: ws};
-
-        //forwarding message to all clients
         ws.on('message', function message(msg) {
             console.log('received: %s', msg);
             wss.clients.forEach(function each(client) {
