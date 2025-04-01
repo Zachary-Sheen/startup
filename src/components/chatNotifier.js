@@ -21,7 +21,9 @@ class ChatNotifier {
         this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
         this.socket.onopen = () => {
             console.log('New WebSocket connection established');
-            this.sendEvent(new EventMessage("chat", GameEvent.Start, 'User has entered the chat'));
+            if (this.username) {
+                this.sendEvent(new EventMessage(this.username, GameEvent.Start, `${this.username} has entered the chat`));
+            }
         }
         this.socket.onmessage = async (event) => {
             if (event.data instanceof Blob) { //IDK WHY it is a blob
@@ -39,7 +41,18 @@ class ChatNotifier {
         }
         this.socket.onclose = () => {
             console.log('WebSocket connection closed');
-            this.receiveEvent(new EventMessage("chat", GameEvent.End, 'User has left the chat'));
+            if (this.username) {
+                this.receiveEvent(new EventMessage(this.username, GameEvent.End, `${this.username} has left the chat`));
+            }
+        }
+    }
+    setUsername(username) {
+        console.log(`Username set to: ${username}`);
+        this.username = username;
+
+        // Send an "enter" event if the WebSocket is already open
+        if (this.socket.readyState === WebSocket.OPEN) {
+            this.sendEvent(new EventMessage(this.username, GameEvent.Start, `${this.username} has entered the chat`));
         }
     }
     addHandler(handler){
