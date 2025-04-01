@@ -84,6 +84,7 @@ const Chatroom = () => {
         })
         .then((res) => res.json())   
         .then((data) => setMessages(data.messages));  
+        console.log("Messages - " + messages);
     
         messageInput.value = ''; 
     }
@@ -98,6 +99,15 @@ const Chatroom = () => {
         }
         chatNotifier.sendEvent(new EventMessage(username, 'message', message));
         setMessages((messages) => [...messages, { username, message }]);
+        fetch('/api/messages', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, message }),
+        })
+        .then((res) => res.json())
+        .then((data) => setMessages(data.messages));
+        console.log("Messages - " + messages);
         messageInput.value = '';
         }
     }

@@ -24,7 +24,7 @@ class ChatNotifier {
             this.sendEvent(new EventMessage("chat", GameEvent.Start, 'User has entered the chat'));
         }
         this.socket.onmessage = async (event) => {
-            if (event.data instanceof Blob) {
+            if (event.data instanceof Blob) { //IDK WHY it is a blob
                 // Convert Blob to text
                 const text = await event.data.text();
                 const data = JSON.parse(text);
