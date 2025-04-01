@@ -41,6 +41,8 @@ const Chatroom = () => {
         const eventHandler = (event) => {
             if (event.event === 'message') {
                 setMessages((messages) => [...messages, { username: event.from, message: event.data }]);
+                const chatBox = document.getElementById('chatBox');
+                chatBox.scrollTop = chatBox.scrollHeight; 
             } else if (event.event === 'enter') {
                 setMessages((messages) => [...messages, { username: 'system', message: `${event.from} has entered the chat`}]);
             } else if (event.event === 'leave') {
@@ -107,6 +109,8 @@ const Chatroom = () => {
         })
         .then((res) => res.json())
         .then((data) => setMessages(data.messages));
+        const chatBox = document.getElementById('chatBox');
+        chatBox.scrollTop = chatBox.scrollHeight; 
         console.log("Messages - " + messages);
         messageInput.value = '';
         }
