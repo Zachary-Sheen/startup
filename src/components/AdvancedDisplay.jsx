@@ -22,10 +22,8 @@ const AdvancedDisplay = () => {
     }, []);
 
     const handleClicked = (crypto) => {
-        // console.log('Clicked:', crypto);
-        // console.log(crypto.name, crypto.symbol.toUpperCase());
-        setSelectedCrypto(crypto);
-    }
+        setSelectedCrypto(crypto); 
+    };
 
     return (
         <div className="container">
@@ -48,8 +46,6 @@ const AdvancedDisplay = () => {
                                         </ul>
                                         <button
                                             className="btn submit-btn mt-auto align-self-end"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#cryptoChartModal"
                                             onClick={() => handleClicked(crypto)}
                                         >
                                             View Chart
@@ -62,29 +58,29 @@ const AdvancedDisplay = () => {
                 ))}
             </div>
 
-            {/* Modal for the crypto graph */}
-            <div
-                className="modal fade"
-                id="cryptoChartModal"
-                tabIndex="-1"
-                aria-labelledby="cryptoChartModalLabel"
-                aria-hidden="true"
-            >
-                <div className="modal-dialog modal-lg modal-dialog-centered">
-                    <div className="modal-content dark-modal">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="cryptoChartModalLabel">
-                                {selectedCrypto && selectedCrypto.name} ({selectedCrypto && selectedCrypto.symbol.toUpperCase()}) {/* Fix this */}
-                            </h5>
-                            <button
-                                type="button"
-                                className="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                            ></button>
-                        </div>
-                        <div className="modal-body">
-                            {selectedCrypto && (
+            {/* Render modal when selectedCrypto exists */}
+            {selectedCrypto && (
+                <div
+                    className="modal fade show"
+                    style={{ display: 'block', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+                    tabIndex="-1"
+                    aria-labelledby="cryptoChartModalLabel"
+                    aria-hidden="true"
+                >
+                    <div className="modal-dialog modal-lg modal-dialog-centered">
+                        <div className="modal-content dark-modal">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="cryptoChartModalLabel">
+                                    {selectedCrypto.name} ({selectedCrypto.symbol.toUpperCase()})
+                                </h5>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    onClick={() => setSelectedCrypto(null)} // Close the modal
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div className="modal-body">
                                 <iframe
                                     src={`https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12345&symbol=${selectedCrypto.symbol.toUpperCase()}USD&interval=D&theme=dark&style=1&locale=en&toolbar_bg=f1f3f6&hide_top_toolbar=false&hide_legend=false`}
                                     width="100%"
@@ -92,11 +88,11 @@ const AdvancedDisplay = () => {
                                     allowtransparency="true"
                                     className="border-0 rounded"
                                 ></iframe>
-                            )}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
