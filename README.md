@@ -146,8 +146,8 @@ For this deliverable I did the following. I checked the box [x] and added a desc
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [X] **Backend listens for WebSocket connection** - I make a socket.js file that listens for messages that are coming through the connection.  It also every 30 seconds pings every single user to check if they are still connected to the website.  If they are, they are kept in the client list, if not, they are removed.  Also, new connections are added to the client list.
+- [X] **Frontend makes WebSocket connection** - I made a chatNotifier.js file that listens for new connections in WebSocket.  It will then show in the chat that a new user has connected to the chat for everybody else.
+- [X] **Data sent over WebSocket connection** - I send chat messages over WebSocket from the front end to the back end.  The process is as listed.  Firstly, the user sends a message in the chat.  Then, the backend will recieve the message and forward it to all of the other connected user's WebSocket connection, which will then update the chat for all users.
+- [X] **WebSocket data displayed** - When a message is passed to each user for the system to update, it will call a function to reset the message list, which will then dynamically update the chat box, which will show the new message.
+- [X] **Application is fully functional** - My application has login, signup, chatting, and browsing ability that makes the website fully functional.  People are able to chat with each other and look at a lot of different cryptocurrencies.
