@@ -21,7 +21,13 @@ const Sidebar = () => {
         fetch('/api/authenticated', {
             credentials: 'include', 
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (res.status === 401) {
+                    return { error: 'Unauthorized' };
+                } else {
+                    return res.json();
+                }
+            })
             .then((data) => {
                 if (data) {
                     if (data.error === 'Unauthorized') {

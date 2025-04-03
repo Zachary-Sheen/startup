@@ -93,7 +93,7 @@ const Chatroom = () => {
         })
         .then((res) => res.json())   
         .then((data) => setMessages(data.messages));  
-        console.log("Messages - " + messages);
+        // console.log("Messages - " + messages);
     
         messageInput.value = ''; 
     }
@@ -116,7 +116,7 @@ const Chatroom = () => {
         })
         .then((res) => res.json())
         .then((data) => setMessages(data.messages));
-        console.log("Messages - " + messages);
+        // console.log("Messages - " + messages);
         messageInput.value = '';
         }
     }
