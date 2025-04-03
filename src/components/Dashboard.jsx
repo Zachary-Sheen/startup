@@ -66,7 +66,7 @@ const Dashboard = () => {
                         <div className="col-md-4 mb-4">
                             <div className="box bg-dark text-white p-3 rounded" style={{ height: '100%' }}>
                                 <h5>Profile</h5>
-                                <p>View and edit your profile information.</p>
+                                <p>View and edit your profile information. <b>Feature Coming Soon</b></p>
                             </div>
                         </div>
                         <div className="col-md-4 mb-4">
@@ -78,7 +78,7 @@ const Dashboard = () => {
                         <div className="col-md-4 mb-4">
                             <div className="box bg-dark text-white p-3 rounded" style={{ height: '100%' }}>
                                 <h5>Settings</h5>
-                                <p>Adjust your preferences and settings.</p>
+                                <p>Adjust your preferences and settings.  <b>Feature Coming Soon</b></p>
                             </div>
                         </div>
                         <div className="col-md-12 mb-4" style={{ height: '100%' }}>
