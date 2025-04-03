@@ -48,7 +48,7 @@ const Sidebar = () => {
 
 
     const handleNavigation = (e, path) => {
-        console.log("path: ", path);
+        // console.log("path: ", path);
         e.preventDefault();
         if ((path === '/login' || path === '/signup') && authed) {
             console.log('Already logged in');

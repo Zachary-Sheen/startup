@@ -20,7 +20,7 @@ class ChatNotifier {
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
         this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
         this.socket.onopen = () => {
-            console.log('New WebSocket connection established');
+            // console.log('New WebSocket connection established');
             if (this.username) {
                 this.sendEvent(new EventMessage(this.username, GameEvent.Start, `${this.username} has entered the chat`));
             }
@@ -30,12 +30,12 @@ class ChatNotifier {
                 // Convert Blob to text
                 const text = await event.data.text();
                 const data = JSON.parse(text);
-                console.log('Received message:', data);
+                // console.log('Received message:', data);
                 this.receiveEvent(data);
             } else {
                 // Handle non-Blob data (e.g., plain JSON string)
                 const data = JSON.parse(event.data);
-                console.log('Received message:', data);
+                // console.log('Received message:', data);
                 this.receiveEvent(data);
             }
         }
@@ -47,7 +47,7 @@ class ChatNotifier {
         }
     }
     setUsername(username) {
-        console.log(`Username set to: ${username}`);
+        // console.log(`Username set to: ${username}`);
         this.username = username;
 
         // Send an "enter" event if the WebSocket is already open
