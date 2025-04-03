@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'lineicons/dist/lineicons.css';
@@ -6,37 +6,56 @@ import './homepgstyle.css';
 
 const Home = () => {
     const navigate = useNavigate();
-
-    function checkLogin() 
-    {
+    const [authed, setAuthed] = React.useState(false);
+    useEffect(() => {
         fetch('/api/authenticated', {
             credentials: 'include',
         })
         .then((res) => res.json())
         .then((data) => {
-            // console.log(data);
+            console.log(data);
             if(data){
                 if (!data.authenticated) {
-                    navigate('/login');
+                    setAuthed(false);
                 }
                 else{
-                    return true;
+                    setAuthed(true);
                 }
-            }
-            else if(!data)
-            {
-                navigate('/signup')
             }
         })
         .catch((err) => {
             console.log('Error fetching authenticated:', err);
         });
+    }, []);
+    function checkLogin(path) 
+    {
+        if(path == '/chatroom' || path == '/dashboard'){
+            if(!authed){
+                console.log('Not logged in');
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        else if(path == '/login' || path == '/signup'){
+            if(authed){
+                console.log('Already logged in');
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        else{
+            return true;
+        }
     }
     
 
     const handleNavigation = (e, path) => {
         e.preventDefault();
-        if (checkLogin()) {
+        if (checkLogin(path)) {
             navigate(path);
         }
     };
@@ -50,10 +69,19 @@ const Home = () => {
                     </div>
                     <ul className="navelements">
                         <Link to="/"><li>Home</li></Link>
-                        <Link to="/dashboard" onClick={(e) => handleNavigation(e, '/dashboard')}><li>Dashboard</li></Link>
-                        <Link to="/chatroom" onClick={(e) => handleNavigation(e, '/chatroom')}><li>Chatroom</li></Link>
+                        {authed && (
+                            <>
+                            <Link to="/dashboard" onClick={(e) => handleNavigation(e, '/dashboard')}><li>Dashboard</li></Link>
+                            <Link to="/chatroom" onClick={(e) => handleNavigation(e, '/chatroom')}><li>Chatroom</li></Link>
+                            </>
+                            )
+                        }
+                        {!authed && (
+                            <>
                         <Link to="/signup"><li>Sign Up</li></Link>
                         <Link to="/login"><li>Login</li></Link>
+                        </>)
+                        }
                         {/* <Link to="/account"><li>Account</li></Link> */}
                     </ul>
                 </div>
