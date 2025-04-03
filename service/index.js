@@ -47,6 +47,7 @@ function passwordGoodEnough(password) {
 
 async function authCheck(req, res, next) {
     const cookiesExist = req.cookies;
+    console.log("Cookies exist: ", cookiesExist);
     if (!cookiesExist) {
         console.log("No cookies exist");
         return res.status(401).send({ error: 'Unauthorized' });
@@ -126,9 +127,6 @@ apiRouter.post('/signup', async (req, res) => {
     DB.addUser({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
     console.log("User added");
     setAuthCookie(res, sessionID);
-    // users.push({ 'username': username, 'password': password, 'sessionID': sessionID, 'favoriteCryptos': {}, 'sessionCreatedAt': new Date(), 'authenticated': true });
-    // setAuthCookie(res, sessionID);
-    // console.log(res);
     res.status(200).send({ message: 'Signup successful' });
 });
 
@@ -157,24 +155,16 @@ apiRouter.get('/messages', authCheck, async (req, res) => {
 apiRouter.post('/messages', authCheck, async (req, res) => {
     const message = req.body.message;
     const username = req.user.username;
-    // if (messages.length >= 50) 
-    // {
-    //     messages.shift(); 
-    // }
     const messages = await DB.addMessage({ 'username': username, 'message': message });
-    // messages.push({ 'username': username, 'message': message });
     res.status(200).send({ 'messages': messages });
 });
 
 apiRouter.get('/favorites', authCheck, (req, res) => {
-    // const username = req.user.username;
-    // const user = users.find(u => u.username === username);
     const favoriteCryptos = req.user.favoriteCryptos;
     res.status(200).send({'favoriteCryptos': favoriteCryptos });
 });
 
 apiRouter.post('/favorites', authCheck, (req, res) => {
-    // console.log(req.body);
     const favoriteCrypto = req.body.favoriteCrypto;
     const symbol = favoriteCrypto.symbol;
 
