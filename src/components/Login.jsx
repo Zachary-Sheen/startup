@@ -36,14 +36,7 @@ const Login = () => {
             },
             body: JSON.stringify({username, password})
         })
-        .then((res) => {
-            if (res.status === 200) {
-                res.json()  
-            } else {
-                alert('Login failed. Please check your username and password.');
-                // throw new Error('Login failed');
-            }
-        })
+        .then((res) => res.json())
         .then((data) => {
             if (data.message === 'Login successful')
             {

@@ -90,11 +90,6 @@ apiRouter.post('/login', async (req, res) => {
     console.log(req.body);
     const { username, password } = req.body;
     const user = await DB.getUser(username);
-    console.log("User grabbed: ", user);
-    if (!user) {
-        return res.status(401).send({ error: 'Invalid credentials' });
-    }
-    console.log("Pass right? ", await bcrypt.compare(password, user.password));
     if (user && await bcrypt.compare(password, user.password)) {
         const sessionID = uuid.v4();
         user.sessionID = sessionID;
@@ -105,7 +100,7 @@ apiRouter.post('/login', async (req, res) => {
         console.log("Login successful")
         res.status(200).send({ message: 'Login successful' });
     } else {
-        res.status(401).send({ error: 'Invalid credentials' });
+        res.status(401).send({ message: 'Invalid credentials' });
     }
 });
 
