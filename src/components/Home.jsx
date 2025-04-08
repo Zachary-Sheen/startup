@@ -105,7 +105,7 @@ const Home = () => {
                     </div>
                     <div className="box">
                         <h2 id="boxheader">Technologies</h2>
-                        <p id="subbox">HTML, CSS, JavaScript, Vite, Express, NodeJS, MongoDB, and WebSocket, hosted through AWS.</p>
+                        <p id="subbox">HTML, CSS, JavaScript, React, Vite, Express, NodeJS, MongoDB, and WebSocket, hosted through AWS.</p>
                     </div>
                 </div>
             </main>
